@@ -1,0 +1,46 @@
+import React, { Component } from 'react';
+import PictureViewer from '../../../utils/PictureViewer';
+
+import testImg from '../../../../bg_intro.jpg';
+
+
+const images = [
+    {
+        image: testImg,
+        alt: 'test alt',
+        title: 'testTitle',
+        description: 'Lorem ipsum orem ipsumorem ipsumorem ipsumorem ipsumorem ipsum',
+    },
+    {
+        image: testImg,
+        alt: 'test alt2',
+        title: 'testTitle2',
+        description: 'Lorem ipsum orem ipsumorem ipsumorem ipsumorem ipsumorem ipsum',
+    },
+    {
+        image: testImg,
+        alt: 'test alt3',
+        title: 'testTitle3',
+        description: 'Lorem ipsum orem ipsumorem ipsumorem ipsumorem ipsumorem ipsum',
+    },
+    {
+        image: testImg,
+        alt: 'test alt4',
+        title: 'testTitle4',
+        description: 'Lorem ipsum orem ipsumorem ipsumorem ipsumorem ipsumorem ipsum',
+    },
+    {
+        image: testImg,
+        alt: 'test alt5',
+        title: 'testTitle5',
+        description: 'Lorem ipsum orem ipsumorem ipsumorem ipsumorem ipsumorem ipsum',
+    },
+];
+
+export default class Flexer extends Component {
+    render() {
+        return (
+            <PictureViewer images={images} />
+        );
+    }
+}
