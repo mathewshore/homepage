@@ -18,7 +18,7 @@ class About extends Component {
         return (
             <Section id='about' background={sectionBackgroundColor}>
                 <Grid container spacing={24}>
-                    <Grid item xs>
+                    <Grid item sm={12} md={6}>
                         <Typography variant='body2' align='justify'>
                             I have been working as a Front End Web Developer at a multicultural Bio-IT
                             company <a href='https://www.medisapiens.com' target='_blank' rel='noopener noreferrer'>MediSapiens</a> since
@@ -31,7 +31,7 @@ class About extends Component {
                             End programming studies.
                         </Typography>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item sm={12} md={6}>
                         <Typography variant='body2' align='justify'>
                             I am an open-minded teamworker with strong logical and analytical skills harnessed
                             with a competitive spirit. Whenever I start working on user interfaces, I ponder

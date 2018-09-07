@@ -103,7 +103,7 @@ class Portfolio extends Component {
 
     render() {
         const { classes, sectionBackgroundColor } = this.props;
-        const portfolioItem = _.get(portfolioItems, this.state.portfolioItemKey, null);
+        const portfolioItem = _.get(portfolioItems, this.state.portfolioItemKey);
 
         return (
             <div>

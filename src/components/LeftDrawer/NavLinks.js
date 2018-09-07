@@ -10,15 +10,14 @@ const LINK_RENDER_TIME = 50; // ms
 export const LINK_BlOCK_UNMOUNT_DELAY = navLinks.length * LINK_RENDER_TIME + 200; // 200 = transition delay
 
 const styles = theme => ({
-    navLinkWrapper: {
-        // position: 'relative',
-        // paddingLeft: 67
+    navLinksWrapper: {
+        padding: `0 ${theme.spacing.unit * 9}px`,
+        marginTop: theme.spacing.unit * 7.5,
     },
     navLink: {
-        // display: 'table',
+        textTransform: 'uppercase',
         display: 'block',
-        height: '100%',
-        margin: '12px 0',
+        margin: `${theme.spacing.unit * 3}px 0`,
 
         transition: 'all 0.3s, opacity 0.2s linear',
         opacity: 0,
@@ -30,7 +29,6 @@ const styles = theme => ({
         '&:hover': {
             color: 'purple',
             textDecoration: 'none',
-            transform: 'scale(1.1)',
         },
     },
 });
@@ -82,7 +80,7 @@ class NavLinks extends Component {
         const { classes } = this.props;
 
         return (
-            <div className={classes.navLinkWrapper}>
+            <div className={classes.navLinksWrapper}>
                 {_.map(navLinks, (label, i) => {
                     const linkDisplayClassName = this.state.linkRenderCount >= (i + 1) ? ' enter' : '';
                     return (

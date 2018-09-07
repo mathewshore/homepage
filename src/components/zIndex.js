@@ -2,11 +2,10 @@
 
 const zIndex = {
     intro: 0,
-    leftDrawer: 1,
+    leftDrawer: 1400,
     navigation: 1,
-    socialMediaButtons: 1,
-    modalBackDrop: 2,
-    modal: 3,
+    modalBackDrop: 1500,
+    modal: 1600,
 };
 
 export default zIndex;

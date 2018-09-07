@@ -8,7 +8,9 @@ import { SvgIcon, Button } from '@material-ui/core';
 const styles = {
     button: {
        display: 'block',
-       margin: '8px 0',
+       margin: '0px 8px',
+       width: 48,
+       height: 48
     },
 };
 
@@ -17,7 +19,7 @@ const SoMeLinkButton = (props) => {
     return (
         <a href={url} target='_blank' rel='noopener noreferrer'>
             <Button
-                mini
+                // mini
                 variant='fab'
                 color="primary"
                 className={classes.button}

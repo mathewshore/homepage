@@ -18,7 +18,7 @@ const styles = theme => ({
         top: 0,
         left: 0,
         position: 'fixed',
-        zIndex: 0,
+        zIndex: zIndex.intro,
     },
     introImage: {
         backgroundPosition: 'center',
@@ -26,7 +26,7 @@ const styles = theme => ({
         filter: 'grayscale(100%)',
         height: '100%',
         width: '100%',
-        zIndex: zIndex.intro,
+        // zIndex: zIndex.intro,
     },
     introTextWrapper: {
         position: 'absolute',
@@ -39,6 +39,7 @@ const styles = theme => ({
     introSubHeader: {
         color: 'rgba(0, 0, 0, 0.74)',
     },
+    dividerRoot: theme.sectionDivider,
 });
 
 class Intro extends Component {
@@ -58,7 +59,7 @@ class Intro extends Component {
                         <Typography variant='display1' className={classes.introSubHeader}>
                             SOFTWARE DEVELOPER
                         </Typography>
-                        <Divider />
+                        <Divider classes={{ root: classes.dividerRoot }}/>
                     </div>
                 </div>
             </div>

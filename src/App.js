@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import LeftDrawer from './components/LeftDrawer';
-// import Navigation from './components/Navigation';
-import SocialMediaButtons from './components/SocialMediaButtons';
 import sections from './components/sections';
 import Footer from './components/Footer';
 
@@ -31,7 +29,6 @@ export default class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <LeftDrawer />
-        <SocialMediaButtons />
         {sections}
         <Footer />
       </MuiThemeProvider>

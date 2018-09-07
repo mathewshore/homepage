@@ -6,18 +6,17 @@ import GitHubIconButton from './GitHubIconButton';
 import LinkedInIconButton from './LinkedInIconButton';
 import WordPressIconButton from './WordPressIconButton';
 
-import zIndex from '../zIndex';
 
-
-const styles = {
+const styles = theme => ({
     socialMediaButtonsContainer: {
-        position: 'fixed',
-        top: 18,
-        right: 20,
-        zIndex: zIndex.socialMediaButtons,
+        display: 'flex',
+        position: 'absolute',
+        bottom: 16,
+        left: 32,
+        width: theme.leftDrawerWidth,
         color: 'white',
     }
-};
+});
 
 const SocialMediaButtons = (props) => (
     <div className={props.classes.socialMediaButtonsContainer}>
@@ -31,4 +30,4 @@ SocialMediaButtons.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles)(SocialMediaButtons);
+export default withStyles(styles, { withTheme: true })(SocialMediaButtons);

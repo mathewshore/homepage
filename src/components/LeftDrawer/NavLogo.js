@@ -12,40 +12,29 @@ const styles = theme => ({
         position: 'fixed',
         top: 0,
         left: 0,
-        // width: 240,
         zIndex: zIndex.navigation,
         textTransform: 'uppercase',
     },
     menuToggler: {
-        display: 'block',
-        margin: '18px',
+        display: 'flex',
+        margin: theme.spacing.unit * 2,
         position: 'relative',
-        height: 40,
-        // width: 244,
+        borderRadius: 4,
+        padding: '4px 8px 4px 6px',
+        transition: 'all 0.3s',
 
         '&:hover': {
-            color: 'purple',
+            color: 'white',
             textDecoration: 'none',
-            // transform: 'scale(1.1)',
+            background: 'rgba(0, 0, 0, 0.3)'
         },
     },
     menuIcon: {
-        fontSize: 44,
-        position: 'absolute',
-        left: 0,
-        // height: 'auto',
-        // marginLeft: -35,
-        // marginRight: 12,
-        // transition: 'ease 0.3s',
+        fontSize: 40,
     },
     menuBrand: {
         fontSize: 28,
-        position: 'absolute',
-        top: 1,
-        left: 48,
-    },
-    firstLetter: {
-        opacity: 1,
+        margin: '-1px 0 0 10px',
     },
     remainingLetters: {
         transition: 'all 0.3s',
@@ -62,6 +51,8 @@ const styles = theme => ({
 class NavLogo extends Component {
     render() {
         const { classes, drawerIsOpen } = this.props;
+        const iconProps = { className: classes.menuIcon };
+        const remainingLettersClassName = classes.remainingLetters + (drawerIsOpen ? ' show' : '');
 
         return (
             <span className={classes.navWrapper}>
@@ -70,12 +61,10 @@ class NavLogo extends Component {
                     href='/#/'
                     onClick={this.props.toggleLeftDrawer}
                 >
-                    {drawerIsOpen ? <CloseIcon className={classes.menuIcon} /> : <MenuIcon className={classes.menuIcon} />}
+                    {drawerIsOpen ? <CloseIcon {...iconProps} /> : <MenuIcon {...iconProps} />}
                     <span className={classes.menuBrand}>
-                        <span className={classes.firstLetter}>M</span>
-                        <span className={classes.remainingLetters + (drawerIsOpen ? ' show' : '')}>atias</span>
-                        <span className={classes.firstLetter}>R</span>
-                        <span className={classes.remainingLetters + (drawerIsOpen ? ' show' : '')}>anta</span>
+                        M<span className={remainingLettersClassName}>atias</span>
+                        R<span className={remainingLettersClassName}>anta</span>
                     </span>
                 </a>
             </span>

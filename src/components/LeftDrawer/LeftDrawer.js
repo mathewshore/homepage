@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer } from '@material-ui/core';
+import { Drawer, Divider } from '@material-ui/core';
 import NavLinks from './NavLinks';
 import NavLogo from './NavLogo';
+import SocialMediaButtons from '../SocialMediaButtons';
 
 import { grey } from '@material-ui/core/colors';
 import zIndex from '../zIndex';
@@ -18,7 +19,8 @@ const styles = theme => ({
         zIndex: zIndex.leftDrawer
     },
     drawerPaper: {
-        background: grey[900]
+        background: grey[900],
+        width: theme.leftDrawerWidth,
     }
 });
 
@@ -27,7 +29,7 @@ class LeftDrawer extends Component {
         super(props);
 
         this.state = {
-            drawerIsOpen: true
+            drawerIsOpen: false
         };
 
         this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -46,6 +48,8 @@ class LeftDrawer extends Component {
                 <NavLogo toggleLeftDrawer={this.toggleDrawer} drawerIsOpen={drawerIsOpen} />
                 <Drawer classes={{ paper: classes.drawerPaper }} open={drawerIsOpen} onClose={this.toggleDrawer}>
                     <NavLinks />
+                    <Divider />
+                    <SocialMediaButtons />
                 </Drawer>
             </div>
         );
