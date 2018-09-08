@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-scroll';
+import TextHeader from '../utils/TextHeader';
 
 
-const navLinks = ['intro', 'about', 'portfolio', 'contact'];
+const navLinks = ['intro', 'about', 'portfolio', 'skills', 'contact'];
 
 const LINK_RENDER_TIME = 50; // ms
 export const LINK_BlOCK_UNMOUNT_DELAY = navLinks.length * LINK_RENDER_TIME + 200; // 200 = transition delay
@@ -16,20 +19,26 @@ const styles = theme => ({
     },
     navLink: {
         textTransform: 'uppercase',
-        display: 'block',
         margin: `${theme.spacing.unit * 3}px 0`,
 
         transition: 'all 0.3s, opacity 0.2s linear',
         opacity: 0,
-        color: 'white',
-
         '&.enter': {
             opacity: 1,
         },
+    },
+    navLinkText: {
+        cursor: 'pointer',
+
+        transition: 'all 0.3s',
+        color: 'white',
         '&:hover': {
             color: 'purple',
             textDecoration: 'none',
         },
+    },
+    navLinkTypography: {
+        display: 'initial',
     },
 });
 
@@ -46,7 +55,7 @@ class NavLinks extends Component {
         };
     }
 
-    // Todo: add window location listener and use it to highlight active section.
+    // Todo: add window location listener to App and use it to highlight active link.
 
     componentWillUnmount() {
         clearInterval(this.state.incrementIntervalId);
@@ -81,16 +90,19 @@ class NavLinks extends Component {
 
         return (
             <div className={classes.navLinksWrapper}>
-                {_.map(navLinks, (label, i) => {
+                {_.map(navLinks, (linkId, i) => {
                     const linkDisplayClassName = this.state.linkRenderCount >= (i + 1) ? ' enter' : '';
                     return (
-                        <a
-                            href={`#${label}`}
-                            className={classes.navLink + linkDisplayClassName}
-                            key={label}
-                        >
-                            {label}
-                        </a>
+                        <div key={linkId} className={classes.navLink + linkDisplayClassName}>
+                            <Link to={linkId} smooth>
+                                <TextHeader
+                                    variant="subheading"
+                                    text={linkId}
+                                    className={classes.navLinkText}
+                                    typographyClassName={classes.navLinkTypography}
+                                />
+                            </Link>
+                        </div>
                     );
                 })}
             </div>

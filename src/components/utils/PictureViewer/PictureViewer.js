@@ -7,7 +7,7 @@ import { Grid } from '@material-ui/core';
 import { ChevronLeft as LeftArrowIcon, ChevronRight as RightArrowIcon } from '@material-ui/icons';
 import PictureSelectPanel from './PictureSelectPanel';
 
-import { purple, grey } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 
 
 const imageToggler = {
@@ -36,7 +36,7 @@ const imageToggler = {
 
 const styles = theme => ({
     viewerWarpper: {
-        height: '100%',
+        height: 'calc(100% - (40px + 16px + 33px))', // (modal-padding-header-height + modal-caption-height + hr-height)
         background: 'white',
     },
     pictureViewerContainer: {

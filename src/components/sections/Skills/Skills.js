@@ -7,18 +7,21 @@ import { Grid, Typography } from '@material-ui/core';
 import Section from '../Section';
 
 
-const styles = {
+const styles = theme => ({
+    skillsSectionContainer: {
+        background: theme.palette.background.sections.skills,
+    },
     card: {
        maxWidth: 345,
     },
-};
+});
 
 class Skills extends Component {
     render() {
-        const { classes, sectionBackgroundColor } = this.props;
+        const { classes } = this.props;
 
         return (
-            <Section id='skills' background={sectionBackgroundColor}>
+            <Section id='skills' containerClassName={classes.skillsSectionContainer}>
                 <Grid container>
                     <Grid item md xs={12}>
                         <Typography variant='display1'>
@@ -57,8 +60,7 @@ class Skills extends Component {
 }
 
 Skills.propTypes = {
-    classes: PropTypes.object,
-    sectionBackgroundColor: PropTypes.string
+    classes: PropTypes.object
 };
 
 export default withStyles(styles, { withTheme: true })(Skills);

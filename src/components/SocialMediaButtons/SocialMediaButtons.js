@@ -11,9 +11,8 @@ const styles = theme => ({
     socialMediaButtonsContainer: {
         display: 'flex',
         position: 'absolute',
-        bottom: 16,
-        left: 32,
-        width: theme.leftDrawerWidth,
+        bottom: theme.spacing.unit * 4,
+        left: theme.spacing.unit * 4,
         color: 'white',
     }
 });

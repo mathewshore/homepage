@@ -9,8 +9,9 @@ const theme = createMuiTheme({
     leftDrawerWidth: 256,
     sectionDivider: {
         height: 5,
-        margin: '20px 0 30px',
+        margin: '20px 0 32px',
         width: 60,
+        // ToDo: define divider background-color in theme/palette and use it here.
         // backgroundColor: `${blue[400]} !important`,
     }
 });

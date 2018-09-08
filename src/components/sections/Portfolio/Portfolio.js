@@ -16,6 +16,9 @@ import testImg from '../../../bg_intro.jpg';
 
 
 const styles = theme => ({
+    portfolioSectionContainer: {
+        background: theme.palette.background.sections.portfolio,
+    },
     card: {
         cursor: 'pointer',
     },
@@ -102,12 +105,12 @@ class Portfolio extends Component {
     }
 
     render() {
-        const { classes, sectionBackgroundColor } = this.props;
+        const { classes } = this.props;
         const portfolioItem = _.get(portfolioItems, this.state.portfolioItemKey);
 
         return (
             <div>
-                <Section id='portfolio' background={sectionBackgroundColor}>
+                <Section id='portfolio' containerClassName={classes.portfolioSectionContainer}>
                     <Grid container spacing={24}>
                         {this.renderPortfolioItems(classes)}
                     </Grid>
@@ -126,8 +129,7 @@ class Portfolio extends Component {
 }
 
 Portfolio.propTypes = {
-    classes: PropTypes.object,
-    sectionBackgroundColor: PropTypes.string
+    classes: PropTypes.object
 };
 
 export default withStyles(styles, { withTheme: true })(Portfolio);

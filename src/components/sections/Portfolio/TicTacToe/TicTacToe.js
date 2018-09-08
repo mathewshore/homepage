@@ -10,8 +10,6 @@ import { blue, red, green, grey } from '@material-ui/core/colors';
 const styles = theme => ({
     gridWrapper: {
         margin: 'auto',
-        // width: 500,
-        // height: 500,
     },
     boardTable: {
         margin: 'auto',

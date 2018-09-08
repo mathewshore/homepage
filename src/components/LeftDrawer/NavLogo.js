@@ -22,11 +22,18 @@ const styles = theme => ({
         borderRadius: 4,
         padding: '4px 8px 4px 6px',
         transition: 'all 0.3s',
+        color: theme.palette.text.header.dark,
 
         '&:hover': {
-            color: 'white',
+            color: theme.palette.text.header.light,
             textDecoration: 'none',
-            background: 'rgba(0, 0, 0, 0.3)'
+            background: 'rgba(0, 0, 0, 0.3)',
+            '&.show': {
+                color: theme.palette.text.header.light,
+            },
+        },
+        '&.show': {
+            color: theme.palette.text.header.light,
         },
     },
     menuIcon: {
@@ -57,7 +64,7 @@ class NavLogo extends Component {
         return (
             <span className={classes.navWrapper}>
                 <a
-                    className={classes.menuToggler}
+                    className={classes.menuToggler + (drawerIsOpen ? ' show' : '')}
                     href='/#/'
                     onClick={this.props.toggleLeftDrawer}
                 >

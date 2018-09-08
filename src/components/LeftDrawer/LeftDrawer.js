@@ -19,7 +19,7 @@ const styles = theme => ({
         zIndex: zIndex.leftDrawer
     },
     drawerPaper: {
-        background: grey[900],
+        background: theme.palette.background.leftDrawer,
         width: theme.leftDrawerWidth,
     }
 });

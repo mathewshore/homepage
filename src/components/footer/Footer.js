@@ -9,7 +9,7 @@ import { red } from '@material-ui/core/colors';
 const styles = theme => ({
     footer: {
         position: 'relative',
-        backgroundColor: red[200],
+        background: theme.palette.background.footer,
         padding: '40px 20px',
         color: 'white',
     },

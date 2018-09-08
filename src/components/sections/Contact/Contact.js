@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, FormGroup, TextField, FormLabel, Button } from '@material-ui/core';
@@ -10,12 +11,18 @@ import Section from '../Section';
 
 
 const styles = theme => ({
+    contactSectionContainer: {
+        background: theme.palette.background.sections.contact
+    },
     textFieldRoot: {
         padding: 0,
+        '&:before': {
+            borderBottom: 0,
+        },
     },
     textFieldInput: {
         borderRadius: 2,
-        boxShadow: `inset ${grey[400]} 0px 1px 3px 1px`,
+        boxShadow: `0px 1px 3px 1px ${grey[400]}`,
         fontSize: 18,
         padding: '8px 4px',
         backgroundColor: 'rgba(255, 255, 255, 0.7)',
@@ -71,7 +78,7 @@ class Contact extends Component {
             errors.name = 'Please, insert your name.';
         }
         if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-            errors.email = "Email address seems invalid, please make sure the format 'example@email.com'.";
+            errors.email = "Email address format is invalid, valid format is 'example@email.com'.";
         }
         if (!message) {
             errors.message = 'Please, type a message.';
@@ -85,7 +92,7 @@ class Contact extends Component {
     }
 
     handleSubmit(e) {
-        console.log('derp')
+        // ToDo: finish contact form message sending logic.
         e.preventDefault();
         const formIsValid = this.checkFormValidity();
         if (formIsValid) {
@@ -94,11 +101,14 @@ class Contact extends Component {
     }
 
     render() {
-        const { sectionBackgroundColor, classes } = this.props;
-        const { name, email, message, errors } = this.state;
+        const { classes } = this.props;
 
-        const fieldProps = {
+        const getTextFieldProps = (fieldKey) => ({
+            id: fieldKey,
+            value: _.get(this.state, fieldKey),
+            onChange: this.handleChange(fieldKey),
             fullWidth: true,
+            helperText: _.get(this.state.errors, fieldKey),
             InputProps: {
                 classes: {
                     root: classes.textFieldRoot,
@@ -106,22 +116,21 @@ class Contact extends Component {
                     // underline: classes.textFieldUnderline,
                 },
             },
-        };
+        });
+
+        // ToDo: render 'required' text next to required field labels.
+        // ToDo: change helper text color to red.
 
         return (
-            <Section id='contact' background={sectionBackgroundColor}>
+            <Section id='contact' containerClassName={classes.contactSectionContainer}>
                 <form onSubmit={this.handleSubmit}>
                     <Grid container spacing={24}>
                         <Grid item xs={12} sm={6}>
                             <FormGroup>
                                 <FormLabel className={classes.fieldLabel}>Name</FormLabel>
                                 <TextField
-                                    {...fieldProps}
-                                    id='name'
+                                    {...getTextFieldProps('name')}
                                     placeholder='Your name...'
-                                    value={name}
-                                    onChange={this.handleChange('name')}
-                                    helperText={errors.name}
                                 />
                             </FormGroup>
                         </Grid>
@@ -129,12 +138,8 @@ class Contact extends Component {
                             <FormGroup>
                                 <FormLabel className={classes.fieldLabel}>Email</FormLabel>
                                 <TextField
-                                    {...fieldProps}
-                                    id='email'
+                                    {...getTextFieldProps('email')}
                                     placeholder='Your email...'
-                                    value={email}
-                                    onChange={this.handleChange('email')}
-                                    helperText={errors.email}
                                 />
                             </FormGroup>
                         </Grid>
@@ -142,14 +147,10 @@ class Contact extends Component {
                             <FormGroup>
                                 <FormLabel className={classes.fieldLabel}>Message</FormLabel>
                                 <TextField
-                                    {...fieldProps}
-                                    id='message'
-                                    placeholder='Type your message here...'
-                                    value={message}
-                                    onChange={this.handleChange('message')}
-                                    multiline={true}
+                                    {...getTextFieldProps('message')}
+                                    multiline
                                     rows={6}
-                                    helperText={errors.message}
+                                    placeholder='Type your message here...'
                                 />
                             </FormGroup>
                         </Grid>
@@ -173,8 +174,7 @@ class Contact extends Component {
 }
 
 Contact.propTypes = {
-    classes: PropTypes.object,
-    sectionBackgroundColor: PropTypes.string
+    classes: PropTypes.object
 };
 
 export default withStyles(styles, { withTheme: true })(Contact);

@@ -30,7 +30,6 @@ const styles = theme => ({
         },
 
         '&:hover': {
-            // transform: 'scale(1.05)',
             boxShadow: `${grey[800]} 0px 1px 4px 1px`,
             opacity: 0.9,
         },
@@ -58,6 +57,8 @@ const styles = theme => ({
 });
 
 class PictureSelectPanel extends Component {
+    // ToDo: scroll to picture when next/previous is clicked in main viewer.
+
     render() {
         const { classes, images, selectedImageIndex } = this.props;
 
@@ -65,6 +66,7 @@ class PictureSelectPanel extends Component {
             <div className={classes.pictureSelectPanelWrapper}>
                 {_.map(images, ({ image, alt }, i) => (
                     <ButtonBase
+                        key={i}
                         focusRipple
                         className={classes.panelImageButton + (i === selectedImageIndex ? ' selected' : '')}
                         onClick={() => this.props.handlePictureSelect(i)}

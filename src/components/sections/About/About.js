@@ -8,21 +8,24 @@ import Section from '../Section';
 
 
 const styles = theme => ({
+    aboutSectionContainer: {
+        background: theme.palette.background.sections.about
+    }
 });
 
 
 class About extends Component {
     render() {
-        const { classes, sectionBackgroundColor } = this.props;
+        const { classes } = this.props;
 
         return (
-            <Section id='about' background={sectionBackgroundColor}>
+            <Section id='about' containerClassName={classes.aboutSectionContainer}>
                 <Grid container spacing={24}>
                     <Grid item sm={12} md={6}>
                         <Typography variant='body2' align='justify'>
-                            I have been working as a Front End Web Developer at a multicultural Bio-IT
-                            company <a href='https://www.medisapiens.com' target='_blank' rel='noopener noreferrer'>MediSapiens</a> since
-                            April 2016. At work, I develop software using the trendiest
+                            I have been working as a Front End Web Developer at a multicultural Bio-IT company
+                            <a href='https://www.medisapiens.com' target='_blank' rel='noopener noreferrer'> MediSapiens </a>
+                            since April 2016. At work, I develop software using the trendiest
                             technologies and finalize it with responsive pixel prefect design.
 
                             Alongside work, I am about to aquire my BBA from Haaga-Helia University of Applied
@@ -51,8 +54,7 @@ class About extends Component {
 }
 
 About.propTypes = {
-    classes: PropTypes.object,
-    sectionBackgroundColor: PropTypes.string
+    classes: PropTypes.object
 };
 
 export default withStyles(styles, { withTheme: true })(About);

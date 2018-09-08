@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { IconButton, Typography } from '@material-ui/core';
+import { Paper, IconButton, Typography } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 
 import zIndex from '../zIndex';
@@ -10,9 +10,6 @@ import { toggleBodyScroll } from '../scroll_functions';
 
 
 const styles = theme => ({
-    closeButton: {
-        float: 'right',
-    },
     modalWrapper: {
         position: 'fixed',
         top: '3vh',
@@ -20,10 +17,14 @@ const styles = theme => ({
         width: '96%',
         height: '95vh',
         zIndex: zIndex.modal,
-        backgroundColor: 'white',
-        overflow: 'auto',
-        boxShadow: 'rgba(0, 0, 0, 0.4) 0 2px 5px 1px',
-        padding: 20,
+        // overflow: 'auto',
+        padding: theme.spacing.unit * 5,
+    },
+    closeButton: {
+        float: 'right',
+    },
+    modalCaption: {
+        marginTop: theme.spacing.unit,
     },
     modalBackDrop: {
         position: 'fixed',
@@ -64,19 +65,20 @@ class Modal extends Component {
 
         return (
             <div>
-                <div className={classes.modalWrapper}>
+                <Paper classes={{ root: classes.modalWrapper }} elevation={10}>
+                    {/* ToDo: Increase close button size. */}
                     <IconButton className={classes.closeButton} onClick={onClose}>
                         <CloseIcon />
                     </IconButton>
                     <Typography variant='display1'>
                         {title}
                     </Typography>
-                    <Typography variant='caption'>
+                    <Typography variant='caption' className={classes.modalCaption}>
                         {description}
                     </Typography>
                     <hr />
                     {children}
-                </div>
+                </Paper>
                 <div onClick={onClose} className={classes.modalBackDrop} />
             </div>
         );
