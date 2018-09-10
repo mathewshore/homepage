@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Divider, Typography } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
 import TextHeader from '../../utils/TextHeader';
 
-// import introImg from '../../../bg_intro.jpg';
+import introImg from '../../../images/intro_matias.jpg';
 import zIndex from '../../zIndex';
 
 
@@ -22,13 +22,21 @@ const styles = theme => ({
         position: 'fixed',
         zIndex: zIndex.intro,
     },
-    // introImage: {
-    //     backgroundPosition: 'center',
-    //     backgroundSize: 'cover',
-    //     filter: 'grayscale(100%)',
-    //     height: '100%',
-    //     width: '100%',
-    // },
+    introImageContainer: {
+        position: 'absolute',
+        top: '20vh',
+        right: '27vw',
+        // width: 200,
+        height: 370,
+    },
+    introImage: {
+        // backgroundPosition: 'center',
+        // backgroundSize: 'cover',
+        // filter: 'grayscale(100%)',
+        height: '100%',
+        borderRadius: 120,
+        // width: '100%',
+    },
     introTextWrapper: {
         position: 'absolute',
         top: '34vh',
@@ -52,15 +60,13 @@ class Intro extends Component {
             <div>
                 <div id='intro' className={classes.introSectionContainer} />
                 <div className={classes.introWrapper}>
-                    {/* <img src={introImg} className={classes.introImage} alt="logo" /> */}
+                    <div className={classes.introImageContainer}>
+                        <img src={introImg} className={classes.introImage} alt="intro" />
+                    </div>
                     <div className={classes.introTextWrapper}>
                         <div>
                             <TextHeader variant="display3" text="MATIAS RANTA" />
                             <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
-
-                            {/* <Typography variant='display1' className={classes.introSubHeader}>
-                                SOFTWARE DEVELOPER
-                            </Typography> */}
                             <Divider classes={{ root: classes.dividerRoot }}/>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
+import SocialMediaButtons from '../SocialMediaButtons';
 
 
 const styles = theme => ({
@@ -12,6 +12,7 @@ const styles = theme => ({
         background: theme.palette.background.footer,
         padding: '40px 20px',
         color: 'white',
+        textAlign: 'center',
     },
 });
 
@@ -26,11 +27,10 @@ class Footer extends Component {
         const { classes } = this.props;
 
         return (
-            <Grid container className={classes.footer}>
-                <Grid item xs style={{ textAlign: 'center' }}>
-                    {Footer.renderCopyrightText()}
-                </Grid>
-            </Grid>
+            <div className={classes.footer}>
+                <div>{Footer.renderCopyrightText()}</div>
+                <SocialMediaButtons />
+            </div>
         );
     }
 }
