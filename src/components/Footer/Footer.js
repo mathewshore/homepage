@@ -12,7 +12,7 @@ const styles = theme => ({
         background: theme.palette.background.footer,
         padding: '40px 20px',
         color: 'white',
-        textAlign: 'center',
+        textAlign: 'center', 
     },
 });
 
