@@ -10,10 +10,8 @@ import WordPressIconButton from './WordPressIconButton';
 const styles = theme => ({
     socialMediaButtonsContainer: {
         display: 'flex',
-        position: 'absolute',
-        bottom: theme.spacing.unit * 4,
-        left: theme.spacing.unit * 4,
         color: 'white',
+        margin: 'auto',
     }
 });
 

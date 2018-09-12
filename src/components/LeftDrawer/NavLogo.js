@@ -37,11 +37,11 @@ const styles = theme => ({
         },
     },
     menuIcon: {
-        fontSize: 40,
+        fontSize: 39,
     },
     menuBrand: {
-        fontSize: 28,
-        margin: '-1px 0 0 10px',
+        fontSize: 31,
+        marginLeft: theme.spacing.unit,
     },
     remainingLetters: {
         transition: 'all 0.3s',

@@ -13,13 +13,15 @@ const palette = {
             intro: grey[100],
             about: brown[200],
             portfolio: grey[300],
-            skills: brown[800],
-            contact: grey[800],
+            skills: brown[400],
+            contact: grey[700],
 
             paper: grey[100],
         },
 
         leftDrawer: grey[900],
+
+        navBar: grey[800],
 
         footer: grey[900],
     },

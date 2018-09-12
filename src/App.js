@@ -8,7 +8,8 @@ import {
     Skills,
     Contact
 } from './components/sections';
-import LeftDrawer from './components/LeftDrawer';
+// import LeftDrawer from './components/LeftDrawer';
+import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 
 import theme from './theme';
@@ -34,12 +35,13 @@ export default class App extends Component {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
+                <NavBar />
                 <Intro />
                 <About />
                 <Portfolio />
                 <Skills />
                 <Contact />
-                <LeftDrawer />
+                {/* <LeftDrawer /> */}
                 <Footer />
             </MuiThemeProvider>
         );
