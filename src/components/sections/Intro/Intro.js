@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Divider } from '@material-ui/core';
+import { Divider, Grid } from '@material-ui/core';
 import TextHeader from '../../utils/TextHeader';
+import Container from '../../utils/Container';
 
-import introImg from '../../../images/intro_matias.jpg';
+import introImg from '../../../images/intro_matias.png';
 import zIndex from '../../zIndex';
 
 
@@ -14,10 +15,13 @@ const styles = theme => ({
         background: theme.palette.background.sections.intro,
         height: '100vh',
     },
+    gridContainer: {
+        padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`,
+    },
     introWrapper: {
         height: '100vh',
         width: '100%',
-        top: 0,
+        top: 66, // navbar height
         left: 0,
         position: 'fixed',
         zIndex: zIndex.intro,
@@ -26,16 +30,14 @@ const styles = theme => ({
         position: 'absolute',
         top: '20vh',
         right: '27vw',
-        // width: 200,
         height: 370,
     },
     introImage: {
-        // backgroundPosition: 'center',
-        // backgroundSize: 'cover',
-        // filter: 'grayscale(100%)',
         height: '100%',
-        borderRadius: 120,
-        // width: '100%',
+        width: '100%',
+        borderRadius: 500,
+
+        // ToDo: define introImg media screen max-widths here.
     },
     introTextWrapper: {
         position: 'absolute',
@@ -60,16 +62,32 @@ class Intro extends Component {
             <div>
                 <div id='intro' className={classes.introSectionContainer} />
                 <div className={classes.introWrapper}>
-                    <div className={classes.introImageContainer}>
-                        <img src={introImg} className={classes.introImage} alt="intro" />
-                    </div>
-                    <div className={classes.introTextWrapper}>
-                        <div>
-                            <TextHeader variant="display3" text="MATIAS RANTA" />
-                            <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
-                            <Divider classes={{ root: classes.dividerRoot }}/>
+                    <Container>
+                        <Grid container spacing={24} className={classes.gridContainer}>
+                            <Grid item xs={6}>
+                                <div>
+                                    <TextHeader variant="display3" text="MATIAS RANTA" />
+                                    <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
+                                    <Divider classes={{ root: classes.dividerRoot }}/>
+                                </div>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <div>
+                                    <img src={introImg} className={classes.introImage} alt="intro" />
+                                </div>
+                            </Grid>
+                        </Grid>
+                        {/* <div className={classes.introImageContainer}>
+                            <img src={introImg} className={classes.introImage} alt="intro" />
                         </div>
-                    </div>
+                        <div className={classes.introTextWrapper}>
+                            <div>
+                                <TextHeader variant="display3" text="MATIAS RANTA" />
+                                <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
+                                <Divider classes={{ root: classes.dividerRoot }}/>
+                            </div>
+                        </div> */}
+                    </Container>
                 </div>
             </div>
         );

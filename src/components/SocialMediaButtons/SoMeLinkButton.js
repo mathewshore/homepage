@@ -17,10 +17,10 @@ const styles = {
 const SoMeLinkButton = (props) => {
     const { url, classes, children, svgIconStyle } = props;
     return (
-        <a href={url} target='_blank' rel='noopener noreferrer'>
+        <a href={url} target="_blank" rel="noopener noreferrer">
             <Button
                 // mini
-                variant='fab'
+                variant="outlined"
                 color="primary"
                 className={classes.button}
             >

@@ -49,7 +49,6 @@ class LeftDrawer extends Component {
                 <Drawer classes={{ paper: classes.drawerPaper }} open={drawerIsOpen} onClose={this.toggleDrawer}>
                     <NavLinks />
                     <Divider />
-                    <SocialMediaButtons />
                 </Drawer>
             </div>
         );

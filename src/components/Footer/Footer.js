@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
 import SocialMediaButtons from '../SocialMediaButtons';
 
 
@@ -14,6 +13,12 @@ const styles = theme => ({
         color: 'white',
         textAlign: 'center',
     },
+    footerContentRow: {
+        padding: `${theme.spacing.unit * 2}px 0`,
+        '&.socialMediaButtonsContainer': {
+            display: 'flex',
+        },
+    }
 });
 
 class Footer extends Component {
@@ -28,8 +33,12 @@ class Footer extends Component {
 
         return (
             <div className={classes.footer}>
-                <div>{Footer.renderCopyrightText()}</div>
-                <SocialMediaButtons />
+                <div className={classes.footerContentRow + ' socialMediaButtonsContainer'}>
+                    <SocialMediaButtons />
+                </div>
+                <div className={classes.footerContentRow}>
+                    {Footer.renderCopyrightText()}
+                </div>
             </div>
         );
     }
