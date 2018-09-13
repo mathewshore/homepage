@@ -28,7 +28,7 @@ const styles = theme => ({
         transition: 'all 0.3s',
         color: theme.palette.text.header.light,
         '&:hover': {
-            color: 'purple',
+            color: theme.palette.primary.main,
             textDecoration: 'none',
         },
     },

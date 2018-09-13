@@ -15,7 +15,19 @@ const styles = theme => ({
     },
     sectionPaper: {
         background: theme.palette.background.sections.paper,
-        padding: theme.spacing.unit * 10,
+
+        [theme.breakpoints.up('xs')]: {
+            padding: theme.spacing.unit * 4,
+        },
+        [theme.breakpoints.up('sm')]: {
+            padding: theme.spacing.unit * 6,
+        },
+        [theme.breakpoints.up('md')]: {
+            padding: theme.spacing.unit * 8,
+        },
+        [theme.breakpoints.up('lg')]: {
+            padding: theme.spacing.unit * 10,
+        },
     },
     dividerRoot: theme.sectionDivider,
 });

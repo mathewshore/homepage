@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Divider, Grid } from '@material-ui/core';
+import { Divider, Grid, Typography } from '@material-ui/core';
 import TextHeader from '../../utils/TextHeader';
 import Container from '../../utils/Container';
 
@@ -16,7 +16,16 @@ const styles = theme => ({
         height: '100vh',
     },
     gridContainer: {
-        padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`,
+        padding: theme.spacing.unit * 10, // same lg padding as in section paper
+        // ToDo: combine gridContainer & section paper paddings
+        // ToDo: adjust padding to media screens
+    },
+    gridItem: {
+        textAlign: 'center',
+
+        [theme.breakpoints.up('md')]: {
+            textAlign: 'initial',
+        },
     },
     introWrapper: {
         height: '100vh',
@@ -25,33 +34,54 @@ const styles = theme => ({
         left: 0,
         position: 'fixed',
         zIndex: zIndex.intro,
+        // ToDo: set top: 0 when navbar is bottom for sm> screens
     },
-    introImageContainer: {
-        position: 'absolute',
-        top: '20vh',
-        right: '27vw',
-        height: 370,
+    introTextWrapper: {
+        [theme.breakpoints.up('md')]: {
+            position: 'relative',
+            top: `calc(50% + ${theme.spacing.unit * 3}px)`,
+            transform: 'translateY(-50%)',
+        },
+        // ToDo: adjust position for sm> screens when nav is bottom
+    },
+    introTextPhrase: {
+        fontSize: 22,
+    },
+    introImageWrapper: {
+        // ToDo: adjust position for sm> screens when nav is bottom
+        [theme.breakpoints.up('md')]: {
+            top: `calc(50% - ${theme.spacing.unit * 17}px)`,
+            transform: 'translateY(-50%)',
+            position: 'relative',
+        },
     },
     introImage: {
         height: '100%',
         width: '100%',
         borderRadius: 500,
+        float: 'none',
 
-        // ToDo: define introImg media screen max-widths here.
+        [theme.breakpoints.up('xs')]: {
+            maxWidth: 240,
+        },
+        [theme.breakpoints.up('sm')]: {
+            maxWidth: 280,
+        },
+        [theme.breakpoints.up('md')]: {
+            maxWidth: 320,
+            float: 'right',
+        },
+        [theme.breakpoints.up('lg')]: {
+            maxWidth: 360,
+        },
     },
-    introTextWrapper: {
-        position: 'absolute',
-        top: '34vh',
-        left: '15vw',
-        // width: theme.spacing.unit * 52,
+    dividerRoot: {
+        ...theme.sectionDivider,
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
     },
-    introMainHeader: {
-        color: theme.palette.text.header.dark,
-    },
-    introSubHeader: {
-        // color: 'rgba(0, 0, 0, 0.74)',
-    },
-    dividerRoot: theme.sectionDivider,
 });
 
 class Intro extends Component {
@@ -63,30 +93,28 @@ class Intro extends Component {
                 <div id='intro' className={classes.introSectionContainer} />
                 <div className={classes.introWrapper}>
                     <Container>
-                        <Grid container spacing={24} className={classes.gridContainer}>
-                            <Grid item xs={6}>
-                                <div>
+                        <Grid
+                            container
+                            spacing={40}
+                            className={classes.gridContainer}
+                            // ToDo: for sm> set direction="column-reverse"
+                        >
+                            <Grid item xs={12} sm={12} md={6} className={classes.gridItem}>
+                                <div className={classes.introTextWrapper}>
                                     <TextHeader variant="display3" text="MATIAS RANTA" />
                                     <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
                                     <Divider classes={{ root: classes.dividerRoot }}/>
+                                    <Typography variant="display1" classes={{ root: classes.introTextPhrase }}>
+                                        PIXEL PERFECTIONIST & DOG LOVER
+                                    </Typography>
                                 </div>
                             </Grid>
-                            <Grid item xs={6}>
-                                <div>
+                            <Grid item xs={12} sm={12} md={6} className={classes.gridItem}>
+                                <div className={classes.introImageWrapper}>
                                     <img src={introImg} className={classes.introImage} alt="intro" />
                                 </div>
                             </Grid>
                         </Grid>
-                        {/* <div className={classes.introImageContainer}>
-                            <img src={introImg} className={classes.introImage} alt="intro" />
-                        </div>
-                        <div className={classes.introTextWrapper}>
-                            <div>
-                                <TextHeader variant="display3" text="MATIAS RANTA" />
-                                <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
-                                <Divider classes={{ root: classes.dividerRoot }}/>
-                            </div>
-                        </div> */}
                     </Container>
                 </div>
             </div>

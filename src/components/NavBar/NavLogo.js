@@ -38,8 +38,7 @@ const styles = theme => ({
 
 class NavLogo extends Component {
     render() {
-        const { classes, drawerIsOpen } = this.props;
-        const remainingLettersClassName = classes.remainingLetters; // (drawerIsOpen ? ' show' : '');
+        const { classes } = this.props;
 
         return (
             <span className={classes.logoContainer}>
@@ -49,9 +48,6 @@ class NavLogo extends Component {
                     onClick={this.props.toggleLeftDrawer}
                 >
                     <TextHeader variant="display1" text="MATIAS RANTA" typographyClassName={classes.logoText} />
-                    {/* <span className={classes.menuBrand}>
-                        M<span className={remainingLettersClassName}>atias</span> R<span className={remainingLettersClassName}>anta</span>
-                    </span> */}
                 </a>
             </span>
         );

@@ -38,7 +38,7 @@ const Container = (props) => {
 Container.propTypes = {
     classes: PropTypes.object,
     className: PropTypes.string,
-    children: PropTypes.element,
+    children: PropTypes.node,
 };
 
 export default withStyles(styles, { withTheme: true })(Container);
