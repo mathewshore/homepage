@@ -1,7 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import overrides from './overrides';
 import palette from './palette';
-import zIndex from '../components/zIndex'; 
+import zIndex from '../components/zIndex';
 
 
 const theme = createMuiTheme({
@@ -20,7 +20,17 @@ const theme = createMuiTheme({
         position: 'fixed',
         left: 0,
         width: '100%',
-    }
+    },
+    mobileNavLogo: {
+        margin: {
+            xs: {
+                marginLeft: 2
+            },
+            sm: {
+                marginLeft: 7
+            },
+        },
+    },
 });
 
 export default theme;

@@ -7,30 +7,43 @@ const styles = theme => ({
     hexagon: {
         position: 'absolute',
         bottom: 0,
-        width: 103,
-        height: 59.47,
-        backgroundColor: theme.palette.primary.main, // '#64C7CC', // add theme bgcolor
-        marginLeft: 7, // 'auto', // '23.09px 0',
+        // width: 103,
+        // height: 59.47,
+        backgroundColor: theme.palette.primary.main,
         boxShadow: theme.shadows[20],
 
         '&:before': {
             content: '""',
             position: 'absolute',
             width: 0,
-            borderLeft: '51.5px solid transparent',
-            borderRight: '51.5px solid transparent',
+            // borderLeft: '51.5px solid transparent',
+            // borderRight: '51.5px solid transparent',
             bottom: '100%',
-            borderBottom: `29.73px solid ${theme.palette.primary.main}`, // add theme bgcolor
+            // borderBottom: `29.73px solid ${theme.palette.primary.main}`,
         },
-        // '&:after': {
-        //     content: '""',
-        //     position: 'absolute',
-        //     width: 0,
-        //     borderLeft: '40px solid transparent',
-        //     borderRight: '40px solid transparent',
-        //     top: '100%',
-        //     borderTop: '23.09px solid #64C7CC' // add theme bgcolor
-        // },
+
+        [theme.breakpoints.up('xs')]: {
+            // ...theme.mobileNavLogo.margin.xs,
+            width: 80,
+            height: 46.19,
+
+            '&:before': {
+                borderLeft: '40px solid transparent',
+                borderRight: '40px solid transparent',
+                borderBottom: `23.09px solid ${theme.palette.primary.main}`,
+            },
+        },
+        [theme.breakpoints.up('sm')]: {
+            // ...theme.mobileNavLogo.margin.sm,
+            width: 103,
+            height: 59.47,
+
+            '&:before': {
+                borderLeft: '51.5px solid transparent',
+                borderRight: '51.5px solid transparent',
+                borderBottom: `29.73px solid ${theme.palette.primary.main}`,
+            },
+        },
     },
 });
 
