@@ -109,6 +109,8 @@ class PictureViewer extends Component {
         const { selectedImageIndex } = this.state;
         const selectedImageItem = images[selectedImageIndex];
 
+        // ToDo: fix small media screen height.
+
         return (
             <div className={classes.viewerWarpper}>
                 <Grid container spacing={16} className={classes.pictureViewerContainer}>

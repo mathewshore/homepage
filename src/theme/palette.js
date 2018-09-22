@@ -1,8 +1,8 @@
-import { purple, green, grey, brown } from '@material-ui/core/colors';
+import { red, orange, purple, green, grey, brown } from '@material-ui/core/colors';
 
 
 const palette = {
-    primary: purple,
+    primary: red,
     secondary: green, // not used
     background: {
         primary: grey[200], // not used

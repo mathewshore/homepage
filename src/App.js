@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
+import { Hidden } from '@material-ui/core';
+import NavBar from './components/NavBar';
+import MobileNavBar from './components/MobileNavBar';
+import Footer from './components/Footer';
 import {
     Intro,
     About,
@@ -8,9 +12,6 @@ import {
     Skills,
     Contact
 } from './components/sections';
-// import LeftDrawer from './components/LeftDrawer';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
 
 import theme from './theme';
 
@@ -35,13 +36,17 @@ export default class App extends Component {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
-                <NavBar />
+                <Hidden smDown>
+                    <NavBar />
+                </Hidden>
+                <Hidden mdUp>
+                    <MobileNavBar />
+                </Hidden>
                 <Intro />
                 <About />
                 <Portfolio />
                 <Skills />
                 <Contact />
-                {/* <LeftDrawer /> */}
                 <Footer />
             </MuiThemeProvider>
         );

@@ -24,9 +24,8 @@ const styles = theme => ({
     },
     navLinkText: {
         cursor: 'pointer',
-
-        transition: 'all 0.3s',
         color: theme.palette.text.header.light,
+        transition: 'all 0.3s',
         '&:hover': {
             color: theme.palette.primary.main,
             textDecoration: 'none',

@@ -9,7 +9,7 @@ const styles = theme => ({
     footer: {
         position: 'relative',
         background: theme.palette.background.footer,
-        padding: '40px 20px',
+        padding: `${theme.spacing.unit * 10}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 16.5}px`,
         color: 'white',
         textAlign: 'center',
     },

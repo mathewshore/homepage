@@ -16,7 +16,19 @@ const styles = theme => ({
         height: '100vh',
     },
     gridContainer: {
-        padding: theme.spacing.unit * 10, // same lg padding as in section paper
+        // padding: theme.spacing.unit * 10,
+        [theme.breakpoints.up('xs')]: {
+            padding: theme.spacing.unit * 4,
+        },
+        [theme.breakpoints.up('sm')]: {
+            padding: theme.spacing.unit * 6,
+        },
+        [theme.breakpoints.up('md')]: {
+            padding: theme.spacing.unit * 8,
+        },
+        [theme.breakpoints.up('lg')]: {
+            padding: theme.spacing.unit * 10,
+        },
         // ToDo: combine gridContainer & section paper paddings
         // ToDo: adjust padding to media screens
     },
@@ -34,6 +46,10 @@ const styles = theme => ({
         left: 0,
         position: 'fixed',
         zIndex: zIndex.intro,
+
+        [theme.breakpoints.down('sm')]: {
+            top: 0,
+        },
         // ToDo: set top: 0 when navbar is bottom for sm> screens
     },
     introTextWrapper: {
