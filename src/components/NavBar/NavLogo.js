@@ -15,6 +15,7 @@ const styles = theme => ({
         display: 'block',
         width: 176,
         transition: 'all 0.3s',
+        textDecoration: 'none',
 
         color: theme.palette.text.header.light,
 

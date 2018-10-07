@@ -15,7 +15,6 @@ import {
 
 import theme from './theme';
 
-import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 
