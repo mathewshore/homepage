@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 
-const styles = (theme) => ({
+const styles = theme => ({
     container: {
         paddingLeft: 0,
         paddingRight: 0,        

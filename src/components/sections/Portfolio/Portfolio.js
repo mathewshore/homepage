@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import map from 'lodash/map';
+import get from 'lodash/get';
 
-import { withStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Card, CardContent } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 import Section from '../Section';
 import Modal from '../../utils/Modal';
@@ -21,9 +25,6 @@ const styles = theme => ({
     },
     card: {
         cursor: 'pointer',
-    },
-    modalCloseButton: {
-        float: 'right',
     },
     portfolioImage: {
         width: '100%',
@@ -73,7 +74,7 @@ class Portfolio extends Component {
         super();
 
         this.state = {
-            portfolioItemKey: '',
+            portfolioItemKey: 'flexer',
         };
 
         this.togglePortfolioModal = this.togglePortfolioModal.bind(this);
@@ -84,7 +85,7 @@ class Portfolio extends Component {
     }
 
     renderPortfolioItems(classes) {
-        return _.map(portfolioItems, (portfolioItem, key) => {
+        return map(portfolioItems, (portfolioItem, key) => {
             const { img, title, shortDescription } = portfolioItem;
 
             return (
@@ -106,7 +107,7 @@ class Portfolio extends Component {
 
     render() {
         const { classes } = this.props;
-        const portfolioItem = _.get(portfolioItems, this.state.portfolioItemKey);
+        const portfolioItem = get(portfolioItems, this.state.portfolioItemKey);
 
         return (
             <div>
@@ -122,7 +123,8 @@ class Portfolio extends Component {
                         description={portfolioItem.longDescription}
                     >
                         {portfolioItem.modalElement}
-                    </Modal>}
+                    </Modal>
+                }
             </div>
         );
     }

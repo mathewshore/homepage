@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
-import { Drawer, Divider } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
 import NavLinks from './NavLinks';
 import NavLogo from './NavLogo';
-import SocialMediaButtons from '../SocialMediaButtons';
 
-import { grey } from '@material-ui/core/colors';
 import zIndex from '../zIndex';
 
 

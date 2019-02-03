@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+import times from 'lodash/times';
+import get from 'lodash/get';
+import assign from 'lodash/assign';
+import includes from 'lodash/includes';
 
-import { withStyles } from '@material-ui/core/styles';
-import { Table, TableHead, TableBody, TableRow, TableCell, Grid, Button } from '@material-ui/core';
-import { Close as XIcon, PanoramaFishEye as OIcon } from '@material-ui/icons';
-import { blue, red, green, grey } from '@material-ui/core/colors';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+
+import XIcon from '@material-ui/icons/Close';
+import OIcon from '@material-ui/icons/PanoramaFishEye';
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
+import green from '@material-ui/core/colors/green';
+import grey from '@material-ui/core/colors/grey';
 
 
 const styles = theme => ({
@@ -68,8 +82,8 @@ class TicTacToe extends Component {
 
     getEmptyGrid() {
         const grid = {};
-        _.times(3, (i) => {
-            _.times(3, (j) => {
+        times(3, (i) => {
+            times(3, (j) => {
                 grid[`${i}_${j}`] = null;
             });
         });
@@ -92,7 +106,7 @@ class TicTacToe extends Component {
 
         let winner = null;
         let winCells = null;
-        _.times(3, (i) => {
+        times(3, (i) => {
             if (!winner) {
                 if ( // Check if grid row has same cell values.
                     (grid[`${i}_0`] === grid[`${i}_1`]) &&
@@ -122,12 +136,12 @@ class TicTacToe extends Component {
             if (isLastTurn && !winner) {
                 this.setState({ gameIsRunning: false });
             } else {
-                const player = _.get(this.state, winner);
-                const wins = _.get(player, 'wins') + 1;
+                const player = get(this.state, winner);
+                const wins = get(player, 'wins') + 1;
                 this.setState({
                     winner,
                     winCells,
-                    [winner]: _.assign({}, player, { wins }),
+                    [winner]: assign({}, player, { wins }),
                     gameIsRunning: false,
                 });
             }
@@ -161,13 +175,13 @@ class TicTacToe extends Component {
             <div className={classes.gridWrapper}>
                 <table className={classes.boardTable}>
                     <tbody>
-                        {_.times(3, (i) => (
+                        {times(3, (i) => (
                             <tr key={i}>
-                                {_.times(3, (j) => {
+                                {times(3, (j) => {
                                     const cellKey = `${i}_${j}`;
-                                    const playerKey = _.get(grid, cellKey);
+                                    const playerKey = get(grid, cellKey);
 
-                                    const isWinCell = _.includes(winCells, cellKey);
+                                    const isWinCell = includes(winCells, cellKey);
                                     const isDisabled = playerKey || !gameIsRunning;
                                     const cellClassName = `${isWinCell ? ' win-cell' : ''} ${isDisabled ? ' disabled' : ''}`;
 

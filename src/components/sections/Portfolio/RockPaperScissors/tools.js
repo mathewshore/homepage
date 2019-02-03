@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { SvgIcon } from '@material-ui/core';
-import { ThumbUp as RockIcon, Note as PaperIcon } from '@material-ui/icons';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import RockIcon from '@material-ui/icons/ThumbUp';
+import PaperIcon from '@material-ui/icons/Note';
 
 
 const ScissorsIcon = (props) => (

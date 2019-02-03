@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import map from 'lodash/map';
+import split from 'lodash/split';
+import size from 'lodash/size';
 
-import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Typography from '@material-ui/core/Typography';
 
 
 const styles = theme => ({
@@ -31,10 +33,10 @@ const styles = theme => ({
 });
 
 
-const getFormattedText = (text, props) => _.map(_.split(text, ' '), (word, i) => {
+const getFormattedText = (text, props) => map(split(text, ' '), (word, i) => {
     const { classes, variant, className } = props;
     const firstLetter = word.substring(0, 1);
-    const remainingLetters = word.substring(1, (_.size(word)));
+    const remainingLetters = word.substring(1, (size(word)));
     const remainingLettersClass = `${classes.remainingLetters} ${variant}`
     const wordWrapperClass = `${classes.wordWrapper}${className ? ` ${className}` : ''}`;
 

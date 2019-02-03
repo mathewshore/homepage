@@ -1,33 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import map from 'lodash/map';
 
-import { withStyles } from '@material-ui/core/styles';
-import { ButtonBase } from '@material-ui/core';
-import { purple, grey } from '@material-ui/core/colors';
+import withStyles from '@material-ui/core/styles/withStyles';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import grey from '@material-ui/core/colors/grey';
+import purple from '@material-ui/core/colors/purple';
 
 
 const styles = theme => ({
-    pictureSelectPanelWrapper: {
-        // padding: `0 ${theme.spacing.unit * 2}px`,
+    panelContainer: {
+        background: grey[700]
     },
-    panelImageButton: {
-        height: '100%',
+    imageButton: {
+        maxWidth: theme.spacing.unit * 15,
+        height: '80px',
         width: '100%',
         cursor: 'pointer',
-        margin: '8px 0',
+        margin: theme.spacing.unit,
 
         transition: 'all 0.3s',
         border: 0,
         boxShadow: 'none',
         opacity: 1,
-
-        '&:first-of-type': {
-            marginTop: 0,
-        },
-        '&:last-of-type': {
-            marginBottom: 0,
-        },
 
         '&:hover': {
             boxShadow: `${grey[800]} 0px 1px 4px 1px`,
@@ -56,19 +51,19 @@ const styles = theme => ({
     },
 });
 
-class PictureSelectPanel extends Component {
+class PreviewPanel extends Component {
     // ToDo: scroll to picture when next/previous is clicked in main viewer.
 
     render() {
         const { classes, images, selectedImageIndex } = this.props;
 
         return (
-            <div className={classes.pictureSelectPanelWrapper}>
-                {_.map(images, ({ image, alt }, i) => (
+            <div className={classes.panelContainer}>
+                {map(images, ({ image, alt }, i) => (
                     <ButtonBase
                         key={i}
                         focusRipple
-                        className={classes.panelImageButton + (i === selectedImageIndex ? ' selected' : '')}
+                        className={classes.imageButton + (i === selectedImageIndex ? ' selected' : '')}
                         onClick={() => this.props.handlePictureSelect(i)}
                     >
                         <img className={classes.panelImage} src={image} alt={alt} />
@@ -80,11 +75,11 @@ class PictureSelectPanel extends Component {
     }
 }
 
-PictureSelectPanel.propTypes = {
+PreviewPanel.propTypes = {
     classes: PropTypes.object,
     images: PropTypes.array,
     selectedImageIndex: PropTypes.number,
     handlePictureSelect: PropTypes.func,
 };
 
-export default withStyles(styles, { withTheme: true })(PictureSelectPanel);
+export default withStyles(styles, { withTheme: true })(PreviewPanel);

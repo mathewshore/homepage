@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import NavLinks from './NavLinks';
 import NavLogo from './NavLogo';
@@ -15,6 +15,8 @@ const styles = (theme) => ({
     },
     container: {
         display: 'flex',
+        height: theme.spacing.unit * 10,
+        alignItems: 'center'
     },
 });
 

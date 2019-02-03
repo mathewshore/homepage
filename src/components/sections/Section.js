@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import toUpper from 'lodash/toUpper';
 
-import { withStyles } from '@material-ui/core/styles';
-import { Divider, Paper } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
 import TextHeader from '../utils/TextHeader';
 import Container from '../utils/Container';
 
@@ -40,7 +41,7 @@ const Section = (props) => {
         <div id={id} className={sectionWrapperClassName}>
             <Container>
                 <Paper elevation={4} className={classes.sectionPaper}>
-                    <TextHeader variant="display2" text={_.toUpper(id)} />
+                    <TextHeader variant="display2" text={toUpper(id)} />
                     <Divider classes={{ root: classes.dividerRoot }} />
                     {children}
                 </Paper>

@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import overrides from './overrides';
 import palette from './palette';
 import zIndex from '../components/zIndex';

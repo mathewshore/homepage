@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import get from 'lodash/get';
 
-import { withStyles } from '@material-ui/core/styles';
-import { Grid, FormGroup, TextField, FormLabel, Button } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Grid from '@material-ui/core/Grid';
+import FormGroup from '@material-ui/core/FormGroup';
+import TextField from '@material-ui/core/TextField';
+import FormLabel from '@material-ui/core/FormLabel';
+import Button from '@material-ui/core/Button';
+import grey from '@material-ui/core/colors/grey';
 
 import Section from '../Section';
 // import SendButton from './SendButton';
@@ -105,10 +109,10 @@ class Contact extends Component {
 
         const getTextFieldProps = (fieldKey) => ({
             id: fieldKey,
-            value: _.get(this.state, fieldKey),
+            value: get(this.state, fieldKey),
             onChange: this.handleChange(fieldKey),
             fullWidth: true,
-            helperText: _.get(this.state.errors, fieldKey),
+            helperText: get(this.state.errors, fieldKey),
             InputProps: {
                 classes: {
                     root: classes.textFieldRoot,

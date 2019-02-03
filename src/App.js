@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
-import { Hidden } from '@material-ui/core';
+import Hidden from '@material-ui/core/Hidden';
 import NavBar from './components/NavBar';
 import MobileNavBar from './components/MobileNavBar';
 import Footer from './components/Footer';

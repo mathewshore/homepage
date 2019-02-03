@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
-import { Menu as MenuIcon, Close as CloseIcon } from '@material-ui/icons';
+import withStyles from '@material-ui/core/styles/withStyles';
+import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
 
 import zIndex from '../zIndex';
 

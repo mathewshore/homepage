@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 
 export default class RPSResultBlock extends React.Component {

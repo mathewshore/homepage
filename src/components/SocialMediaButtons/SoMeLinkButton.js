@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
-import { SvgIcon, Button } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import Button from '@material-ui/core/Button';
 
 
-const styles = {
+const styles = theme => ({
     button: {
        display: 'block',
-       margin: '0px 8px',
-       width: 48,
-       height: 48
+       margin: `0px ${theme.spacing.unit}px`,
+       width: theme.spacing.unit * 6,
+       height: theme.spacing.unit * 6
     },
-};
+});
 
 const SoMeLinkButton = (props) => {
     const { url, classes, children, svgIconStyle } = props;

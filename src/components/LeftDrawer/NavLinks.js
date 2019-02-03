@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import map from 'lodash/map';
 
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-scroll';
 import TextHeader from '../utils/TextHeader';
 
@@ -90,7 +90,7 @@ class NavLinks extends Component {
 
         return (
             <div className={classes.navLinksWrapper}>
-                {_.map(navLinks, (linkId, i) => {
+                {map(navLinks, (linkId, i) => {
                     const linkDisplayClassName = this.state.linkRenderCount >= (i + 1) ? ' enter' : '';
                     return (
                         <div key={linkId} className={classes.navLink + linkDisplayClassName}>

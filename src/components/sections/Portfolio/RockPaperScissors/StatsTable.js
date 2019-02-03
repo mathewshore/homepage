@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import map from 'lodash/map';
+import keys from 'lodash/keys';
 
-import { withStyles } from '@material-ui/core/styles';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 
 
 const styles = theme => ({
@@ -26,7 +32,7 @@ class StatsTable extends Component {
             <Table classes={{ root: classes.table }}>
                 <TableHead>
                     <TableRow>
-                        {StatsTable.headers.map((header) => (
+                        {map(StatsTable.headers, header => (
                             <TableCell key={header} classes={{ root: classes.tableCell }}>
                                 {header}
                             </TableCell>
@@ -35,7 +41,7 @@ class StatsTable extends Component {
                 </TableHead>
                 <TableBody>
                     <TableRow>
-                        {Object.keys(stats).map((key) => (
+                        {map(keys(stats), key => (
                             <TableCell key={key} classes={{ root: classes.tableCell }}>
                                 {stats[key]}
                             </TableCell>
