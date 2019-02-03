@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     button: {
-       display: 'block',
        margin: `0px ${theme.spacing.unit}px`,
        width: theme.spacing.unit * 6,
        height: theme.spacing.unit * 6
@@ -16,17 +15,16 @@ const styles = theme => ({
 });
 
 const SoMeLinkButton = (props) => {
-    const { url, classes, children, svgIconStyle } = props;
+    const { classes } = props;
     return (
-        <a href={url} target="_blank" rel="noopener noreferrer">
+        <a href={props.url} target="_blank" rel="noopener noreferrer">
             <Button
-                // mini
                 variant="outlined"
                 color="primary"
                 className={classes.button}
             >
-                <SvgIcon style={svgIconStyle}>
-                    {children}
+                <SvgIcon style={props.svgIconStyle}>
+                    {props.children}
                 </SvgIcon>
             </Button>
         </a>

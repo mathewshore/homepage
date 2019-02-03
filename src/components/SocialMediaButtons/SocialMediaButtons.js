@@ -9,8 +9,6 @@ import WordPressIconButton from './WordPressIconButton';
 
 const styles = theme => ({
     socialMediaButtonsContainer: {
-        display: 'flex',
-        color: 'white',
         margin: 'auto',
     }
 });

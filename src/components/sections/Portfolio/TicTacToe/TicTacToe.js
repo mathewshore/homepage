@@ -64,21 +64,15 @@ const styles = theme => ({
 });
 
 class TicTacToe extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            x: { wins: 0 },
-            o: { wins: 0 },
-            grid: this.getEmptyGrid(),
-            turnCount: 1,
-            gameIsRunning: true,
-            winner: null,
-            winCells: null,
-        };
-
-        this.resetGame = this.resetGame.bind(this);
-    }
+    state = {
+        x: { wins: 0 },
+        o: { wins: 0 },
+        grid: this.getEmptyGrid(),
+        turnCount: 1,
+        gameIsRunning: true,
+        winner: null,
+        winCells: null,
+    };
 
     getEmptyGrid() {
         const grid = {};
@@ -210,7 +204,7 @@ class TicTacToe extends Component {
         );
     }
 
-    resetGame() {
+    resetGame = () => {
         this.setState({
             grid: this.getEmptyGrid(),
             turnCount: 1,
