@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import MobileNavBarContent from './MobileNavBarContent';
-import Container from '../utils/Container';
+import Container from '../common/Container';
 
 
 const styles = theme => ({

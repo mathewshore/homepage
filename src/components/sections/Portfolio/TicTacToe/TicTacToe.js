@@ -5,11 +5,6 @@ import assign from 'lodash/assign';
 import includes from 'lodash/includes';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
@@ -19,6 +14,8 @@ import blue from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/red';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
+
+import Table from '../../../common/Table';
 
 
 const styles = theme => ({
@@ -47,9 +44,6 @@ const styles = theme => ({
         '&.win-cell': {
             backgroundColor: green[100],
         },
-    },
-    statsTableCell: {
-        textAlign: 'center',
     },
     resetButton: {
         display: 'block',
@@ -215,15 +209,16 @@ class TicTacToe extends Component {
     }
 
     getPlayerIcon(playerKey) {
-        const { xIcon, oIcon } = this.props.classes;
-        return playerKey === 'x' ? <XIcon classes={{ root: xIcon }} /> : <OIcon classes={{ root: oIcon }} />;
+        const { classes } = this.props;
+        const Icon = playerKey === 'x' ? XIcon : OIcon;
+        const iconClassName = playerKey === 'x' ? classes.xIcon : classes.oIcon;
+        return <Icon classes={{ root: iconClassName }} />;
     }
 
     getStatusText() {
-        const { winner, gameIsRunning } = this.state;
-        if (winner) {
-            return winner ? 'won!' : 'turn';
-        } else if (gameIsRunning) {
+        if (this.state.winner) {
+            return 'won!';
+        } else if (this.state.gameIsRunning) {
             return 'turn';
         }
         return 'Draw!';
@@ -243,41 +238,27 @@ class TicTacToe extends Component {
 
     render() {
         const { classes } = this.props;
-        const { x, o } = this.state;
+
+        const dataMapping = [
+            { dataKey: 'player', label: 'Player' },
+            { dataKey: 'wins', label: 'Wins' }
+        ];
+
+        const data = [
+            {
+                player: this.getPlayerIcon('x'),
+                wins: this.state.x.wins
+            },
+            {
+                player: this.getPlayerIcon('o'),
+                wins: this.state.o.wins
+            }
+        ];
 
         return (
             <Grid container>
                 <Grid item md={4} xs={12}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell classes={{ root: classes.statsTableCell }}>
-                                    Player
-                                </TableCell>
-                                <TableCell classes={{ root: classes.statsTableCell }}>
-                                    Wins
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell classes={{ root: classes.statsTableCell }}>
-                                    {this.getPlayerIcon('x')}
-                                </TableCell>
-                                <TableCell classes={{ root: classes.statsTableCell }}>
-                                    {x.wins}
-                                </TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell classes={{ root: classes.statsTableCell }}>
-                                    {this.getPlayerIcon('o')}
-                                </TableCell>
-                                <TableCell classes={{ root: classes.statsTableCell }}>
-                                    {o.wins}
-                                </TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
+                    <Table dataMapping={dataMapping} data={data} />
                 </Grid>
                 <Grid item md={8} xs={12}>
                     {this.renderGameStatusText()}

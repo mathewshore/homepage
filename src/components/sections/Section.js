@@ -5,8 +5,8 @@ import toUpper from 'lodash/toUpper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
-import TextHeader from '../utils/TextHeader';
-import Container from '../utils/Container';
+import TextHeader from '../common/TextHeader';
+import Container from '../common/Container';
 
 
 const styles = theme => ({

@@ -3,7 +3,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import NavLinks from './NavLinks';
 import NavLogo from './NavLogo';
-import Container from '../utils/Container';
+import Container from '../common/Container';
 
 
 const styles = (theme) => ({

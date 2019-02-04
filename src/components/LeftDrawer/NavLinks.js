@@ -4,7 +4,7 @@ import map from 'lodash/map';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-scroll';
-import TextHeader from '../utils/TextHeader';
+import TextHeader from '../common/TextHeader';
 
 
 const navLinks = ['intro', 'about', 'portfolio', 'skills', 'contact'];

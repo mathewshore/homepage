@@ -5,8 +5,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TextHeader from '../../utils/TextHeader';
-import Container from '../../utils/Container';
+import TextHeader from '../../common/TextHeader';
+import Container from '../../common/Container';
 
 import introImg from '../../../images/intro_matias.png';
 import zIndex from '../../zIndex';

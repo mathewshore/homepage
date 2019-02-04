@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PictureViewer from '../../../utils/PictureViewer';
+import PictureViewer from '../../../common/PictureViewer';
 
 import testImg from '../../../../bg_intro.jpg';
 
