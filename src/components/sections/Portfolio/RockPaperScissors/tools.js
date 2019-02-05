@@ -18,8 +18,7 @@ ScissorsIcon.propTypes = {
     style: PropTypes.object
 };
 
-
-export const tools = [
+const tools = [
     {
         label: 'Rock',
         value: 'rock',
@@ -42,3 +41,5 @@ export const tools = [
         icon: <ScissorsIcon style={{ color: 'orange' }} />,
     },
 ];
+
+export default tools;

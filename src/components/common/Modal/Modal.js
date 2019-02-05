@@ -57,7 +57,11 @@ class Modal extends Component {
         const { classes } = this.props;
 
         return (
-            <MuiModal open onClose={this.props.onClose}>
+            <MuiModal
+                open
+                disableAutoFocus
+                onClose={this.props.onClose}
+            >
                 <Container>
                     <Paper classes={{ root: classes.modalPaper }} elevation={10}>
                         <ModalHead

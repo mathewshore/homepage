@@ -1,82 +1,57 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import map from 'lodash/map';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 
 import ToolButton from './ToolButton';
-import { tools } from './tools';
+import tools from './tools';
 
 
 const styles = theme => ({
-    toolWrapper: {
-        padding: 10,
+    userBlock: {
+        textAlign: 'center'
     },
-    scissorsButton: {
-        marginLeft: 10,
-    }
+    toolWrapper: {
+        padding: theme.spacing.unit * 1.5,
+    },
 });
 
-class RPSUserBlock extends React.Component {
-    static getTool(toolValue) {
-        return tools.find((tool) => toolValue === tool.value);
-    }
+const RPSUserBlock = props => {
+    const { classes, userTool } = props;
+    const [rock, paper, scissors] = tools;
 
-    renderUserTools(classes) {
-        const { userTool } = this.props;
+    const getButtonProps = tool => ({
+        tool,
+        disabled: tool.value === userTool,
+        onClick: props.onToolClick(tool.value),
+        children: tool.icon
+    });
 
-        if (userTool) {
-            const tool = RPSUserBlock.getTool(userTool);
-
-            return (
+    return (
+        <div className={classes.userBlock}>
+            <Typography variant='display1'>You</Typography>
+            <div className={classes.toolWrapper}>
                 <div>
-                    <ToolButton
-                        disabled={true}
-                        tool={tool}
-                        onClick={this.props.onToolClick}
-                    />
-                </div>
-            );
-        }
-
-        const rock = tools[0];
-        const paper = tools[1];
-        const scissors = tools[2];
-
-        return (
-            <div>
-                <div>
-                    <ToolButton
-                        tool={rock}
-                        onClick={this.props.onToolClick}
-                    />
+                    <ToolButton {...getButtonProps(rock)} />
                 </div>
                 <div>
+                    <ToolButton {...getButtonProps(paper)} />
                     <ToolButton
-                        tool={paper}
-                        onClick={this.props.onToolClick}
-                    />
-                    <ToolButton
-                        tool={scissors}
-                        onClick={this.props.onToolClick}
+                        {...getButtonProps(scissors)}
                         buttonClass={classes.scissorsButton}
                     />
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
+};
 
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <div style={{  textAlign: 'center' }}>
-                <Typography variant='display1'>You</Typography>
-                <div className={classes.toolWrapper}>
-                    { this.renderUserTools(classes) }
-                </div>
-            </div>
-        );
-    }
-}
+RPSUserBlock.propTypes = {
+    classes: PropTypes.object.isRequired,
+    onToolClick: PropTypes.func,
+    userTool: PropTypes.oneOf([null, ...map(tools, 'value')])
+};
 
 export default withStyles(styles, { withTheme: true })(RPSUserBlock);

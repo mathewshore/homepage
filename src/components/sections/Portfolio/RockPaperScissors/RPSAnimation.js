@@ -1,46 +1,42 @@
 import React from 'react';
 
 import ToolButton from './ToolButton';
-import { tools } from './tools';
+import tools from './tools';
 
 
 const TOOLS_PER_SECOND = 6;
 
 export default class RPSAnimation extends React.Component {
-    constructor() {
-        super();
+    state = {
+        toolIndex: 0,
+        count: 0
+    };
 
-        this.toolIntervalFunction = setInterval(() => this.setToolIndex(), (1000 / TOOLS_PER_SECOND));
-
-        this.state = {
-            toolIndex: 0,
-            count: 0
-        };
-    }
-
-    setToolIndex() {
-        let { toolIndex, count } = this.state;
-        toolIndex++;
-        toolIndex = toolIndex === tools.length ? 0 : toolIndex;
-        count++;
-
-        if (count >= ((TOOLS_PER_SECOND * tools.length) - 1)) {
-            clearInterval(this.toolIntervalFunction);
-        }
-
-        this.setState({ toolIndex, count });
-    }
+    toolIntervalFunction = setInterval(() => this.setToolIndex(), (1000 / TOOLS_PER_SECOND));
 
     componentWillUnmount() {
         clearInterval(this.toolIntervalFunction);
     }
 
+    setToolIndex() {
+        const count = this.state.count + 1;
+        if (count >= ((TOOLS_PER_SECOND * tools.length) - 1)) {
+            clearInterval(this.toolIntervalFunction);
+        }
+
+        const incrementedIndex = this.state.toolIndex + 1;
+        const toolIndex = incrementedIndex === tools.length ? 0 : incrementedIndex;
+
+        this.setState({ toolIndex, count });
+    }
+
     render() {
         const tool = tools[this.state.toolIndex];
-
         return (
             <div>
-                <ToolButton disabled tool={tool} onClick={this.props.onToolClick} />
+                <ToolButton disabled tool={tool}>
+                    {tool.icon}
+                </ToolButton>
             </div>
         )
     }

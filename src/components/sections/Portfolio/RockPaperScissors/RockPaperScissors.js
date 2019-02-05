@@ -2,32 +2,28 @@ import React from 'react';
 
 import Grid from '@material-ui/core/Grid';
 
-import StatsTable from './StatsTable';
+import Table from '../../../common/Table';
 import RPSUserBlock from './RPSUserBlock';
 import RPSResultBlock from './RPSResultBlock';
 import RPSOpponentBlock from './RPSOpponentBlock';
-import { tools } from './tools';
+import tools from './tools';
 
 
 export default class RockPaperScissors extends React.Component {
-    constructor() {
-        super();
+    state = {
+        stats: {
+            w: 0,
+            d: 0,
+            l: 0
+        },
+        userTool: null,
+        opponentTool: null,
+        animationToggled: false,
+        resultText: null,
+        updatedStat: null
+    };
 
-        this.gameStateTimeoutFunction = null;
-
-        this.state = {
-            stats: {
-                w: 0,
-                d: 0,
-                l: 0
-            },
-            userTool: null,
-            opponentTool: null,
-            animationToggled: false,
-            resultText: null,
-            updatedStat: null
-        };
-    }
+    gameStateTimeoutFunction = null;
 
     componentWillUnmount() {
         if (this.gameStateTimeoutFunction) {
@@ -65,7 +61,7 @@ export default class RockPaperScissors extends React.Component {
         return stats;
     }
 
-    onToolClick(userTool) {
+    onToolClick = userTool => () => {
         const opponentTool = this.getOpponentTool();
         this.setState({ userTool, animationToggled: true });
 
@@ -83,7 +79,7 @@ export default class RockPaperScissors extends React.Component {
         ), 3000);
     }
 
-    nullifySelections() {
+    nullifySelections = () => {
         this.setState({
             userTool: null,
             opponentTool: null,
@@ -94,6 +90,12 @@ export default class RockPaperScissors extends React.Component {
     render() {
         const { userTool, opponentTool, animationToggled, stats } = this.state;
 
+        const dataMapping = [
+            { dataKey: 'w', label: 'Victories' },
+            { dataKey: 'd', label: 'Draws' },
+            { dataKey: 'l', label: 'Defeats' }
+        ];
+
         return (
             <Grid container style={{ overflow: 'auto' }}>
                 <Grid item xs={12} md={8}>
@@ -101,7 +103,7 @@ export default class RockPaperScissors extends React.Component {
                         <Grid item xs={4}>
                             <RPSUserBlock
                                 userTool={userTool}
-                                onToolClick={this.onToolClick.bind(this)}
+                                onToolClick={this.onToolClick}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -109,7 +111,7 @@ export default class RockPaperScissors extends React.Component {
                                 userTool={userTool}
                                 animationToggled={animationToggled}
                                 resultText={this.state.resultText}
-                                onPlayAgainClick={() => this.nullifySelections()}
+                                onPlayAgainClick={this.nullifySelections}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -121,7 +123,7 @@ export default class RockPaperScissors extends React.Component {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <StatsTable stats={stats} />
+                    <Table dataMapping={dataMapping} data={[stats]} />
                 </Grid>
             </Grid>
         );

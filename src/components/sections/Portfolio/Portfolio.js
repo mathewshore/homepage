@@ -20,7 +20,7 @@ const styles = theme => ({
 
 class Portfolio extends Component {
     state = {
-        portfolioItemKey: 'ttt',
+        portfolioItemKey: 'rps',
     };
 
     togglePortfolioModal = portfolioItemKey => () => {
