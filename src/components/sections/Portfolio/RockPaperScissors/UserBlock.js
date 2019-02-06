@@ -18,7 +18,7 @@ const styles = theme => ({
     },
 });
 
-const RPSUserBlock = props => {
+const UserBlock = props => {
     const { classes, userTool } = props;
     const [rock, paper, scissors] = tools;
 
@@ -48,10 +48,10 @@ const RPSUserBlock = props => {
     );
 };
 
-RPSUserBlock.propTypes = {
+UserBlock.propTypes = {
     classes: PropTypes.object.isRequired,
     onToolClick: PropTypes.func,
     userTool: PropTypes.oneOf([null, ...map(tools, 'value')])
 };
 
-export default withStyles(styles, { withTheme: true })(RPSUserBlock);
+export default withStyles(styles, { withTheme: true })(UserBlock);

@@ -1,58 +1,63 @@
 import React from 'react';
-
+import random from 'lodash/random';
+import find from 'lodash/find';
 import Grid from '@material-ui/core/Grid';
 
 import Table from '../../../common/Table';
-import RPSUserBlock from './RPSUserBlock';
-import RPSResultBlock from './RPSResultBlock';
-import RPSOpponentBlock from './RPSOpponentBlock';
+import UserBlock from './UserBlock';
+import StatusBlock from './StatusBlock';
+import OpponentBlock from './OpponentBlock';
 import tools from './tools';
 
 
+const dataMapping = [
+    { dataKey: 'w', label: 'Victories' },
+    { dataKey: 'd', label: 'Draws' },
+    { dataKey: 'l', label: 'Defeats' }
+];
+
+const nullifiedGameState = {
+    userTool: null,
+    opponentTool: null,
+    updatedStat: null,
+    resultText: null
+};
+
 export default class RockPaperScissors extends React.Component {
     state = {
+        ...nullifiedGameState,
+        animationToggled: false,
         stats: {
             w: 0,
             d: 0,
             l: 0
-        },
-        userTool: null,
-        opponentTool: null,
-        animationToggled: false,
-        resultText: null,
-        updatedStat: null
+        }
     };
 
     gameStateTimeoutFunction = null;
 
     componentWillUnmount() {
         if (this.gameStateTimeoutFunction) {
-            // Stop animation and state update when modal is closed before round is finished.
+            // Stop animation and state update if modal is closed before round is finished.
             clearTimeout(this.gameStateTimeoutFunction);
         }
     }
 
-    getOpponentTool() {
-        const min = Math.ceil(0);
-        const max = Math.floor(2);
-        const randomToolIndex = Math.floor(Math.random() * (max - min + 1)) + min;
-
-        return tools[randomToolIndex].value;
-    }
+    getRandomTool = () => tools[random(0, 2)].value;
 
     getResult(userTool, opponentTool) {
         if (userTool === opponentTool) {
             return 'd';
         }
-        const toolRuleObj = tools.find((tool) => (tool.value === userTool));
-        return (toolRuleObj.beats === opponentTool) ? 'w' : 'l';
+        const tool = find(tools, { value: userTool });
+        return (tool.beats === opponentTool) ? 'w' : 'l';
     }
 
     getResultText(result) {
-        if (['w', 'l'].includes(result)) {
-            return result === 'w' ? 'You are Victorious!' : 'You were Defeated.'
+        if (result === 'd') {
+            return 'It is a Draw.';
         }
-        return 'It is a Draw.';
+        return result === 'w' ? 'You are Victorious!' : 'You were Defeated.'
     }
 
     getIncrementedStats(result) {
@@ -62,13 +67,12 @@ export default class RockPaperScissors extends React.Component {
     }
 
     onToolClick = userTool => () => {
-        const opponentTool = this.getOpponentTool();
         this.setState({ userTool, animationToggled: true });
 
-        const result = this.getResult(userTool, opponentTool);
-        const resultText = this.getResultText(result);
-
-        this.gameStateTimeoutFunction = setTimeout(() => (
+        this.gameStateTimeoutFunction = setTimeout(() => {
+            const opponentTool = this.getRandomTool();
+            const result = this.getResult(userTool, opponentTool);
+            const resultText = this.getResultText(result);
             this.setState({
                 stats: this.getIncrementedStats(result),
                 updatedStat: result,
@@ -76,38 +80,28 @@ export default class RockPaperScissors extends React.Component {
                 resultText,
                 animationToggled: false
             })
-        ), 3000);
+        }, 3000);
     }
 
     nullifySelections = () => {
-        this.setState({
-            userTool: null,
-            opponentTool: null,
-            updatedStat: null
-        });
+        this.setState({ ...nullifiedGameState });
     }
 
     render() {
-        const { userTool, opponentTool, animationToggled, stats } = this.state;
-
-        const dataMapping = [
-            { dataKey: 'w', label: 'Victories' },
-            { dataKey: 'd', label: 'Draws' },
-            { dataKey: 'l', label: 'Defeats' }
-        ];
+        const { userTool, animationToggled } = this.state;
 
         return (
             <Grid container style={{ overflow: 'auto' }}>
                 <Grid item xs={12} md={8}>
                     <Grid container>
                         <Grid item xs={4}>
-                            <RPSUserBlock
+                            <UserBlock
                                 userTool={userTool}
                                 onToolClick={this.onToolClick}
                             />
                         </Grid>
                         <Grid item xs={4}>
-                            <RPSResultBlock
+                            <StatusBlock
                                 userTool={userTool}
                                 animationToggled={animationToggled}
                                 resultText={this.state.resultText}
@@ -115,15 +109,15 @@ export default class RockPaperScissors extends React.Component {
                             />
                         </Grid>
                         <Grid item xs={4}>
-                            <RPSOpponentBlock
-                                opponentTool={opponentTool}
+                            <OpponentBlock
+                                opponentTool={this.state.opponentTool}
                                 animationToggled={animationToggled}
                             />
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Table dataMapping={dataMapping} data={[stats]} />
+                    <Table dataMapping={dataMapping} data={[this.state.stats]} />
                 </Grid>
             </Grid>
         );

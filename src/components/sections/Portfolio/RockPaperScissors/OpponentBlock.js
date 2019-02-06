@@ -26,7 +26,9 @@ const renderOpponentBlockContent = (animationToggled, opponentTool) => {
 
     const tool = getTool(opponentTool);
     return tool ? (
-        <ToolButton disabled tool={tool}>{tool.icon}</ToolButton>
+        <ToolButton disabled tool={tool}>
+            {tool.icon}
+        </ToolButton>
     ) : (
         <Button disabled>
             <HelpOutline />
@@ -34,17 +36,17 @@ const renderOpponentBlockContent = (animationToggled, opponentTool) => {
     );
 };
 
-const RPSOpponentBlock = props => (
+const OpponentBlock = props => (
     <div className={props.classes.opponentBlock}>
         <Typography variant='display1'>Opponent</Typography>
         {renderOpponentBlockContent(props.animationToggled, props.opponentTool)}
     </div>
 );
 
-RPSOpponentBlock.propTypes = {
+OpponentBlock.propTypes = {
     classes: PropTypes.object.isRequired,
     animationToggled: PropTypes.bool.isRequired,
     opponentTool: PropTypes.oneOf([null, ...map(tools, 'value')])
 };
 
-export default withStyles(styles)(RPSOpponentBlock);
+export default withStyles(styles)(OpponentBlock);

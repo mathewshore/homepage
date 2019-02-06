@@ -57,6 +57,11 @@ const styles = theme => ({
     },
 });
 
+const dataMapping = [
+    { dataKey: 'player', label: 'Player' },
+    { dataKey: 'wins', label: 'Wins' }
+];
+
 class TicTacToe extends Component {
     state = {
         x: { wins: 0 },
@@ -238,11 +243,6 @@ class TicTacToe extends Component {
 
     render() {
         const { classes } = this.props;
-
-        const dataMapping = [
-            { dataKey: 'player', label: 'Player' },
-            { dataKey: 'wins', label: 'Wins' }
-        ];
 
         const data = [
             {
