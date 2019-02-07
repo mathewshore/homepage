@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import Section from '../Section';
-
+import { SECTIONS } from '../../constants';
 
 const styles = theme => ({
     aboutSectionContainer: {
@@ -20,7 +20,7 @@ class About extends Component {
         const { classes } = this.props;
 
         return (
-            <Section id='about' containerClassName={classes.aboutSectionContainer}>
+            <Section id={SECTIONS.ABOUT} containerClassName={classes.aboutSectionContainer}>
                 <Grid container spacing={24}>
                     <Grid item sm={12} md={6}>
                         <Typography variant='body2' align='justify'>

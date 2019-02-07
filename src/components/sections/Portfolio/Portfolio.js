@@ -11,6 +11,8 @@ import Modal from '../../common/Modal';
 import PortfolioCard from './PortfolioCard';
 import portfolioItems from './portfolioItems';
 
+import { SECTIONS } from '../../constants';
+
 
 const styles = theme => ({
     portfolioSectionContainer: {
@@ -20,7 +22,7 @@ const styles = theme => ({
 
 class Portfolio extends Component {
     state = {
-        portfolioItemKey: 'rps',
+        portfolioItemKey: '',
     };
 
     togglePortfolioModal = portfolioItemKey => () => {
@@ -32,22 +34,20 @@ class Portfolio extends Component {
         const portfolioItem = get(portfolioItems, this.state.portfolioItemKey);
 
         return (
-            <div>
-                <Section id='portfolio' containerClassName={classes.portfolioSectionContainer}>
-                    <Grid container spacing={24}>
-                        {map(portfolioItems, (portfolioItem, key) => (
-                            <Grid item md={6} xs={12} key={key}>
-                                <PortfolioCard
-                                    onClick={this.togglePortfolioModal(key)}
-                                    imageSrc={portfolioItem.img}
-                                    title={portfolioItem.title}
-                                    description={portfolioItem.shortDescription}
-                                />
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Section>
-                {portfolioItem &&
+            <Section id={SECTIONS.PORTFOLIO} containerClassName={classes.portfolioSectionContainer}>
+                <Grid container spacing={24}>
+                    {map(portfolioItems, (portfolioItem, key) => (
+                        <Grid item md={6} xs={12} key={key}>
+                            <PortfolioCard
+                                onClick={this.togglePortfolioModal(key)}
+                                imageSrc={portfolioItem.img}
+                                title={portfolioItem.title}
+                                description={portfolioItem.shortDescription}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+                {portfolioItem && (
                     <Modal
                         onClose={this.togglePortfolioModal(null)}
                         title={portfolioItem.title}
@@ -55,8 +55,8 @@ class Portfolio extends Component {
                     >
                         <portfolioItem.Component />
                     </Modal>
-                }
-            </div>
+                )}
+            </Section>
         );
     }
 }

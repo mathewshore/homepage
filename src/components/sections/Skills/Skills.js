@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import Section from '../Section';
+import { SECTIONS } from '../../constants';
 
 
 const styles = theme => ({
@@ -22,7 +23,7 @@ class Skills extends Component {
         const { classes } = this.props;
 
         return (
-            <Section id='skills' containerClassName={classes.skillsSectionContainer}>
+            <Section id={SECTIONS.SKILLS} containerClassName={classes.skillsSectionContainer}>
                 <Grid container>
                     <Grid item md xs={12}>
                         <Typography variant='display1'>

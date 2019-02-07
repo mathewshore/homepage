@@ -30,7 +30,8 @@ const palette = {
             dark: grey[900],
             light: grey[100],
         }
-    }
+    },
+    transparent: 'transparent'
 };
 
 export default palette;

@@ -18,10 +18,10 @@ const renderStatusText = (animationToggled, resultText) => {
 }
 
 const StatusBlock = props => {
+    // ToDo: Change new game start logic
     return (
         <div style={{ textAlign: 'center' }}>
             <h3 style={{ fontWeight: 'bold', margin: '20px 0' }}>VS</h3>
-            {/* {renderBlockContent(props)} */}
             {renderStatusText(props.animationToggled, props.resultText)}
             {props.resultText && (
                 <Button color='primary' onClick={props.onPlayAgainClick}>

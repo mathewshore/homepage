@@ -163,7 +163,7 @@ class TicTacToe extends Component {
     renderTTTGrid() {
         const { classes } = this.props;
         const { winCells, grid, gameIsRunning } = this.state;
-
+        // ToDo: Refactor this to divs
         return (
             <div className={classes.gridWrapper}>
                 <table className={classes.boardTable}>
@@ -242,8 +242,6 @@ class TicTacToe extends Component {
     }
 
     render() {
-        const { classes } = this.props;
-
         const data = [
             {
                 player: this.getPlayerIcon('x'),

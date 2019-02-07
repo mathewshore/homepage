@@ -7,8 +7,6 @@ import { Link } from 'react-scroll';
 import TextHeader from '../common/TextHeader';
 
 
-const navLinks = ['intro', 'about', 'portfolio', 'skills', 'contact'];
-
 const styles = theme => ({
     navLinksContainer: {
         marginTop: theme.spacing.unit * 0.5,
@@ -27,35 +25,41 @@ const styles = theme => ({
     },
     navLinkText: {
         cursor: 'pointer',
-        color: theme.palette.text.header.light,
         transition: 'all 0.3s',
+
+        '&.light': {
+            color: theme.palette.text.header.light,
+        },
+        '&.dark': {
+            color: theme.palette.text.dark,
+        },
         '&:hover': {
-            color: theme.palette.primary.main,
+            color: theme.palette.primary.light,
             textDecoration: 'none',
+        },
+        '&.active': {
+            color: theme.palette.primary.main
         },
     },
     navLinkTypography: {
-        display: 'initial',
+        display: 'initial'
     },
 });
 
 class NavLinks extends Component {
-    state = {};
-
-    // Todo: add window location listener to App and use it to highlight active link.
-
     render() {
+        // ToDo: highlight active section link.
         const { classes } = this.props;
 
         return (
             <div className={classes.navLinksContainer}>
-                {map(navLinks, (linkId, i) => (
-                    <div key={linkId} className={classes.navLink}>
-                        <Link to={linkId} smooth>
+                {map(this.props.sectionIds, (id, i) => (
+                    <div key={id} className={classes.navLink}>
+                        <Link to={id} smooth>
                             <TextHeader
                                 variant="subheading"
-                                text={linkId}
-                                className={classes.navLinkText}
+                                text={id}
+                                className={`${classes.navLinkText}${this.props.activeSection === id ? ' active' : ''}${this.props.withDarkLinks ? ' dark' : ' light'}`}
                                 typographyClassName={classes.navLinkTypography}
                             />
                         </Link>
@@ -67,7 +71,8 @@ class NavLinks extends Component {
 }
 
 NavLinks.propTypes = {
-    classes: PropTypes.object
+    classes: PropTypes.object.isRequired,
+    sectionIds: PropTypes.array.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(NavLinks);

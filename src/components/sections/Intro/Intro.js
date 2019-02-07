@@ -10,6 +10,7 @@ import Container from '../../common/Container';
 
 import introImg from '../../../images/intro_matias.png';
 import zIndex from '../../zIndex';
+import { SECTIONS } from '../../constants';
 
 
 const styles = theme => ({
@@ -107,8 +108,8 @@ class Intro extends Component {
         const { classes } = this.props;
 
         return (
-            <div>
-                <div id='intro' className={classes.introSectionContainer} />
+            <div id={SECTIONS.INTRO}>
+                <div className={classes.introSectionContainer} />
                 <div className={classes.introWrapper}>
                     <Container>
                         <Grid

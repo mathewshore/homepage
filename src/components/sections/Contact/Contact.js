@@ -12,6 +12,7 @@ import grey from '@material-ui/core/colors/grey';
 
 import Section from '../Section';
 // import SendButton from './SendButton';
+import { SECTIONS } from '../../constants';
 
 
 const styles = theme => ({
@@ -126,7 +127,7 @@ class Contact extends Component {
         // ToDo: change helper text color to red.
 
         return (
-            <Section id='contact' containerClassName={classes.contactSectionContainer}>
+            <Section id={SECTIONS.CONTACT} containerClassName={classes.contactSectionContainer}>
                 <form onSubmit={this.handleSubmit}>
                     <Grid container spacing={24}>
                         <Grid item xs={12} sm={6}>

@@ -52,9 +52,12 @@ const Section = (props) => {
 
 Section.propTypes = {
     classes: PropTypes.object,
+    id: PropTypes.string,
     containerClassName: PropTypes.string,
-    children: PropTypes.element,
-    id: PropTypes.string
+    children: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.arrayOf(PropTypes.element)
+    ])
 };
 
 export default withStyles(styles, { withTheme: true })(Section);
