@@ -1,4 +1,5 @@
 import React from 'react';
+import StreamPortal from './StreamPortal';
 import Flexer from './Flexer';
 import RockPaperScissors from './RockPaperScissors';
 import TicTacToe from './TicTacToe';
@@ -7,42 +8,47 @@ import TicTacToe from './TicTacToe';
 import testImg from '../../../bg_intro.jpg';
 
 
-const portfolioItems = {
-    flexer: {
-        img: testImg,
+const portfolioItems = [
+    {
+        id: 'stream_portal',
+        title: 'Stream Portal',
+        imgSrc: testImg,
+        shortDescription: 'A web application for connecting streaming platforms',
+        longDescription: 'Add modal description here',
+        Component: StreamPortal,
+    },
+    {
+        id: 'flexer',
         title: 'Flexer',
+        imgSrc: testImg,
         shortDescription: 'Flexible time management system',
         longDescription: 'Add modal description here',
         Component: Flexer,
     },
-    fledge: {
-        img: testImg,
+    {
+        id: 'fledge',
         title: 'Fledge the Hedgehog',
+        imgSrc: testImg,
         shortDescription: 'Mobile game for Apple phones',
         longDescription: 'Add modal description here',
         Component: () => <div>Add component here</div>,
     },
-    softala: {
-        img: testImg,
-        title: 'Softala Course Management System',
-        shortDescription: 'A web application for managing training sessions',
-        longDescription: 'Add modal description here',
-        Component: () => <div>Add component here</div>,
-    },
-    rps: {
-        img: testImg,
+    {
+        id: 'rps',
         title: 'Rock Paper Scissors',
+        imgSrc: testImg,
         shortDescription: 'A small project for testing out React and learning simplistic designing',
         longDescription: 'Add modal description here',
         Component: RockPaperScissors,
     },
-    ttt: {
-        img: testImg,
+    {
+        id: 'ttt',
         title: 'Tic Tac Toe',
+        imgSrc: testImg,
         shortDescription: 'A project for improving programming logic',
         longDescription: 'A practise project for improving logical approach of stuff',
         Component: TicTacToe,
-    },
-};
+    }
+];
 
 export default portfolioItems;

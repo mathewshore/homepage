@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import size from 'lodash/size';
+import isEmpty from 'lodash/isEmpty';
 
 import PreviewPanel from './PreviewPanel';
 import PictureCarousel from './PictureCarousel';
@@ -23,6 +24,13 @@ class PictureViewer extends Component {
 
     render() {
         const { images } = this.props;
+
+        if (!images || isEmpty(images)) {
+            return (
+                <div>No images for display.</div>
+            );
+        }
+
         const { selectedImageIndex } = this.state;
         const selectedImage = images[selectedImageIndex];
 

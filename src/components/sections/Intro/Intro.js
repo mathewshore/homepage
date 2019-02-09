@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TextHeader from '../../common/TextHeader';
 import Container from '../../common/Container';
+import IntroText from './IntroText';
+import IntroPortrait from './IntroPortrait';
 
-import introImg from '../../../images/intro_matias.png';
 import zIndex from '../../zIndex';
 import { SECTIONS } from '../../constants';
 
@@ -18,88 +15,40 @@ const styles = theme => ({
         background: theme.palette.background.sections.intro,
         height: '100vh',
     },
-    gridContainer: {
-        // padding: theme.spacing.unit * 10,
+    introContainer: {
+        height: '100%',
+    },
+    introContent: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+
         [theme.breakpoints.up('xs')]: {
-            padding: theme.spacing.unit * 4,
+            flexDirection: 'column-reverse',
+            marginTop: theme.spacing.unit * -5,
+            padding: `0 ${theme.spacing.unit * 4}px`,
         },
         [theme.breakpoints.up('sm')]: {
-            padding: theme.spacing.unit * 6,
+            padding: `0 ${theme.spacing.unit * 6}px`,
         },
         [theme.breakpoints.up('md')]: {
-            padding: theme.spacing.unit * 8,
+            flexDirection: 'initial',
+            marginTop: 0,
+            padding: `0 ${theme.spacing.unit * 8}px`,
         },
         [theme.breakpoints.up('lg')]: {
-            padding: theme.spacing.unit * 10,
+            padding: `0 ${theme.spacing.unit * 10}px`,
         },
-        // ToDo: combine gridContainer & section paper paddings
-        // ToDo: adjust padding to media screens
     },
-    gridItem: {
-        textAlign: 'center',
 
-        [theme.breakpoints.up('md')]: {
-            textAlign: 'initial',
-        },
-    },
-    introWrapper: {
+    introFixedContainer: {
         height: '100vh',
         width: '100%',
-        top: 66, // navbar height
+        top: 0,
         left: 0,
         position: 'fixed',
         zIndex: zIndex.intro,
-
-        [theme.breakpoints.down('sm')]: {
-            top: 0,
-        },
-        // ToDo: set top: 0 when navbar is bottom for sm> screens
-    },
-    introTextWrapper: {
-        [theme.breakpoints.up('md')]: {
-            position: 'relative',
-            top: `calc(50% + ${theme.spacing.unit * 3}px)`,
-            transform: 'translateY(-50%)',
-        },
-        // ToDo: adjust position for sm> screens when nav is bottom
-    },
-    introTextPhrase: {
-        fontSize: 22,
-    },
-    introImageWrapper: {
-        // ToDo: adjust position for sm> screens when nav is bottom
-        [theme.breakpoints.up('md')]: {
-            top: `calc(50% - ${theme.spacing.unit * 17}px)`,
-            transform: 'translateY(-50%)',
-            position: 'relative',
-        },
-    },
-    introImage: {
-        height: '100%',
-        width: '100%',
-        borderRadius: 500,
-        float: 'none',
-
-        [theme.breakpoints.up('xs')]: {
-            maxWidth: 240,
-        },
-        [theme.breakpoints.up('sm')]: {
-            maxWidth: 280,
-        },
-        [theme.breakpoints.up('md')]: {
-            maxWidth: 320,
-            float: 'right',
-        },
-        [theme.breakpoints.up('lg')]: {
-            maxWidth: 360,
-        },
-    },
-    dividerRoot: {
-        ...theme.sectionDivider,
-        [theme.breakpoints.down('sm')]: {
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
     },
 });
 
@@ -110,30 +59,12 @@ class Intro extends Component {
         return (
             <div id={SECTIONS.INTRO}>
                 <div className={classes.introSectionContainer} />
-                <div className={classes.introWrapper}>
-                    <Container>
-                        <Grid
-                            container
-                            spacing={40}
-                            className={classes.gridContainer}
-                            // ToDo: for sm> set direction="column-reverse"
-                        >
-                            <Grid item xs={12} sm={12} md={6} className={classes.gridItem}>
-                                <div className={classes.introTextWrapper}>
-                                    <TextHeader variant="display3" text="MATIAS RANTA" />
-                                    <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
-                                    <Divider classes={{ root: classes.dividerRoot }}/>
-                                    <Typography variant="display1" classes={{ root: classes.introTextPhrase }}>
-                                        PIXEL PERFECTIONIST & DOG LOVER
-                                    </Typography>
-                                </div>
-                            </Grid>
-                            <Grid item xs={12} sm={12} md={6} className={classes.gridItem}>
-                                <div className={classes.introImageWrapper}>
-                                    <img src={introImg} className={classes.introImage} alt="intro" />
-                                </div>
-                            </Grid>
-                        </Grid>
+                <div className={classes.introFixedContainer}>
+                    <Container className={classes.introContainer}>
+                        <div className={classes.introContent}>
+                            <IntroText />
+                            <IntroPortrait />
+                        </div>
                     </Container>
                 </div>
             </div>

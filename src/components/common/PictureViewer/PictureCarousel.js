@@ -20,12 +20,13 @@ const styles = theme => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        maxHeight: 400
     },
     selectedImage: {
         maxWidth: '100%',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        maxHeight: '100%',
+        maxHeight: 'inherit',
     },
 });
 
@@ -42,7 +43,7 @@ const PictureCarousel = props => {
                     onClick={props.onArrowClick(false)}
                     hidden={selectedImageIndex === 0}
                 />
-                <img className={classes.selectedImage} src={image.image} alt={image.alt} />
+                <img className={classes.selectedImage} src={image.src} alt={image.alt} />
                 <ArrowPanel
                     direction="next"
                     onClick={props.onArrowClick(true)}

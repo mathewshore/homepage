@@ -23,11 +23,24 @@ const styles = (theme) => ({
             boxShadow: theme.shadows[5]
         }
     },
-    container: {
+    navContent: {
         display: 'flex',
         height: theme.spacing.unit * 10,
-        alignItems: 'center'
-    },
+        alignItems: 'center',
+
+        [theme.breakpoints.up('xs')]: {
+            padding: `0 ${theme.spacing.unit * 4}px`,
+        },
+        [theme.breakpoints.up('sm')]: {
+            padding: `0 ${theme.spacing.unit * 6}px`,
+        },
+        [theme.breakpoints.up('md')]: {
+            padding: `0 ${theme.spacing.unit * 8}px`,
+        },
+        [theme.breakpoints.up('lg')]: {
+            padding: `0 ${theme.spacing.unit * 10}px`,
+        },
+    }
 });
 
 const sectionIds = map(SECTIONS, section => section);
@@ -82,13 +95,15 @@ class NavBar extends Component {
 
         return (
             <div className={`${classes.navBarContainer}${this.state.navBarHighlighted ? ' highlight' : ''}`}>
-                <Container className={classes.container}>
-                    <NavLogo />
-                    <NavLinks
-                        sectionIds={sectionIds}
-                        activeSection={this.state.activeSection}
-                        withDarkLinks={!this.state.navBarHighlighted}
-                    />
+                <Container>
+                    <div className={classes.navContent}>
+                        <NavLogo />
+                        <NavLinks
+                            sectionIds={sectionIds}
+                            activeSection={this.state.activeSection}
+                            withDarkLinks={!this.state.navBarHighlighted}
+                        />
+                    </div>
                 </Container>
             </div>
         );

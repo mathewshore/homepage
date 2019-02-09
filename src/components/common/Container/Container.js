@@ -29,7 +29,7 @@ const styles = theme => ({
 const Container = (props) => {
     const { classes, className, children } = props;
     return (
-        <div className={classes.container + (className ? ` ${className}` : '')}>
+        <div className={`${classes.container}${className ? ` ${className}` : ''}`}>
             {children}
         </div>
     );

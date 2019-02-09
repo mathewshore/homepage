@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
-import get from 'lodash/get';
+import find from 'lodash/find';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
@@ -22,27 +22,27 @@ const styles = theme => ({
 
 class Portfolio extends Component {
     state = {
-        portfolioItemKey: '',
+        portfolioItemId: '',
     };
 
-    togglePortfolioModal = portfolioItemKey => () => {
-        this.setState({ portfolioItemKey });
+    togglePortfolioModal = portfolioItemId => () => {
+        this.setState({ portfolioItemId });
     }
 
     render() {
         const { classes } = this.props;
-        const portfolioItem = get(portfolioItems, this.state.portfolioItemKey);
+        const portfolioItem = find(portfolioItems, { id: this.state.portfolioItemId });
 
         return (
             <Section id={SECTIONS.PORTFOLIO} containerClassName={classes.portfolioSectionContainer}>
                 <Grid container spacing={24}>
-                    {map(portfolioItems, (portfolioItem, key) => (
-                        <Grid item md={6} xs={12} key={key}>
+                    {map(portfolioItems, ({ id, imgSrc, title, shortDescription }) => (
+                        <Grid item md={6} xs={12} key={id}>
                             <PortfolioCard
-                                onClick={this.togglePortfolioModal(key)}
-                                imageSrc={portfolioItem.img}
-                                title={portfolioItem.title}
-                                description={portfolioItem.shortDescription}
+                                title={title}
+                                imageSrc={imgSrc}
+                                description={shortDescription}
+                                onClick={this.togglePortfolioModal(id)}
                             />
                         </Grid>
                     ))}

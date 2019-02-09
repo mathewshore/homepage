@@ -16,7 +16,8 @@ const styles = theme => ({
         cursor: 'pointer',
 
         transition: 'all 0.3s, visibility 0s linear, opacity 0.3s linear',
-        background: 'rgba(0, 0, 0, 0.1)',
+        // background: 'rgba(0, 0, 0, 0.1)',
+        background: 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4))',
         color: 'rgba(0, 0, 0, 0.5)',
         visibility: 'visible',
         opacity: 1,
@@ -32,7 +33,7 @@ const styles = theme => ({
         },
 
         '&:hover': {
-            background: 'rgba(0, 0, 0, 0.4)',
+            // background: 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5) 80%)',
             color: 'white',
         },
         '&.hidden': {
