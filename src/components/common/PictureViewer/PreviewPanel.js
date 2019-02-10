@@ -59,14 +59,14 @@ class PreviewPanel extends Component {
 
         return (
             <div className={classes.panelContainer}>
-                {map(images, ({ image, alt }, i) => (
+                {map(images, ({ src, alt }, i) => (
                     <ButtonBase
                         key={i}
                         focusRipple
                         className={classes.imageButton + (i === selectedImageIndex ? ' selected' : '')}
                         onClick={() => this.props.handlePictureSelect(i)}
                     >
-                        <img className={classes.panelImage} src={image} alt={alt} />
+                        <img className={classes.panelImage} src={src} alt={alt} />
                         {selectedImageIndex !== i && <span className={classes.panelImageBackdrop} />}
                     </ButtonBase>
                 ))}

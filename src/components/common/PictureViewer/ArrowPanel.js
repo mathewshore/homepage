@@ -15,9 +15,7 @@ const styles = theme => ({
         height: '100%',
         cursor: 'pointer',
 
-        transition: 'all 0.3s, visibility 0s linear, opacity 0.3s linear',
-        // background: 'rgba(0, 0, 0, 0.1)',
-        background: 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4))',
+        transition: 'all 0.5s',
         color: 'rgba(0, 0, 0, 0.5)',
         visibility: 'visible',
         opacity: 1,
@@ -27,13 +25,18 @@ const styles = theme => ({
 
         '&.previous': {
             left: 0,
+            '&:hover': {
+                background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.4), transparent)',
+            }
         },
         '&.next': {
             right: 0,
+            '&:hover': {
+                background: 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4))',
+            }
         },
 
         '&:hover': {
-            // background: 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5) 80%)',
             color: 'white',
         },
         '&.hidden': {

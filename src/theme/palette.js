@@ -1,4 +1,7 @@
-import { red, orange, purple, green, grey, brown } from '@material-ui/core/colors';
+import red from '@material-ui/core/colors/red';
+import green from '@material-ui/core/colors/green';
+import grey from '@material-ui/core/colors/grey';
+import brown from '@material-ui/core/colors/brown';
 
 
 const palette = {
