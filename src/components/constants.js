@@ -1,5 +1,8 @@
+import spacing from '@material-ui/core/styles/spacing';
+
+
 // ToDo: use this in about, portfolio, skills, contact
-export const GRID_CONTAINER_SPACING = 24;
+export const GRID_CONTAINER_SPACING = spacing.unit * 3;
 
 export const SECTIONS = {
     INTRO: 'intro',
@@ -12,5 +15,5 @@ export const SECTIONS = {
 // Store element z-indexes here.
 export const Z_INDEX = {
     INTRO: 0,
-    NAVIGATION: 1
+    NAV_BAR: 1
 };

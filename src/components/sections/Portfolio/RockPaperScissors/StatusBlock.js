@@ -18,7 +18,7 @@ const renderStatusText = (animationToggled, resultText) => {
 }
 
 const StatusBlock = props => {
-    // ToDo: Change new game start logic
+    // ToDo: Change new game start logic.
     return (
         <div style={{ textAlign: 'center' }}>
             <h3 style={{ fontWeight: 'bold', margin: '20px 0' }}>VS</h3>

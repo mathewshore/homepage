@@ -7,8 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 
 
-const styles = ({ spacing, breakpoints }) => ({
+const styles = ({ palette, spacing, breakpoints }) => ({
     modalHead: {
+        background: palette.secondary.light,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -17,7 +18,6 @@ const styles = ({ spacing, breakpoints }) => ({
         width: `calc(100% - ${spacing.unit * 5 * 2}px)`,
         display: 'flex',
         alignItems: 'center',
-        borderBottom: '1px solid black',
 
         [breakpoints.down('md')]: {
             padding: `${spacing.unit * 1.5}px ${spacing.unit * 3}px ${spacing.unit}px`,
@@ -43,7 +43,6 @@ const ModalHead = props => {
     const { classes } = props;
     return (
         <div className={classes.modalHead}>
-            {/* ToDo: Increase close button size. */}
             <div>
                 <Typography variant='display1'>
                     {props.title}

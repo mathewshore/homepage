@@ -23,7 +23,6 @@ const styles = theme => ({
         fontSize: 22,
     },
     dividerRoot: {
-        ...theme.sectionDivider,
         [theme.breakpoints.down('sm')]: {
             marginLeft: 'auto',
             marginRight: 'auto',

@@ -8,6 +8,8 @@ import brown from '@material-ui/core/colors/brown';
 // Primary: #f8c687 - light brown/orange
 // Secondary: #45b29a - light green
 
+const mainBg = '#fae8d3';
+
 const palette = {
     primary: red,
     secondary: green, // not used
@@ -18,18 +20,14 @@ const palette = {
 
         sections: {
             intro: grey[100],
-            about: brown[200],
-            portfolio: grey[300],
-            skills: brown[400],
-            contact: grey[700],
+            about: mainBg,
+            portfolio: mainBg,
+            skills: mainBg,
+            contact: mainBg,
 
             paper: grey[100],
         },
-
-        leftDrawer: grey[900],
-
         navBar: grey[800],
-
         footer: grey[900],
     },
     text: {

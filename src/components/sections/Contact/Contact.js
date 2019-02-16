@@ -164,7 +164,7 @@ class Contact extends Component {
                         <Button
                             className={classes.submitButton}
                             variant='raised'
-                            color='primary'
+                            color='secondary'
                             type='submit'
                             size='large'
                         >

@@ -9,15 +9,13 @@ import { SECTIONS } from '../constants';
 
 const styles = ({ palette }) => ({
     logoContainer: {
-        display: 'flex',
         cursor: 'pointer',
         transition: 'all 0.3s',
         textDecoration: 'none',
         color: palette.text.header.light,
 
         '&:hover': {
-            color: palette.primary.main,
-            textDecoration: 'none',
+            color: palette.secondary.light,
         },
     },
     logoText: {

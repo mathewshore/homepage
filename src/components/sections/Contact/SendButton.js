@@ -88,7 +88,7 @@ class SendButton extends React.Component {
             <div className={classes.wrapper}>
                 <Button
                     variant='raised'
-                    color='primary'
+                    color='secondary'
                     className={buttonClassname}
                     disabled={loading}
                     onClick={this.handleButtonClick}

@@ -20,7 +20,7 @@ const SoMeLinkButton = (props) => {
         <a href={props.url} target="_blank" rel="noopener noreferrer">
             <Button
                 variant="outlined"
-                color="primary"
+                color="secondary"
                 className={classes.button}
             >
                 <SvgIcon style={props.svgIconStyle}>

@@ -29,8 +29,7 @@ const styles = theme => ({
         [theme.breakpoints.up('lg')]: {
             padding: theme.spacing.unit * 10,
         },
-    },
-    dividerRoot: theme.sectionDivider,
+    }
 });
 
 const Section = (props) => {
@@ -42,7 +41,7 @@ const Section = (props) => {
             <Container>
                 <Paper elevation={4} className={classes.sectionPaper}>
                     <TextHeader variant="display2" text={toUpper(id)} />
-                    <Divider classes={{ root: classes.dividerRoot }} />
+                    <Divider />
                     {children}
                 </Paper>
             </Container>

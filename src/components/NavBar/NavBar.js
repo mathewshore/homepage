@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import map from 'lodash/map';
 import last from 'lodash/last';
+import pull from 'lodash/pull';
 import findIndex from 'lodash/findIndex';
-import withStyles from '@material-ui/core/styles/withStyles';
 
-import NavLinks from './NavLinks';
-import NavLogo from './NavLogo';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Hidden from '@material-ui/core/Hidden';
+
 import Container from '../common/Container';
 import { SECTIONS, Z_INDEX } from '../constants';
+import NavLinks from './NavLinks';
+import NavLogo from './NavLogo';
+import MobileNavMenu from './MobileNavMenu';
 
 
 const styles = (theme) => ({
     navBarContainer: {
-        zIndex: Z_INDEX.NAVIGATION,
+        zIndex: Z_INDEX.NAV_BAR,
         position: 'fixed',
         left: 0,
         top: 0,
@@ -30,19 +34,20 @@ const styles = (theme) => ({
         display: 'flex',
         height: theme.spacing.unit * 10,
         alignItems: 'center',
+        padding: `0 ${theme.spacing.unit * 6}px`,
 
-        [theme.breakpoints.up('xs')]: {
-            padding: `0 ${theme.spacing.unit * 4}px`,
-        },
-        [theme.breakpoints.up('sm')]: {
-            padding: `0 ${theme.spacing.unit * 6}px`,
-        },
-        [theme.breakpoints.up('md')]: {
-            padding: `0 ${theme.spacing.unit * 8}px`,
-        },
-        [theme.breakpoints.up('lg')]: {
-            padding: `0 ${theme.spacing.unit * 10}px`,
-        },
+        // [theme.breakpoints.up('xs')]: {
+        //     padding: `0 ${theme.spacing.unit * 4}px`,
+        // },
+        // [theme.breakpoints.up('sm')]: {
+        //     padding: `0 ${theme.spacing.unit * 6}px`,
+        // },
+        // [theme.breakpoints.up('md')]: {
+        //     padding: `0 ${theme.spacing.unit * 8}px`,
+        // },
+        // [theme.breakpoints.up('lg')]: {
+        //     padding: `0 ${theme.spacing.unit * 10}px`,
+        // },
     }
 });
 
@@ -74,10 +79,10 @@ const shouldNavBarHighlight = () => {
 class NavBar extends Component {
     state = {
         activeSection: null,
-        navBarHighlighted: null
+        navBarHighlighted: null,
+        mobileMenuIsOpen: false
     };
 
-    // Todo: add window location listener to App and use it to highlight active link.
     componentDidMount() {
         this.setState({
             activeSection: getActiveSection(),
@@ -97,21 +102,35 @@ class NavBar extends Component {
         });
     };
 
+    toggleMobileMenu = () => {
+        this.setState({ mobileMenuIsOpen: !this.state.mobileMenuIsOpen });
+    };
+
     render() {
         const { classes } = this.props;
 
         return (
             <div className={`${classes.navBarContainer}${this.state.navBarHighlighted ? ' highlight' : ''}`}>
-                <Container>
+                {/* <Container> */}
                     <div className={classes.navContent}>
                         <NavLogo />
-                        <NavLinks
-                            sectionIds={sectionIds}
-                            activeSection={this.state.activeSection}
-                            withDarkLinks={!this.state.navBarHighlighted}
-                        />
+                        <Hidden mdUp>
+                            <MobileNavMenu
+                                isOpen={this.state.mobileMenuIsOpen}
+                                sectionIds={pull(sectionIds, SECTIONS.INTRO)}
+                                activeSection={this.state.activeSection}
+                                onMenuToggleClick={this.toggleMobileMenu}
+                            />
+                        </Hidden>
+                        <Hidden smDown>
+                            <NavLinks // Remove intro section from nav links.
+                                sectionIds={pull(sectionIds, SECTIONS.INTRO)}
+                                activeSection={this.state.activeSection}
+                                withDarkLinks={!this.state.navBarHighlighted}
+                            />
+                        </Hidden>
                     </div>
-                </Container>
+                {/* </Container> */}
             </div>
         );
     }
