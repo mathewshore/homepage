@@ -8,12 +8,12 @@ import Typography from '@material-ui/core/Typography';
 import Section from '../Section';
 import { SECTIONS } from '../../constants';
 
+
 const styles = theme => ({
     aboutSectionContainer: {
         background: theme.palette.background.sections.about
     }
 });
-
 
 class About extends Component {
     render() {

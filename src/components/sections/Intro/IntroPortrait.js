@@ -11,10 +11,8 @@ const styles = theme => ({
         },
     },
     introImage: {
-        height: '100%',
         width: '100%',
         borderRadius: 500,
-        float: 'none',
 
         [theme.breakpoints.up('xs')]: {
             maxWidth: 240,
@@ -24,7 +22,6 @@ const styles = theme => ({
         },
         [theme.breakpoints.up('md')]: {
             maxWidth: 320,
-            float: 'right',
         },
         [theme.breakpoints.up('lg')]: {
             maxWidth: 360,

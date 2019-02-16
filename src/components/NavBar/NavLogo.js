@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
+import { Link } from 'react-scroll';
 import TextHeader from '../common/TextHeader';
+import { SECTIONS } from '../constants';
 
 
-const styles = theme => ({
+const styles = ({ palette }) => ({
     logoContainer: {
-        textTransform: 'uppercase',
-        display: 'inline-block',
-        // margin: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px ${theme.spacing.unit}px`,
-    },
-    menuToggler: {
-        display: 'block',
+        display: 'flex',
+        cursor: 'pointer',
         transition: 'all 0.3s',
         textDecoration: 'none',
-
-        color: theme.palette.text.header.light,
+        color: palette.text.header.light,
 
         '&:hover': {
-            color: theme.palette.primary.main,
+            color: palette.primary.main,
             textDecoration: 'none',
         },
     },
@@ -29,34 +26,28 @@ const styles = theme => ({
         '&:hover': {
             color: 'inherit',
         },
-    },
-    remainingLetters: {
-        fontSize: 22,
     }
 });
 
 
-class NavLogo extends Component {
-    render() {
-        const { classes } = this.props;
+const NavLogo = props => {
+    const { classes } = props;
 
-        return (
-            <div className={classes.logoContainer}>
-                <a
-                    className={classes.menuToggler}
-                    href='/#/'
-                    onClick={this.props.toggleLeftDrawer}
-                >
-                    <TextHeader variant="display1" text="MATIAS RANTA" typographyClassName={classes.logoText} />
-                </a>
-            </div>
-        );
-    }
-}
+    return (
+        <div className={classes.logoContainer}>
+            <Link to={SECTIONS.INTRO} smooth>
+                <TextHeader
+                    variant="display1"
+                    text="MATIAS RANTA"
+                    typographyClassName={classes.logoText}
+                />
+            </Link>
+        </div>
+    );
+};
 
 NavLogo.propTypes = {
-    classes: PropTypes.object,
-    toggleLeftDrawer: PropTypes.func
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(NavLogo);

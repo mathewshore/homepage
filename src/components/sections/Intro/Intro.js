@@ -5,14 +5,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Container from '../../common/Container';
 import IntroText from './IntroText';
 import IntroPortrait from './IntroPortrait';
-
-import zIndex from '../../zIndex';
-import { SECTIONS } from '../../constants';
+import { SECTIONS, Z_INDEX } from '../../constants';
 
 
-const styles = theme => ({
+const styles = ({ palette, spacing, breakpoints }) => ({
     introSectionContainer: {
-        background: theme.palette.background.sections.intro,
+        background: palette.background.sections.intro,
         height: '100vh',
     },
     introContainer: {
@@ -24,31 +22,30 @@ const styles = theme => ({
         justifyContent: 'center',
         height: '100%',
 
-        [theme.breakpoints.up('xs')]: {
+        [breakpoints.up('xs')]: {
             flexDirection: 'column-reverse',
-            marginTop: theme.spacing.unit * -5,
-            padding: `0 ${theme.spacing.unit * 4}px`,
+            marginTop: spacing.unit * -5,
+            padding: `0 ${spacing.unit * 4}px`,
         },
-        [theme.breakpoints.up('sm')]: {
-            padding: `0 ${theme.spacing.unit * 6}px`,
+        [breakpoints.up('sm')]: {
+            padding: `0 ${spacing.unit * 6}px`,
         },
-        [theme.breakpoints.up('md')]: {
+        [breakpoints.up('md')]: {
             flexDirection: 'initial',
             marginTop: 0,
-            padding: `0 ${theme.spacing.unit * 8}px`,
+            padding: `0 ${spacing.unit * 8}px`,
         },
-        [theme.breakpoints.up('lg')]: {
-            padding: `0 ${theme.spacing.unit * 10}px`,
+        [breakpoints.up('lg')]: {
+            padding: `0 ${spacing.unit * 10}px`,
         },
     },
-
     introFixedContainer: {
         height: '100vh',
         width: '100%',
         top: 0,
         left: 0,
         position: 'fixed',
-        zIndex: zIndex.intro,
+        zIndex: Z_INDEX.INTRO,
     },
 });
 

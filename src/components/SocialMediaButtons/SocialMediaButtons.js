@@ -9,6 +9,7 @@ import WordPressIconButton from './WordPressIconButton';
 
 const styles = theme => ({
     socialMediaButtonsContainer: {
+        padding: `${theme.spacing.unit * 2}px 0`,
         margin: 'auto',
     }
 });

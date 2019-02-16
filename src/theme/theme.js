@@ -1,35 +1,18 @@
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import spacing from '@material-ui/core/styles/spacing';
 import overrides from './overrides';
 import palette from './palette';
-import zIndex from '../components/zIndex';
 
 
 const theme = createMuiTheme({
     palette,
     overrides,
-    leftDrawerWidth: 256,
     sectionDivider: {
         height: 5,
-        margin: '20px 0 32px',
-        width: 60,
+        margin: `${spacing.unit * 2.5}px 0 ${spacing.unit * 4}px`,
+        width: `${spacing.unit * 8}px`,
         // ToDo: define divider background-color in theme/palette and use it here.
         // backgroundColor: `${blue[400]} !important`,
-    },
-    navBarContainer: {
-        zIndex: zIndex.navigation,
-        position: 'fixed',
-        left: 0,
-        width: '100%',
-    },
-    mobileNavLogo: {
-        margin: {
-            xs: {
-                marginLeft: 2
-            },
-            sm: {
-                marginLeft: 7
-            },
-        },
     },
 });
 

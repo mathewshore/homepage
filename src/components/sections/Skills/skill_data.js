@@ -5,7 +5,7 @@
 //   2 elementary
 //   1 beginner
 
-export const programmingSkills = [
+export const programming = [
     {
         name: 'React',
         level: 5
@@ -19,7 +19,7 @@ export const programmingSkills = [
         level: 4
     },
     {
-        name: 'Vanilla Javascript',
+        name: 'Javascript',
         level: 3
     },
     {
@@ -27,22 +27,22 @@ export const programmingSkills = [
         level: 2
     },
     {
-        name: 'C# (Unity)',
-        level: 1
-    },
-    {
         name: 'Git',
         level: 3
-    },
-    {
-        name: 'Bash scripts',
-        level: 1
     }
 ];
 
-export const designSkills = [
+export const design = [
+    {
+        name: 'Atomic Design',
+        level: 4
+    },
     {
         name: 'Material Design',
+        level: 3
+    },
+    {
+        name: 'Responsive Design',
         level: 3
     },
     {
@@ -52,11 +52,21 @@ export const designSkills = [
     {
         name: 'Adobe Illustrator',
         level: 1
+    },
+    {
+        name: 'Balsamiq',
+        level: 3
     }
 ];
 
 export const operatingSystems = [
-    'Windows',
-    'Linux mint',
-    'MacOS'
+    {
+        name: 'Windows'
+    },
+    {
+        name: 'Linux mint'
+    },
+    {
+        name: 'MacOS'
+    }
 ];

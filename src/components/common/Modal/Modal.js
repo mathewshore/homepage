@@ -5,13 +5,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import MuiModal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 
-import { toggleBodyScroll } from '../../scroll_functions';
+import { toggleBodyScroll } from '../../utils';
 import Container from '../Container';
 import ModalHead from './ModalHead';
 import ModalContent from './ModalContent';
 
 
-const styles = ({ spacing, breakpoints}) => ({
+const styles = ({ spacing, breakpoints }) => ({
     modalPaper: {
         position: 'relative',
         maxHeight: `calc(100vh - ${spacing.unit * 5 * 2}px)`,

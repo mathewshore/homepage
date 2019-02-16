@@ -1,65 +1,58 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import CodeIcon from '@material-ui/icons/Code';
+import DesignIcon from '@material-ui/icons/Wallpaper';
+// import OSIcon from '@material-ui/icons/Dvr';
 
 import Section from '../Section';
 import { SECTIONS } from '../../constants';
+import * as skills from './skill_data';
+import SkillList from './SkillList';
 
 
 const styles = theme => ({
-    skillsSectionContainer: {
+    sectionContainer: {
         background: theme.palette.background.sections.skills,
     },
     card: {
-       maxWidth: 345,
+        maxWidth: 345,
     },
 });
 
-class Skills extends Component {
-    render() {
-        const { classes } = this.props;
+const Skills = props => {
+    const { classes } = props;
 
-        return (
-            <Section id={SECTIONS.SKILLS} containerClassName={classes.skillsSectionContainer}>
-                <Grid container>
-                    <Grid item md xs={12}>
-                        <Typography variant='display1'>
-                            Programming
-                        </Typography>
-                        <Typography variant='body1'>
-                            Front End
-                        </Typography>
-                    </Grid>
-                    <Grid item md xs={12}>
-                        <Typography variant='display1'>
-                            Design
-                        </Typography>
-                        <Typography variant='body1'>
-                            Material Design
-                        </Typography>
-                        <Typography variant='body1'>
-                            Adobe Illustrator
-                        </Typography>
-                    </Grid>
-                    <Grid item md xs={12}>
-                        <Typography variant='display1'>
-                            Miscellaneous 
-                        </Typography>
-                        <Typography variant='body1'>
-                            Prototyping
-                        </Typography>
-                        <Typography variant='body1'>
-                            Lean
-                        </Typography>
-                    </Grid>
+    return (
+        <Section id={SECTIONS.SKILLS} containerClassName={classes.sectionContainer}>
+            <Grid container spacing={24}>
+                <Grid item md={6} xs={12}>
+                    <SkillList
+                        title="Programming"
+                        ListIcon={CodeIcon}
+                        skills={skills.programming}
+                    />
                 </Grid>
-            </Section>
-        );
-    }
-}
+                <Grid item md={6} xs={12}>
+                    <SkillList
+                        ListIcon={DesignIcon}
+                        title="Design & Prototyping"
+                        skills={skills.design}
+                    />
+                </Grid>
+                {/* <Grid item md={4} xs={12}>
+                    <SkillList
+                        ListIcon={OSIcon}
+                        title="Operating systems"
+                        skills={skills.operatingSystems}
+                    />
+                </Grid> */}
+            </Grid>
+        </Section>
+    );
+};
 
 Skills.propTypes = {
     classes: PropTypes.object

@@ -7,13 +7,16 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import NavLinks from './NavLinks';
 import NavLogo from './NavLogo';
 import Container from '../common/Container';
-import { SECTIONS } from '../constants';
+import { SECTIONS, Z_INDEX } from '../constants';
 
 
 const styles = (theme) => ({
     navBarContainer: {
-        ...theme.navBarContainer,
+        zIndex: Z_INDEX.NAVIGATION,
+        position: 'fixed',
+        left: 0,
         top: 0,
+        width: '100%',
 
         transition: 'all 0.3s',
         background: theme.palette.transparent,
@@ -70,12 +73,16 @@ const shouldNavBarHighlight = () => {
 
 class NavBar extends Component {
     state = {
-        activeSection: getActiveSection(),
-        navBarHighlighted: shouldNavBarHighlight()
+        activeSection: null,
+        navBarHighlighted: null
     };
 
     // Todo: add window location listener to App and use it to highlight active link.
     componentDidMount() {
+        this.setState({
+            activeSection: getActiveSection(),
+            navBarHighlighted: shouldNavBarHighlight()
+        });
         window.addEventListener('scroll', this.handleScroll);
     }
 

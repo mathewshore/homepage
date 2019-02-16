@@ -4,6 +4,10 @@ import grey from '@material-ui/core/colors/grey';
 import brown from '@material-ui/core/colors/brown';
 
 
+// Potential colors
+// Primary: #f8c687 - light brown/orange
+// Secondary: #45b29a - light green
+
 const palette = {
     primary: red,
     secondary: green, // not used

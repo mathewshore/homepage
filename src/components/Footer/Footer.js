@@ -1,48 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import SocialMediaButtons from '../SocialMediaButtons';
+import Copyright from './Copyright';
 
 
-const styles = theme => ({
+const styles = ({ spacing, palette }) => ({
     footer: {
         position: 'relative',
-        background: theme.palette.background.footer,
-        padding: `${theme.spacing.unit * 10}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 16.5}px`,
+        background: palette.background.footer,
+        padding: `${spacing.unit * 10}px ${spacing.unit * 3}px ${spacing.unit * 12}px`,
         color: 'white',
         textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center'
     },
-    footerContentRow: {
-        padding: `${theme.spacing.unit * 2}px 0`,
-        '&.socialMediaButtonsContainer': {
-            display: 'flex',
-        },
-    }
+    footerContent: {
+        width: '100%'
+    },
 });
 
-class Footer extends Component {
-    static renderCopyrightText() {
-        const date = new Date();
-        const currentYear = date.getFullYear();
-        return `Copyright © ${currentYear} Matias Ranta. All rights reserved.`;
-    }
+const Footer = props => {
+    const { classes } = props;
 
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <div className={classes.footer}>
-                <div className={classes.footerContentRow + ' socialMediaButtonsContainer'}>
-                    <SocialMediaButtons />
-                </div>
-                <div className={classes.footerContentRow}>
-                    {Footer.renderCopyrightText()}
-                </div>
+    return (
+        <div className={classes.footer}>
+            <div className={classes.footerContent}>
+                <SocialMediaButtons />
+                <Copyright />
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
+
 
 Footer.propTypes = {
     classes: PropTypes.object

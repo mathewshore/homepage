@@ -8,3 +8,9 @@ export const SECTIONS = {
     SKILLS: 'skills',
     CONTACT: 'contact'
 };
+
+// Store element z-indexes here.
+export const Z_INDEX = {
+    INTRO: 0,
+    NAVIGATION: 1
+};
