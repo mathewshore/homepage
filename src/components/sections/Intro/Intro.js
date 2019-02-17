@@ -24,7 +24,6 @@ const styles = ({ palette, spacing, breakpoints }) => ({
 
         [breakpoints.up('xs')]: {
             flexDirection: 'column-reverse',
-            marginTop: spacing.unit * -5,
             padding: `0 ${spacing.unit * 4}px`,
         },
         [breakpoints.up('sm')]: {

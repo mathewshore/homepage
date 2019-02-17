@@ -12,7 +12,10 @@ import Container from '../common/Container';
 const styles = theme => ({
     sectionWrapper: {
         position: 'relative',
-        padding: `${theme.spacing.unit * 7}px 0`,
+        padding: `0 0 ${theme.spacing.unit * 7}px`,
+        '&#about': {
+            paddingTop: theme.spacing.unit * 7
+        }
     },
     sectionPaper: {
         background: theme.palette.background.sections.paper,
@@ -34,10 +37,9 @@ const styles = theme => ({
 
 const Section = (props) => {
     const { classes, children, id, containerClassName } = props;
-    const sectionWrapperClassName = `${classes.sectionWrapper} ${containerClassName}`;
 
     return (
-        <div id={id} className={sectionWrapperClassName}>
+        <div id={id} className={`${classes.sectionWrapper} ${containerClassName}`}>
             <Container>
                 <Paper elevation={4} className={classes.sectionPaper}>
                     <TextHeader variant="display2" text={toUpper(id)} />
