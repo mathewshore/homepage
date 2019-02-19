@@ -14,7 +14,7 @@ import NavLogo from './NavLogo';
 import MobileNavMenu from './MobileNavMenu';
 
 
-const styles = (theme) => ({
+const styles = theme => ({
     navBarContainer: {
         zIndex: Z_INDEX.NAV_BAR,
         position: 'fixed',
@@ -23,31 +23,26 @@ const styles = (theme) => ({
         width: '100%',
 
         transition: 'all 0.3s',
-        background: theme.palette.transparent,
-        boxShadow: 'none',
-        '&.highlight': {
-            background: theme.palette.background.navBar,
-            boxShadow: theme.shadows[5]
-        }
+        background: theme.palette.background.navBar,
+        boxShadow: theme.shadows[5]
     },
     navContent: {
         display: 'flex',
         height: theme.spacing.unit * 10,
         alignItems: 'center',
-        padding: `0 ${theme.spacing.unit * 6}px`,
 
-        // [theme.breakpoints.up('xs')]: {
-        //     padding: `0 ${theme.spacing.unit * 4}px`,
-        // },
-        // [theme.breakpoints.up('sm')]: {
-        //     padding: `0 ${theme.spacing.unit * 6}px`,
-        // },
-        // [theme.breakpoints.up('md')]: {
-        //     padding: `0 ${theme.spacing.unit * 8}px`,
-        // },
-        // [theme.breakpoints.up('lg')]: {
-        //     padding: `0 ${theme.spacing.unit * 10}px`,
-        // },
+        [theme.breakpoints.up('xs')]: {
+            padding: `0 ${theme.spacing.unit * 4}px`,
+        },
+        [theme.breakpoints.up('sm')]: {
+            padding: `0 ${theme.spacing.unit * 6}px`,
+        },
+        [theme.breakpoints.up('md')]: {
+            padding: `0 ${theme.spacing.unit * 8}px`,
+        },
+        [theme.breakpoints.up('lg')]: {
+            padding: `0 ${theme.spacing.unit * 10}px`,
+        },
     }
 });
 
@@ -111,7 +106,7 @@ class NavBar extends Component {
 
         return (
             <div className={`${classes.navBarContainer}${this.state.navBarHighlighted ? ' highlight' : ''}`}>
-                {/* <Container> */}
+                <Container>
                     <div className={classes.navContent}>
                         <NavLogo />
                         <Hidden mdUp>
@@ -130,7 +125,7 @@ class NavBar extends Component {
                             />
                         </Hidden>
                     </div>
-                {/* </Container> */}
+                </Container>
             </div>
         );
     }

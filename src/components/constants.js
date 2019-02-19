@@ -15,5 +15,7 @@ export const SECTIONS = {
 // Store element z-indexes here.
 export const Z_INDEX = {
     INTRO: 0,
-    NAV_BAR: 1
+    NAV_BAR: 10,
+    MOBILE_NAV_MENU: 30,
+    MOBILE_NAV_MENU_BACKDROP: 20
 };
