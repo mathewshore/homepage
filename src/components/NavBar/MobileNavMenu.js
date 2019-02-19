@@ -44,6 +44,7 @@ const styles = ({ palette, spacing }) => ({
 const MobileNavMenu = props => {
     const { classes, isOpen } = props;
     // ToDo: Render different menu icon for open & closed states.
+    // ToDo: refactor this to render links as props.children
     return (
         <div className={classes.menuContainer}>
             <div className={classes.menuDropDown}>
@@ -53,14 +54,14 @@ const MobileNavMenu = props => {
                 />
                 {isOpen && (
                     <div className={classes.menuList}>
-                        {map(props.sectionIds, id => (
+                        {map(props.sectionIds, (id, i) => (
                             <NavLink
                                 isMobile
+                                first={i === 0}
                                 key={id}
                                 linkTo={id}
                                 text={id}
                                 isActive={id === props.activeSection}
-                                withDarkColor={process.withDarkLinks}
                             />
                         ))}
                     </div>

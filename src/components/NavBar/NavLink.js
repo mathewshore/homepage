@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import join from 'lodash/join';
 
 import withStyles from '@material-ui/core/styles/withStyles';
+import spacing from '@material-ui/core/styles/spacing';
 import { Link } from 'react-scroll';
 import TextHeader from '../common/TextHeader';
 
@@ -49,26 +50,29 @@ const styles = ({ spacing, palette }) => ({
     },
 });
 
-const getNavLinkAdditionalClasses = (isActive, withDarkColor) => {
-    const additionalClasses = [' '];
+const getExtraClassNames = (isActive, withDarkColor) => {
+    const classNames = [' '];
     const textColorClass = withDarkColor ? 'dark' : 'light';
-    additionalClasses.push(textColorClass);
+    classNames.push(textColorClass);
     if (isActive) {
-        additionalClasses.push('active');
+        classNames.push('active');
     }
-    return join(additionalClasses, ' ');
+    return join(classNames, ' ');
 };
 
 const NavLink = props => {
-    const { classes, isMobile, linkTo, isActive } = props;
-    const additionalClasses = getNavLinkAdditionalClasses(
-        isActive,
-        props.withDarkColor
-    );
+    const { classes, isMobile } = props;
+    const additionalClasses = getExtraClassNames(props.isActive, props.withDarkColor);
+    const offsetUnitTimes = props.first ? 3 : 10;
                 
     return (
         <div className={`${classes.navLink}${isMobile ? ' mobile' : ''}${additionalClasses}`}>
-            <Link to={linkTo} smooth className={classes.link}>
+            <Link
+                smooth
+                to={props.linkTo}
+                className={classes.link}
+                offset={spacing.unit * -offsetUnitTimes}
+            >
                 <TextHeader
                     variant="subheading"
                     text={props.text}
@@ -82,6 +86,7 @@ const NavLink = props => {
 
 NavLink.propTypes = {
     classes: PropTypes.object.isRequired,
+    first: PropTypes.bool,
     linkTo: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     activeSection: PropTypes.oneOfType([

@@ -18,16 +18,17 @@ const styles = ({ spacing, palette }) => ({
 
 const NavLinks = props => {
     const { classes } = props;
+    // ToDo: refactor this to render links as props.children
 
     return (
         <div className={classes.navLinksContainer}>
-            {map(props.sectionIds, id => (
+            {map(props.sectionIds, (id, i) => (
                 <NavLink
+                    first={i === 0}
                     key={id}
                     linkTo={id}
                     text={id}
                     isActive={id === props.activeSection}
-                    withDarkColor={process.withDarkLinks}
                 />
             ))}
         </div>
