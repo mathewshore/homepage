@@ -14,7 +14,7 @@ const styles = ({ palette, spacing, breakpoints }) => ({
         height: '100vh',
     },
     introContainer: {
-        height: '100%',
+        height: `calc(100% - ${spacing.unit * 3}px)`,
     },
     introContent: {
         display: 'flex',
@@ -24,18 +24,18 @@ const styles = ({ palette, spacing, breakpoints }) => ({
 
         [breakpoints.up('xs')]: {
             flexDirection: 'column-reverse',
-            padding: `0 ${spacing.unit * 4}px`,
+            padding: `${spacing.unit * 3}px ${spacing.unit * 4}px 0`,
         },
         [breakpoints.up('sm')]: {
-            padding: `0 ${spacing.unit * 6}px`,
+            padding: `${spacing.unit * 3}px ${spacing.unit * 6}px 0`,
         },
         [breakpoints.up('md')]: {
             flexDirection: 'initial',
             marginTop: 0,
-            padding: `0 ${spacing.unit * 8}px`,
+            padding: `${spacing.unit * 3}px ${spacing.unit * 8}px 0`,
         },
         [breakpoints.up('lg')]: {
-            padding: `0 ${spacing.unit * 10}px`,
+            padding: `${spacing.unit * 3}px ${spacing.unit * 10}px 0`,
         },
     },
     introFixedContainer: {

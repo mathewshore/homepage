@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import map from 'lodash/map';
 import last from 'lodash/last';
+import includes from 'lodash/includes';
 import pull from 'lodash/pull';
 import findIndex from 'lodash/findIndex';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import Hidden from '@material-ui/core/Hidden';
+import withWidth from '@material-ui/core/withWidth';
 
 import Container from '../common/Container';
 import { SECTIONS, Z_INDEX } from '../constants';
 import NavLinks from './NavLinks';
+import NavLink from './NavLink';
 import NavLogo from './NavLogo';
 import MobileNavMenu from './MobileNavMenu';
 
@@ -66,23 +68,11 @@ const getActiveSection = () => {
     return isLastSection ? last(sectionIds) : sectionIds[nextSectionIndex - 1];
 };
 
-const shouldNavBarHighlight = () => {
-    const currentLocation = window.scrollY;
-    return currentLocation > 150;
-};
-
 class NavBar extends Component {
-    state = {
-        activeSection: null,
-        navBarHighlighted: null,
-        mobileMenuIsOpen: false
-    };
+    state = { activeSection: null };
 
     componentDidMount() {
-        this.setState({
-            activeSection: getActiveSection(),
-            navBarHighlighted: shouldNavBarHighlight()
-        });
+        this.setState({ activeSection: getActiveSection() });
         window.addEventListener('scroll', this.handleScroll);
     }
 
@@ -91,39 +81,32 @@ class NavBar extends Component {
     }
 
     handleScroll = () => {
-        this.setState({
-            activeSection: getActiveSection(),
-            navBarHighlighted: shouldNavBarHighlight()
-        });
-    };
-
-    toggleMobileMenu = () => {
-        this.setState({ mobileMenuIsOpen: !this.state.mobileMenuIsOpen });
+        this.setState({ activeSection: getActiveSection() });
     };
 
     render() {
         const { classes } = this.props;
+        const isMobile = includes(['xs', 'sm'], this.props.width);
+        const NavLinksContainer = isMobile ? MobileNavMenu : NavLinks;
 
         return (
-            <div className={`${classes.navBarContainer}${this.state.navBarHighlighted ? ' highlight' : ''}`}>
+            <div className={classes.navBarContainer}>
                 <Container>
                     <div className={classes.navContent}>
                         <NavLogo />
-                        <Hidden mdUp>
-                            <MobileNavMenu
-                                isOpen={this.state.mobileMenuIsOpen}
-                                sectionIds={pull(sectionIds, SECTIONS.INTRO)}
-                                activeSection={this.state.activeSection}
-                                onMenuToggleClick={this.toggleMobileMenu}
-                            />
-                        </Hidden>
-                        <Hidden smDown>
-                            <NavLinks // Remove intro section from nav links.
-                                sectionIds={pull(sectionIds, SECTIONS.INTRO)}
-                                activeSection={this.state.activeSection}
-                                withDarkLinks={!this.state.navBarHighlighted}
-                            />
-                        </Hidden>
+                        <NavLinksContainer>
+                            {/* Intro section link is not rendered in nav. */}
+                            {map(pull(sectionIds, SECTIONS.INTRO), (id, i) => (
+                                <NavLink
+                                    key={id}
+                                    isMobile={isMobile}
+                                    first={i === 0}
+                                    linkTo={id}
+                                    text={id}
+                                    isActive={id === this.state.activeSection}
+                                />
+                            ))}
+                        </NavLinksContainer>
                     </div>
                 </Container>
             </div>
@@ -131,4 +114,4 @@ class NavBar extends Component {
     }
 }
 
-export default withStyles(styles, { withTheme: true })(NavBar);
+export default withWidth()(withStyles(styles, { withTheme: true })(NavBar));

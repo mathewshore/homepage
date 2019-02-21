@@ -15,7 +15,7 @@ const styles = ({ palette }) => ({
         color: palette.text.header.light,
 
         '&:hover': {
-            color: palette.secondary.light,
+            color: palette.primary.light,
         },
     },
     logoText: {

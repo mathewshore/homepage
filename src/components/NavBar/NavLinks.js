@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map';
-
 import withStyles from '@material-ui/core/styles/withStyles';
-import NavLink from './NavLink';
 
 
-const styles = ({ spacing, palette }) => ({
+const styles = ({ spacing }) => ({
     navLinksContainer: {
         marginTop: spacing.unit * 0.5,
         marginLeft: 'auto',
@@ -18,30 +15,16 @@ const styles = ({ spacing, palette }) => ({
 
 const NavLinks = props => {
     const { classes } = props;
-    // ToDo: refactor this to render links as props.children
-
     return (
         <div className={classes.navLinksContainer}>
-            {map(props.sectionIds, (id, i) => (
-                <NavLink
-                    first={i === 0}
-                    key={id}
-                    linkTo={id}
-                    text={id}
-                    isActive={id === props.activeSection}
-                />
-            ))}
+            {props.children}
         </div>
     );
 };
 
 NavLinks.propTypes = {
     classes: PropTypes.object.isRequired,
-    sectionIds: PropTypes.array.isRequired,
-    activeSection: PropTypes.oneOfType([
-        PropTypes.oneOf([null]),
-        PropTypes.string
-    ])
+    children: PropTypes.arrayOf(PropTypes.element).isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(NavLinks);

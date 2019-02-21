@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = ({ spacing, palette }) => ({
     headerContainer: {
         padding: spacing.unit * 3,
-        backgroundColor: palette.secondary.light,
+        backgroundColor: palette.primary.light,
         display: 'flex'
     },
     listContainer: {

@@ -1,11 +1,9 @@
-import React from 'react';
-import map from 'lodash/map';
-
+import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MenuIcon from '@material-ui/icons/Menu';
-import NavLinks from './NavLinks';
 import { Z_INDEX } from '../constants';
-import NavLink from './NavLink';
+import Backdrop from '../common/Backdrop';
+
 
 const styles = ({ palette, spacing }) => ({
     menuContainer: {
@@ -26,55 +24,44 @@ const styles = ({ palette, spacing }) => ({
     menuList: {
         display: 'block',
         position: 'absolute',
-        top: spacing.unit * 7.5,
-        // ToDo: set mediascreen based right position according to different paddings
+        top: (spacing.unit * 7.5) - 2, 
+        // ToDo: Set mediascreen based right position according to different paddings (?)
         right: 0,
         background: palette.background.navBar,
+        borderRadius: 2
     },
-    backdrop: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100vh',
-        zIndex: Z_INDEX.MOBILE_NAV_MENU_BACKDROP
-    }
 });
 
-const MobileNavMenu = props => {
-    const { classes, isOpen } = props;
-    // ToDo: Render different menu icon for open & closed states.
-    // ToDo: refactor this to render links as props.children
-    return (
-        <div className={classes.menuContainer}>
-            <div className={classes.menuDropDown}>
-                <MenuIcon
-                    className={classes.menuIcon}
-                    onClick={props.onMenuToggleClick}
-                />
-                {isOpen && (
-                    <div className={classes.menuList}>
-                        {map(props.sectionIds, (id, i) => (
-                            <NavLink
-                                isMobile
-                                first={i === 0}
-                                key={id}
-                                linkTo={id}
-                                text={id}
-                                isActive={id === props.activeSection}
-                            />
-                        ))}
-                    </div>
-                )}
+class MobileNavMenu extends Component {
+    state = { isOpen: false };
+
+    onMenuToggleClick = () => {
+        this.setState({ isOpen: !this.state.isOpen });
+    };
+
+    render() {
+        // ToDo: Update to react version with state hooks and use it here.
+        const { classes } = this.props;
+        const { isOpen } = this.state;
+        // ToDo: Render different menu icon for open & closed states.
+
+        return (
+            <div className={classes.menuContainer}>
+                <div className={classes.menuDropDown}>
+                    <MenuIcon
+                        className={classes.menuIcon}
+                        onClick={this.onMenuToggleClick}
+                    />
+                    {isOpen && (
+                        <div className={classes.menuList}>
+                            {this.props.children}
+                        </div>
+                    )}
+                </div>
+                {isOpen && <Backdrop />}
             </div>
-            {isOpen && (
-                <div
-                    className={classes.backdrop}
-                    onClick={props.onMenuToggleClick}
-                />
-            )}
-        </div>
-    );
-};
+        );
+    }
+}
 
 export default withStyles(styles, { withTheme: true })(MobileNavMenu);

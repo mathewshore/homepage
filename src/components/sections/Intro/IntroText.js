@@ -1,48 +1,102 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import get from 'lodash/get';
+import size from 'lodash/size';
+import toUpper from 'lodash/toUpper';
+
 import withStyles from '@material-ui/core/styles/withStyles';
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography';
 import TextHeader from '../../common/TextHeader';
 
 
-const styles = theme => ({
+const styles = ({ breakpoints, spacing }) => ({
     textContainer: {
-        [theme.breakpoints.up('xs')]: {
+        [breakpoints.up('xs')]: {
             textAlign: 'center',
             minWidth: '100%',
-            marginTop: theme.spacing.unit * 3
+            marginTop: spacing.unit * 3
         },
-        [theme.breakpoints.up('md')]: {
+        [breakpoints.up('md')]: {
             textAlign: 'initial',
             minWidth: 'auto',
             marginTop: 0
         },
     },
     textPhrase: {
+        minHeight: spacing.unit * 5,
         fontSize: 22,
+        transition: 'all 0.3s ease',
+        '&.animated': {
+            fontSize: 28,
+            color: 'transparent',
+        }
     },
     dividerRoot: {
-        [theme.breakpoints.down('sm')]: {
+        [breakpoints.down('sm')]: {
             marginLeft: 'auto',
             marginRight: 'auto',
         },
     },
 });
 
-const IntroText = props => {
-    const { classes } = props;
-    return (
-        <div className={classes.textContainer}>
-            <TextHeader variant="display3" text="MATIAS RANTA" />
-            <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
-            <Divider classes={{ root: classes.dividerRoot }}/>
-            <Typography variant="display1" classes={{ root: classes.textPhrase }}>
-                PIXEL PERFECTIONIST & DOG LOVER
-            </Typography>
-        </div>
-    );
-};
+const textPhrases = [
+    'pixel perfectionist',
+    'dog lover',
+    'climbing enthusiast'
+];
+
+const PHRASE_INTERVAL_TIME = 4000;
+
+class IntroText extends Component {
+    state = {
+        phraseIsChanging: false,
+        phraseIndex: 0
+    };
+
+    componentDidMount = () => {
+        setTimeout(this.activePhraseIntervals, 500);
+    };
+    
+    activePhraseIntervals = () => {
+        setInterval(this.setPhraseTransition, PHRASE_INTERVAL_TIME)
+        setTimeout(() => setInterval(this.changePhrase, PHRASE_INTERVAL_TIME), 500);
+    };
+
+    setPhraseTransition = () => {
+        this.setState({ phraseIsChanging: true });
+    };
+
+    componentWillUnmount = () => {
+        clearInterval(this.changePhrase);
+    };
+
+    changePhrase = () => {
+        const phraseCount = size(textPhrases);
+        const currentIsLast = (this.state.phraseIndex + 1) === phraseCount;
+        const phraseIndex = currentIsLast ? 0 : this.state.phraseIndex + 1;
+        this.setState({ phraseIndex, phraseIsChanging: false });
+    };
+
+    render() {
+        const { classes } = this.props;
+        // ToDo: Loop different text phrases.
+    
+        return (
+            <div className={classes.textContainer}>
+                <TextHeader variant="display3" text="MATIAS RANTA" />
+                <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
+                <Divider classes={{ root: classes.dividerRoot }}/>
+                <Typography
+                    variant="display1"
+                    classes={{ root: `${classes.textPhrase}${this.state.phraseIsChanging ? ' animated' : ''}` }}
+                >
+                    {toUpper(get(textPhrases, this.state.phraseIndex, ''))}
+                </Typography>
+            </div>
+        );
+    }
+}
 
 IntroText.propTypes = {
     classes: PropTypes.object.isRequired

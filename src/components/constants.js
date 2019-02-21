@@ -17,5 +17,5 @@ export const Z_INDEX = {
     INTRO: 0,
     NAV_BAR: 10,
     MOBILE_NAV_MENU: 30,
-    MOBILE_NAV_MENU_BACKDROP: 20
+    BACKDROP: 20
 };

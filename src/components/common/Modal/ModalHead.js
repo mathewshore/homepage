@@ -9,7 +9,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 const styles = ({ palette, spacing, breakpoints }) => ({
     modalHead: {
-        background: palette.secondary.light,
+        background: palette.primary.light,
         position: 'absolute',
         top: 0,
         left: 0,

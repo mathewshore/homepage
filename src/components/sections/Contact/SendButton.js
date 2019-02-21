@@ -87,12 +87,12 @@ class SendButton extends React.Component {
         return (
             <div className={classes.wrapper}>
                 <Button
-                    variant='raised'
-                    color='secondary'
+                    variant="raised"
+                    color="primary"
                     className={buttonClassname}
                     disabled={loading}
                     onClick={this.handleButtonClick}
-                    type='submit'
+                    type="submit" // not sure if this is needed
                 >
                     {success ? 'Message was Sent!' : 'Send Message'}
                 </Button>

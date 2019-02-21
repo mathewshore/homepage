@@ -24,12 +24,12 @@ const styles = ({ spacing, palette }) => ({
             textAlign: 'center'
         },
         '&:hover': {
-            color: palette.secondary.main,
+            color: palette.primary.main,
             textDecoration: 'none',
             transform: 'scale(1.1)'
         },
         '&.active': {
-            color: palette.secondary.light,
+            color: palette.primary.light,
             transform: 'scale(1.1)'
         },
     },
@@ -39,7 +39,6 @@ const styles = ({ spacing, palette }) => ({
     navLinkText: {
         cursor: 'pointer',
         transition: 'all 0.3s',
-        
     },
     navLinkTypography: {
         display: 'inherit',
@@ -61,23 +60,24 @@ const getExtraClassNames = (isActive, withDarkColor) => {
 };
 
 const NavLink = props => {
-    const { classes, isMobile } = props;
+    const { classes } = props;
     const additionalClasses = getExtraClassNames(props.isActive, props.withDarkColor);
-    const offsetUnitTimes = props.first ? 3 : 10;
+    const scrollOffset = spacing.unit * (props.first ? -3 : -10);
+    const mobileClassName = props.isMobile ? ' mobile' : '';
                 
     return (
-        <div className={`${classes.navLink}${isMobile ? ' mobile' : ''}${additionalClasses}`}>
+        <div className={`${classes.navLink}${mobileClassName}${additionalClasses}`}>
             <Link
                 smooth
                 to={props.linkTo}
                 className={classes.link}
-                offset={spacing.unit * -offsetUnitTimes}
+                offset={scrollOffset}
             >
                 <TextHeader
                     variant="subheading"
                     text={props.text}
                     className={`${classes.navLinkText}${additionalClasses}`}
-                    typographyClassName={`${classes.navLinkTypography}${isMobile ? ' mobile' : ''}`}
+                    typographyClassName={`${classes.navLinkTypography}${mobileClassName}`}
                 />
             </Link>
         </div>

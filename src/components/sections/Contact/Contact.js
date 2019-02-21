@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
+import isNil from 'lodash/isNil';
+import reduce from 'lodash/reduce';
+import includes from 'lodash/includes';
+import isEmpty from 'lodash/isEmpty';
+import startCase from 'lodash/startCase';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
-import FormGroup from '@material-ui/core/FormGroup';
-import TextField from '@material-ui/core/TextField';
-import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
-import grey from '@material-ui/core/colors/grey';
 
 import Section from '../Section';
+import FormField from './FormField';
 // import SendButton from './SendButton';
 import { SECTIONS } from '../../constants';
 
@@ -19,154 +21,157 @@ const styles = theme => ({
     contactSectionContainer: {
         background: theme.palette.background.sections.contact
     },
-    textFieldRoot: {
-        padding: 0,
-        '&:before': {
-            borderBottom: 0,
-        },
-    },
-    textFieldInput: {
-        borderRadius: 2,
-        boxShadow: `0px 1px 3px 1px ${grey[400]}`,
-        fontSize: 18,
-        padding: '8px 4px',
-        backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    },
-    textFieldUnderline: {
-        // backgroundColor: 'green',
-        height: 0,
-    },
-    fieldLabel: {
-        fontSize: 20,
-        marginBottom: 8,
-    },
     submitButtonWrapper: {
         paddingTop: 20,
         textAlign: 'center',
-        // position: 'relative',
     },
     submitButton: {
         margin: 'auto',
+        color: theme.palette.text.light
     },
+    // ToDo: move this styling to <FormField />
+    fieldLabelWrapper: {
+        display: 'flex',
+        alignItems: 'center'
+    },
+    labelRequiredText: {
+        fontSize: 14,
+        marginLeft: theme.spacing.unit
+    }
 });
 
+const requiredFields = ['name', 'email', 'message'];
+
+const validateRequiredFields = (requiredFields, values) => reduce(
+    requiredFields, (errors, key) => ({
+        ...errors,
+        ...getFieldError(key, get(values, key))
+    }), {}
+);
+
+const getFieldError = (key, value) => ({
+    [key]: value ? undefined : `Please, insert ${key}.`
+});
+
+const isRequired = key => includes(requiredFields, key);
+
+const getRequiredText = key => isRequired(key) && '(required)';
+
+const isValidEmail = email => email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+
 class Contact extends Component {
-    constructor() {
-        super();
+    state = {
+        name: '',
+        email: '',
+        message: '',
+        errors: {},
+    };
 
-        this.state = {
-            name: '',
-            email: '',
-            message: '',
-            errors: {
-                name: '',
-                email: '',
-                message: '',
-            },
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    onFieldChange = key => e => {
+        this.setState({ [key]: e.target.value });
     }
 
-    handleChange(key) {
-        return (e) => {
-            this.setState({ [key]: e.target.value });
-        };
+    onFieldBlur = key => () => {
+        this.validateValue(key);
+    };
+
+    validateValue = key => {
+        const value = get(this.state, key);
+        const isEmailWithValue = key === 'email';
+        const error = isEmailWithValue ? this.validateEmail() : getFieldError(key, value);
+        this.setState({ errors: { ...this.state.errors, ...error } });
+    };
+
+    validateEmail = () => {
+        const { email } = this.state;
+        if (isRequired('email') && !email) {
+            return getFieldError('email', email)
+        } else if (isValidEmail(email)) {
+            return { email: "Invalid email address, expected format: 'example@email.com'." };
+        }
+        return { email: undefined };
+    };
+
+    getFormErrors() {
+        const errors = validateRequiredFields(requiredFields, this.state);
+        return { ...errors, ...this.validateEmail() };
     }
 
-    checkFormValidity() {
-        const { name, email, message } = this.state;
-        const errors = {};
-
-        if (!name) {
-            errors.name = 'Please, insert your name.';
-        }
-        if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-            errors.email = "Email address format is invalid, valid format is 'example@email.com'.";
-        }
-        if (!message) {
-            errors.message = 'Please, type a message.';
-        }
-
-        if (!errors) {
-            return true;
-        }
-        this.setState({ errors });
-        return false;
-    }
-
-    handleSubmit(e) {
+    handleSubmit = e => {
         // ToDo: finish contact form message sending logic.
         e.preventDefault();
-        const formIsValid = this.checkFormValidity();
-        if (formIsValid) {
-            // do shit here.
+        const errors = this.getFormErrors();
+        this.setState({ errors });
+        if (isEmpty(errors)) {
+            console.log('Send form.')
         }
-    }
+    };
+
+    getLabel = key => {
+        const { classes } = this.props;
+        const requiredText = getRequiredText(key);
+        return (
+            <div className={classes.fieldLabelWrapper}>
+                {startCase(key)}
+                {requiredText && (
+                    <div className={classes.labelRequiredText}>
+                        {requiredText}
+                    </div>
+                )}
+            </div>
+        );
+    };
+
+    getFormFieldProps = key => ({
+        id: key,
+        name: key,
+        label: this.getLabel(key),
+        value: get(this.state, key),
+        onChange: this.onFieldChange(key),
+        onBlur: this.onFieldBlur(key),
+        // Return default ' ' to prevent elements from jumping.
+        helperText: get(this.state.errors, key, ' '),
+        error: !isNil(get(this.state.errors, key))
+    });
 
     render() {
         const { classes } = this.props;
 
-        const getTextFieldProps = (fieldKey) => ({
-            id: fieldKey,
-            value: get(this.state, fieldKey),
-            onChange: this.handleChange(fieldKey),
-            fullWidth: true,
-            helperText: get(this.state.errors, fieldKey),
-            InputProps: {
-                classes: {
-                    root: classes.textFieldRoot,
-                    input: classes.textFieldInput,
-                    // underline: classes.textFieldUnderline,
-                },
-            },
-        });
-
-        // ToDo: render 'required' text next to required field labels.
-        // ToDo: change helper text color to red.
-
         return (
-            <Section id={SECTIONS.CONTACT} containerClassName={classes.contactSectionContainer}>
+            <Section
+                id={SECTIONS.CONTACT}
+                containerClassName={classes.contactSectionContainer}
+            >
                 <form onSubmit={this.handleSubmit}>
                     <Grid container spacing={24}>
                         <Grid item xs={12} sm={6}>
-                            <FormGroup>
-                                <FormLabel className={classes.fieldLabel}>Name</FormLabel>
-                                <TextField
-                                    {...getTextFieldProps('name')}
-                                    placeholder='Your name...'
-                                />
-                            </FormGroup>
+                            <FormField
+                                {...this.getFormFieldProps('name')}
+                                placeholder="Your name..."
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <FormGroup>
-                                <FormLabel className={classes.fieldLabel}>Email</FormLabel>
-                                <TextField
-                                    {...getTextFieldProps('email')}
-                                    placeholder='Your email...'
-                                />
-                            </FormGroup>
+                            <FormField
+                                {...this.getFormFieldProps('email')}
+                                placeholder="Your email..."
+                            />
                         </Grid>
                         <Grid item xs={12}>
-                            <FormGroup>
-                                <FormLabel className={classes.fieldLabel}>Message</FormLabel>
-                                <TextField
-                                    {...getTextFieldProps('message')}
-                                    multiline
-                                    rows={6}
-                                    placeholder='Type your message here...'
-                                />
-                            </FormGroup>
+                            <FormField
+                                {...this.getFormFieldProps('message')}
+                                multiline
+                                rows={6}
+                                placeholder="Type your message here..."
+                            />
                         </Grid>
                     </Grid>
                     <div className={classes.submitButtonWrapper}>
                         <Button
                             className={classes.submitButton}
-                            variant='raised'
-                            color='secondary'
-                            type='submit'
-                            size='large'
+                            variant="raised"
+                            color="primary"
+                            type="submit"
+                            size="large"
                         >
                             Send Message
                         </Button>

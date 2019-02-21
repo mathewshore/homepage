@@ -1,8 +1,6 @@
 import red from '@material-ui/core/colors/red';
-import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
 import brown from '@material-ui/core/colors/brown';
-import lightGreen from '@material-ui/core/colors/lightGreen';
 
 
 // Potential colors
@@ -13,15 +11,14 @@ const sectionBgColor = '#fae8d3';
 
 const palette = {
     primary: {
-        light: red[200],
-        main: red[400],
-        dark: red[800],
-    },
-    // secondary: green,
-    secondary: {
         light: '#63d6bd',
         main: '#45b29a',
         dark: '#399984'
+    },
+    secondary: {
+        light: red[200],
+        main: red[400],
+        dark: red[800],
     },
     background: {
         primary: grey[200], // not used
@@ -41,9 +38,10 @@ const palette = {
         footer: grey[900],
     },
     text: {
+        light: grey[50],
         header: {
             dark: grey[900],
-            light: grey[100],
+            light: grey[50],
         }
     },
     transparent: 'transparent'
