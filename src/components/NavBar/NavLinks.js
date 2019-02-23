@@ -27,4 +27,4 @@ NavLinks.propTypes = {
     children: PropTypes.arrayOf(PropTypes.element).isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(NavLinks);
+export default withStyles(styles)(NavLinks);

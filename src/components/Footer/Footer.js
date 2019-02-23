@@ -39,4 +39,4 @@ Footer.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles, { withTheme: true })(Footer);
+export default withStyles(styles)(Footer);

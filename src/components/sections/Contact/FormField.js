@@ -4,6 +4,7 @@ import omit from 'lodash/omit';
 import withStyles from "@material-ui/core/styles/withStyles";
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
+import FieldLabel from './FieldLabel';
 
 
 const styles = ({ spacing, shadows }) => ({
@@ -30,14 +31,14 @@ const styles = ({ spacing, shadows }) => ({
 });
 
 const FormField = props => {
-    const { classes } = props;
+    const { classes, label, isRequired } = props;
     return (
         <FormGroup>
             <TextField
-                {...omit(props, ['classes', 'theme'])}
+                {...omit(props, ['classes', 'label', 'isRequired'])}
+                label={<FieldLabel label={label} isRequired={isRequired} />}
                 InputLabelProps={{
                     ...props.InputLabelProps,
-                    shrink: true,
                     classes: {
                         root: classes.inputLabelRoot
                     }
@@ -54,12 +55,19 @@ const FormField = props => {
     );
 };
 
+FormField.defaultProps = {
+    InputLabelProps: {
+        shrink: true
+    }
+};
+
 FormField.propTypes = {
     classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
+    isRequired: PropTypes.bool,
+    label: PropTypes.string,
     id: PropTypes.string,
     InputLabelProps: PropTypes.object,
     InputProps: PropTypes.object,
 };
 
-export default withStyles(styles, { withTheme: true })(FormField);
+export default withStyles(styles)(FormField);

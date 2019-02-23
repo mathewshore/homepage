@@ -26,4 +26,4 @@ const ToolButton = props => {
     );
 };
 
-export default withStyles(styles, { withTheme: true })(ToolButton);
+export default withStyles(styles)(ToolButton);

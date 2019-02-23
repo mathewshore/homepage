@@ -2,6 +2,7 @@ import React from 'react';
 import SoMeLinkButton from './SoMeLinkButton';
 
 
+// ToDo: use classname here.
 const LinkedInIconButton = () => (
     <SoMeLinkButton
         url="https://fi.linkedin.com/in/matiasranta"

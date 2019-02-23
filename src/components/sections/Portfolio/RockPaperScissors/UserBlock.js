@@ -54,4 +54,4 @@ UserBlock.propTypes = {
     userTool: PropTypes.oneOf([null, ...map(tools, 'value')])
 };
 
-export default withStyles(styles, { withTheme: true })(UserBlock);
+export default withStyles(styles)(UserBlock);

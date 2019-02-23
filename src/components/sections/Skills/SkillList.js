@@ -56,4 +56,4 @@ SkillList.propTypes = {
     title: PropTypes.string.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(SkillList);
+export default withStyles(styles)(SkillList);

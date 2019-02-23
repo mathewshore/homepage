@@ -65,4 +65,4 @@ Portfolio.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles, { withTheme: true })(Portfolio);
+export default withStyles(styles)(Portfolio);

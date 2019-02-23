@@ -46,8 +46,6 @@ const textPhrases = [
     'climbing enthusiast'
 ];
 
-const PHRASE_INTERVAL_TIME = 4000;
-
 class IntroText extends Component {
     state = {
         phraseIsChanging: false,
@@ -55,12 +53,12 @@ class IntroText extends Component {
     };
 
     componentDidMount = () => {
-        setTimeout(this.activePhraseIntervals, 500);
+        setTimeout(this.activatePhraseIntervals(4000), 500);
     };
     
-    activePhraseIntervals = () => {
-        setInterval(this.setPhraseTransition, PHRASE_INTERVAL_TIME)
-        setTimeout(() => setInterval(this.changePhrase, PHRASE_INTERVAL_TIME), 500);
+    activatePhraseIntervals = phraseInterval => {
+        setInterval(this.setPhraseTransition, phraseInterval)
+        setTimeout(() => setInterval(this.changePhrase, phraseInterval), 500);
     };
 
     setPhraseTransition = () => {
@@ -76,6 +74,15 @@ class IntroText extends Component {
         const currentIsLast = (this.state.phraseIndex + 1) === phraseCount;
         const phraseIndex = currentIsLast ? 0 : this.state.phraseIndex + 1;
         this.setState({ phraseIndex, phraseIsChanging: false });
+    };
+
+    // ToDo: Add onMouseEnter & on 
+    onPhraseMouseEnter = () => {
+        // ToDo: Disable phrase loop.
+    };
+
+    onPhraseMouseExit = () => {
+        // ToDo: Enable phrase loop again.
     };
 
     render() {
@@ -102,4 +109,4 @@ IntroText.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(IntroText);
+export default withStyles(styles)(IntroText);

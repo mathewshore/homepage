@@ -58,4 +58,4 @@ About.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles, { withTheme: true })(About);
+export default withStyles(styles)(About);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import get from 'lodash/get';
 import isNil from 'lodash/isNil';
 import reduce from 'lodash/reduce';
@@ -17,9 +18,9 @@ import FormField from './FormField';
 import { SECTIONS } from '../../constants';
 
 
-const styles = theme => ({
+const styles = ({ palette }) => ({
     contactSectionContainer: {
-        background: theme.palette.background.sections.contact
+        background: palette.background.sections.contact
     },
     submitButtonWrapper: {
         paddingTop: 20,
@@ -27,21 +28,13 @@ const styles = theme => ({
     },
     submitButton: {
         margin: 'auto',
-        color: theme.palette.text.light
+        color: palette.text.light
     },
-    // ToDo: move this styling to <FormField />
-    fieldLabelWrapper: {
-        display: 'flex',
-        alignItems: 'center'
-    },
-    labelRequiredText: {
-        fontSize: 14,
-        marginLeft: theme.spacing.unit
-    }
 });
 
 const requiredFields = ['name', 'email', 'message'];
 
+// ToDo: Move validation functions to helpers. 
 const validateRequiredFields = (requiredFields, values) => reduce(
     requiredFields, (errors, key) => ({
         ...errors,
@@ -54,8 +47,6 @@ const getFieldError = (key, value) => ({
 });
 
 const isRequired = key => includes(requiredFields, key);
-
-const getRequiredText = key => isRequired(key) && '(required)';
 
 const isValidEmail = email => email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
@@ -92,40 +83,31 @@ class Contact extends Component {
         return { email: undefined };
     };
 
-    getFormErrors() {
+    getFormErrors = () => {
         const errors = validateRequiredFields(requiredFields, this.state);
-        return { ...errors, ...this.validateEmail() };
-    }
+        const emailError = this.validateEmail();
+        return { ...errors, ...emailError };
+    };
+
+    sendMessage = () => {
+        // ToDo: finish contact form message sending logic.
+        console.log('Send form.')
+    };
 
     handleSubmit = e => {
-        // ToDo: finish contact form message sending logic.
         e.preventDefault();
         const errors = this.getFormErrors();
         this.setState({ errors });
         if (isEmpty(errors)) {
-            console.log('Send form.')
+            this.sendMessage();
         }
-    };
-
-    getLabel = key => {
-        const { classes } = this.props;
-        const requiredText = getRequiredText(key);
-        return (
-            <div className={classes.fieldLabelWrapper}>
-                {startCase(key)}
-                {requiredText && (
-                    <div className={classes.labelRequiredText}>
-                        {requiredText}
-                    </div>
-                )}
-            </div>
-        );
     };
 
     getFormFieldProps = key => ({
         id: key,
         name: key,
-        label: this.getLabel(key),
+        isRequired: isRequired(key),
+        label: startCase(key),
         value: get(this.state, key),
         onChange: this.onFieldChange(key),
         onBlur: this.onFieldBlur(key),
@@ -187,4 +169,4 @@ Contact.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles, { withTheme: true })(Contact);
+export default withStyles(styles)(Contact);

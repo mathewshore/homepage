@@ -114,4 +114,4 @@ class NavBar extends Component {
     }
 }
 
-export default withWidth()(withStyles(styles, { withTheme: true })(NavBar));
+export default withWidth()(withStyles(styles)(NavBar));

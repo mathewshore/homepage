@@ -58,4 +58,4 @@ Skills.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles, { withTheme: true })(Skills);
+export default withStyles(styles)(Skills);

@@ -26,4 +26,4 @@ SocialMediaButtons.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles, { withTheme: true })(SocialMediaButtons);
+export default withStyles(styles)(SocialMediaButtons);

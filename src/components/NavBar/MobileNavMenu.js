@@ -64,4 +64,4 @@ class MobileNavMenu extends Component {
     }
 }
 
-export default withStyles(styles, { withTheme: true })(MobileNavMenu);
+export default withStyles(styles)(MobileNavMenu);

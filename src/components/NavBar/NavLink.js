@@ -95,4 +95,4 @@ NavLink.propTypes = {
     ])
 };
 
-export default withStyles(styles, { withTheme: true })(NavLink);
+export default withStyles(styles)(NavLink);

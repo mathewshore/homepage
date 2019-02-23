@@ -48,4 +48,4 @@ NavLogo.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(NavLogo);
+export default withStyles(styles)(NavLogo);

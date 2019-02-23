@@ -11,8 +11,8 @@ const styles = theme => ({
 
 const Copyright = props => {
     const { classes } = props;
-    const date = new Date();
-    const currentYear = date.getFullYear();
+    const currentYear = new Date().getFullYear();
+
     return (
         <div className={classes.copyrightContainer}>
             {`© ${currentYear} Matias Ranta. All rights reserved.`}
@@ -24,4 +24,4 @@ Copyright.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(Copyright);
+export default withStyles(styles)(Copyright);

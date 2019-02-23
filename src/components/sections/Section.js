@@ -61,4 +61,4 @@ Section.propTypes = {
     ])
 };
 
-export default withStyles(styles, { withTheme: true })(Section);
+export default withStyles(styles)(Section);

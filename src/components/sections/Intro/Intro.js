@@ -72,4 +72,4 @@ Intro.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles, { withTheme: true })(Intro);
+export default withStyles(styles)(Intro);

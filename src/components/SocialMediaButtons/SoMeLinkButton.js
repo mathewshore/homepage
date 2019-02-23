@@ -38,4 +38,4 @@ SoMeLinkButton.propTypes = {
     svgIconStyle: PropTypes.object
 };
 
-export default withStyles(styles, { withTheme: true })(SoMeLinkButton);
+export default withStyles(styles)(SoMeLinkButton);
