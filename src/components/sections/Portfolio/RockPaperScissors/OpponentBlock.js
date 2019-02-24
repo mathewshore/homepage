@@ -38,7 +38,7 @@ const renderOpponentBlockContent = (animationToggled, opponentTool) => {
 
 const OpponentBlock = props => (
     <div className={props.classes.opponentBlock}>
-        <Typography variant='display1'>Opponent</Typography>
+        <Typography variant="display1">Opponent</Typography>
         {renderOpponentBlockContent(props.animationToggled, props.opponentTool)}
     </div>
 );

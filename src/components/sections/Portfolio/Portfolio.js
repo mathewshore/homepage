@@ -22,7 +22,7 @@ const styles = theme => ({
 
 class Portfolio extends Component {
     state = {
-        portfolioItemId: '',
+        portfolioItemId: 'rps',
     };
 
     togglePortfolioModal = portfolioItemId => () => {
@@ -30,11 +30,15 @@ class Portfolio extends Component {
     }
 
     render() {
+        // ToDo: Upgrade react version and use hook here.
         const { classes } = this.props;
         const portfolioItem = find(portfolioItems, { id: this.state.portfolioItemId });
 
         return (
-            <Section id={SECTIONS.PORTFOLIO} containerClassName={classes.portfolioSectionContainer}>
+            <Section
+                id={SECTIONS.PORTFOLIO}
+                containerClassName={classes.portfolioSectionContainer}
+            >
                 <Grid container spacing={24}>
                     {map(portfolioItems, ({ id, imgSrc, title, shortDescription }) => (
                         <Grid item md={6} xs={12} key={id}>

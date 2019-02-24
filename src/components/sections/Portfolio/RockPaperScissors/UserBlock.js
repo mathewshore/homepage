@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
+import isNil from 'lodash/isNil';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
@@ -24,24 +25,22 @@ const UserBlock = props => {
 
     const getButtonProps = tool => ({
         tool,
-        disabled: tool.value === userTool,
+        disabled: !isNil(userTool),
         onClick: props.onToolClick(tool.value),
-        children: tool.icon
+        children: tool.icon,
+        selected: userTool === tool.value
     });
 
     return (
         <div className={classes.userBlock}>
-            <Typography variant='display1'>You</Typography>
+            <Typography variant="display1">You</Typography>
             <div className={classes.toolWrapper}>
                 <div>
                     <ToolButton {...getButtonProps(rock)} />
                 </div>
                 <div>
                     <ToolButton {...getButtonProps(paper)} />
-                    <ToolButton
-                        {...getButtonProps(scissors)}
-                        buttonClass={classes.scissorsButton}
-                    />
+                    <ToolButton {...getButtonProps(scissors)} />
                 </div>
             </div>
         </div>

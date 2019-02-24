@@ -1,8 +1,11 @@
 import React from 'react';
+
 import random from 'lodash/random';
 import find from 'lodash/find';
-import Grid from '@material-ui/core/Grid';
+import get from 'lodash/get';
+import assign from 'lodash/assign';
 
+import Grid from '@material-ui/core/Grid';
 import Table from '../../../common/Table';
 import UserBlock from './UserBlock';
 import StatusBlock from './StatusBlock';
@@ -43,7 +46,7 @@ export default class RockPaperScissors extends React.Component {
         }
     }
 
-    getRandomTool = () => tools[random(0, 2)].value;
+    getRandomTool = () => get(tools[random(0, 2)], 'value');
 
     getResult(userTool, opponentTool) {
         if (userTool === opponentTool) {
@@ -60,11 +63,16 @@ export default class RockPaperScissors extends React.Component {
         return result === 'w' ? 'You are Victorious!' : 'You were Defeated.'
     }
 
-    getIncrementedStats(result) {
+    setResultText = result => {
+        this.setState({ resultText: this.getResultText(result) });
+    };
+
+    updateStats = result => {
         const { stats } = this.state;
-        stats[result]++;
-        return stats;
-    }
+        const newStat = get(stats, result) + 1;
+        const updatedStats = assign({}, stats, { [result]: newStat });
+        this.setState({ stats: updatedStats });
+    };
 
     onToolClick = userTool => () => {
         this.setState({ userTool, animationToggled: true });
@@ -72,12 +80,12 @@ export default class RockPaperScissors extends React.Component {
         this.gameStateTimeoutFunction = setTimeout(() => {
             const opponentTool = this.getRandomTool();
             const result = this.getResult(userTool, opponentTool);
-            const resultText = this.getResultText(result);
+            this.setResultText(result);
+            this.updateStats(result);
             this.setState({
-                stats: this.getIncrementedStats(result),
                 updatedStat: result,
                 opponentTool,
-                resultText,
+                resultText: this.getResultText(result),
                 animationToggled: false
             })
         }, 3000);
@@ -91,7 +99,7 @@ export default class RockPaperScissors extends React.Component {
         const { userTool, animationToggled } = this.state;
 
         return (
-            <Grid container style={{ overflow: 'auto' }}>
+            <Grid container>
                 <Grid item xs={12} md={8}>
                     <Grid container>
                         <Grid item xs={4}>

@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import SocialMediaButtons from '../SocialMediaButtons';
+import SocialMediaLinks from '../SocialMediaLinks';
 import Copyright from './Copyright';
 
 
 const styles = ({ spacing, palette }) => ({
-    footer: {
+    footerContainer: {
         position: 'relative',
         background: palette.background.footer,
         padding: `${spacing.unit * 10}px ${spacing.unit * 3}px ${spacing.unit * 12}px`,
@@ -25,9 +25,9 @@ const Footer = props => {
     const { classes } = props;
 
     return (
-        <div className={classes.footer}>
+        <div className={classes.footerContainer}>
             <div className={classes.footerContent}>
-                <SocialMediaButtons />
+                <SocialMediaLinks />
                 <Copyright />
             </div>
         </div>

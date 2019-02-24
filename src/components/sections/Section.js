@@ -9,28 +9,28 @@ import TextHeader from '../common/TextHeader';
 import Container from '../common/Container';
 
 
-const styles = theme => ({
+const styles = ({ spacing, palette, breakpoints }) => ({
     sectionWrapper: {
         position: 'relative',
-        padding: `0 0 ${theme.spacing.unit * 7}px`,
+        padding: `0 0 ${spacing.unit * 7}px`,
         '&#about': {
-            paddingTop: theme.spacing.unit * 7
+            paddingTop: spacing.unit * 7
         }
     },
     sectionPaper: {
-        background: theme.palette.background.sections.paper,
+        background: palette.background.sections.paper,
 
-        [theme.breakpoints.up('xs')]: {
-            padding: theme.spacing.unit * 4,
+        [breakpoints.up('xs')]: {
+            padding: spacing.unit * 4,
         },
-        [theme.breakpoints.up('sm')]: {
-            padding: theme.spacing.unit * 6,
+        [breakpoints.up('sm')]: {
+            padding: spacing.unit * 6,
         },
-        [theme.breakpoints.up('md')]: {
-            padding: theme.spacing.unit * 8,
+        [breakpoints.up('md')]: {
+            padding: spacing.unit * 8,
         },
-        [theme.breakpoints.up('lg')]: {
-            padding: theme.spacing.unit * 10,
+        [breakpoints.up('lg')]: {
+            padding: spacing.unit * 10,
         },
     }
 });
