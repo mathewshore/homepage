@@ -4,20 +4,18 @@ import map from 'lodash/map';
 import isNil from 'lodash/isNil';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import Typography from '@material-ui/core/Typography';
 
+import PlayerBlock from './PlayerBlock';
 import ToolButton from './ToolButton';
 import tools from './tools';
 
 
-const styles = theme => ({
-    userBlock: {
-        textAlign: 'center'
-    },
-    toolWrapper: {
-        padding: theme.spacing.unit * 1.5,
-    },
-});
+const styles = {
+    bottomTools: {
+        display: 'flex',
+        justifyContent: 'center'
+    }
+};
 
 const UserBlock = props => {
     const { classes, userTool } = props;
@@ -32,18 +30,13 @@ const UserBlock = props => {
     });
 
     return (
-        <div className={classes.userBlock}>
-            <Typography variant="display1">You</Typography>
-            <div className={classes.toolWrapper}>
-                <div>
-                    <ToolButton {...getButtonProps(rock)} />
-                </div>
-                <div>
-                    <ToolButton {...getButtonProps(paper)} />
-                    <ToolButton {...getButtonProps(scissors)} />
-                </div>
+        <PlayerBlock title="You">
+            <ToolButton {...getButtonProps(rock)} />
+            <div className={classes.bottomTools}>
+                <ToolButton {...getButtonProps(paper)} tooltipPlacement="left" />
+                <ToolButton {...getButtonProps(scissors)} />
             </div>
-        </div>
+        </PlayerBlock>
     );
 };
 

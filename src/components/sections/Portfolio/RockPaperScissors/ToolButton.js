@@ -10,7 +10,7 @@ import grey from '@material-ui/core/colors/grey';
 
 const styles = theme => ({
     buttonRoot: {
-        margin: theme.spacing.unit * 0.5,
+        margin: `${theme.spacing.unit * 0.5}px ${theme.spacing.unit}px`,
         background: '#fff',
         '&.selected': {
             border: `2px solid ${grey[400]}`,
@@ -25,22 +25,29 @@ const ToolButton = props => {
     const selectedClass = props.selected ? ' selected' : '';
 
     return (
-        <Tooltip title={tool.value}>
-            <Button
-                {...pick(props, [
-                    'disabled',
-                    'onClick',
-                    'children'
-                ])}
-                variant="fab"
-                classes={{ root: `${classes.buttonRoot} ${scissorsClass}${selectedClass}` }}
-            />
+        <Tooltip title={tool.value} placement={props.tooltipPlacement}>
+            <span>
+                <Button
+                    {...pick(props, [
+                        'disabled',
+                        'onClick',
+                        'children'
+                    ])}
+                    variant="fab"
+                    classes={{ root: `${classes.buttonRoot} ${scissorsClass}${selectedClass}` }}
+                />
+            </span>
         </Tooltip>
     );
 };
 
+ToolButton.defaultProps = {
+    tooltipPlacement: 'right'
+};
+
 ToolButton.propTypes = {
     classes: PropTypes.object.isRequired,
+    tooltipPlacement: PropTypes.string,
     disabled: PropTypes.bool,
     tool: PropTypes.object,
     onClick: PropTypes.func,

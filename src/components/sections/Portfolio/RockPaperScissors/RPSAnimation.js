@@ -12,16 +12,16 @@ export default class RPSAnimation extends React.Component {
         count: 0
     };
 
-    toolIntervalFunction = setInterval(() => this.setToolIndex(), (1000 / TOOLS_PER_SECOND));
+    toolInterval = setInterval(() => this.setToolIndex(), (1000 / TOOLS_PER_SECOND));
 
     componentWillUnmount() {
-        clearInterval(this.toolIntervalFunction);
+        clearInterval(this.toolInterval);
     }
 
     setToolIndex() {
         const count = this.state.count + 1;
         if (count >= ((TOOLS_PER_SECOND * tools.length) - 1)) {
-            clearInterval(this.toolIntervalFunction);
+            clearInterval(this.toolInterval);
         }
 
         const incrementedIndex = this.state.toolIndex + 1;

@@ -16,17 +16,17 @@ import SkillList from './SkillList';
 const styles = theme => ({
     sectionContainer: {
         background: theme.palette.background.sections.skills,
-    },
-    card: {
-        maxWidth: 345,
-    },
+    }
 });
 
 const Skills = props => {
     const { classes } = props;
 
     return (
-        <Section id={SECTIONS.SKILLS} containerClassName={classes.sectionContainer}>
+        <Section
+            id={SECTIONS.SKILLS}
+            containerClassName={classes.sectionContainer}
+        >
             <Grid container spacing={24}>
                 <Grid item md={6} xs={12}>
                     <SkillList
