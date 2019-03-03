@@ -16,16 +16,17 @@ const styles = theme => ({
             border: `2px solid ${grey[400]}`,
             background: '#fff'
         }
-    }
+    },
 });
 
 const ToolButton = props => {
     const { classes, tool } = props;
-    const scissorsClass = tool.value === 'scissors' ? classes.scissorsButtonRoot : '';
-    const selectedClass = props.selected ? ' selected' : '';
 
     return (
-        <Tooltip title={tool.value} placement={props.tooltipPlacement}>
+        <Tooltip
+            title={tool.value}
+            placement={props.tooltipPlacement}
+        >
             <span>
                 <Button
                     {...pick(props, [
@@ -34,7 +35,7 @@ const ToolButton = props => {
                         'children'
                     ])}
                     variant="fab"
-                    classes={{ root: `${classes.buttonRoot} ${scissorsClass}${selectedClass}` }}
+                    classes={{ root: `${classes.buttonRoot}${props.selected ? ' selected' : ''}` }}
                 />
             </span>
         </Tooltip>

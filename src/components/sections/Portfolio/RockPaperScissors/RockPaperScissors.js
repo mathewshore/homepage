@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import random from 'lodash/random';
 import find from 'lodash/find';
@@ -26,7 +26,7 @@ const nullifiedGameState = {
     resultText: null
 };
 
-export default class RockPaperScissors extends React.Component {
+export default class RockPaperScissors extends Component {
     state = {
         ...nullifiedGameState,
         animationToggled: false,
@@ -99,35 +99,34 @@ export default class RockPaperScissors extends React.Component {
         const { userTool, animationToggled } = this.state;
 
         return (
-            <Grid container>
-                <Grid item xs={12} md={8}>
-                    <Grid container>
-                        <Grid item xs={4}>
-                            <UserBlock
-                                userTool={userTool}
-                                onToolClick={this.onToolClick}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <StatusBlock
-                                userTool={userTool}
-                                animationToggled={animationToggled}
-                                resultText={this.state.resultText}
-                                onPlayAgainClick={this.nullifySelections}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <OpponentBlock
-                                opponentTool={this.state.opponentTool}
-                                animationToggled={animationToggled}
-                            />
-                        </Grid>
+            <div>
+                <Table
+                    dataMapping={dataMapping}
+                    data={[this.state.stats]}
+                />
+                <Grid container>
+                    <Grid item xs={4}>
+                        <UserBlock
+                            userTool={userTool}
+                            onToolClick={this.onToolClick}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <StatusBlock
+                            userTool={userTool}
+                            animationToggled={animationToggled}
+                            resultText={this.state.resultText}
+                            onPlayAgainClick={this.nullifySelections}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <OpponentBlock
+                            opponentTool={this.state.opponentTool}
+                            animationToggled={animationToggled}
+                        />
                     </Grid>
                 </Grid>
-                <Grid item xs={12} md={4}>
-                    <Table dataMapping={dataMapping} data={[this.state.stats]} />
-                </Grid>
-            </Grid>
+            </div>
         );
     }
 }
