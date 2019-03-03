@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import random from 'lodash/random';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import assign from 'lodash/assign';
 
+import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 import Table from '../../../common/Table';
 import UserBlock from './UserBlock';
@@ -13,10 +15,31 @@ import OpponentBlock from './OpponentBlock';
 import tools from './tools';
 
 
+const styles = theme => ({
+    rpsGameContainer: {
+        marginTop: theme.spacing.unit * 5
+    }
+});
+
+const RESULT_TYPES = {
+    WIN: 'w',
+    LOOSE: 'l',
+    DRAW: 'd'
+};
+
 const dataMapping = [
-    { dataKey: 'w', label: 'Victories' },
-    { dataKey: 'd', label: 'Draws' },
-    { dataKey: 'l', label: 'Defeats' }
+    {
+        dataKey: RESULT_TYPES.WIN,
+        label: 'Victories'
+    },
+    {
+        dataKey: RESULT_TYPES.DRAW,
+        label: 'Draws'
+    },
+    {
+        dataKey: RESULT_TYPES.LOOSE,
+        label: 'Defeats'
+    }
 ];
 
 const nullifiedGameState = {
@@ -26,14 +49,14 @@ const nullifiedGameState = {
     resultText: null
 };
 
-export default class RockPaperScissors extends Component {
+class RockPaperScissors extends Component {
     state = {
         ...nullifiedGameState,
         animationToggled: false,
         stats: {
-            w: 0,
-            d: 0,
-            l: 0
+            [RESULT_TYPES.WIN]: 0,
+            [RESULT_TYPES.LOOSE]: 0,
+            [RESULT_TYPES.DRAW]: 0
         }
     };
 
@@ -50,28 +73,23 @@ export default class RockPaperScissors extends Component {
 
     getResult(userTool, opponentTool) {
         if (userTool === opponentTool) {
-            return 'd';
+            return RESULT_TYPES.DRAW;
         }
         const tool = find(tools, { value: userTool });
-        return (tool.beats === opponentTool) ? 'w' : 'l';
+        return (tool.beats === opponentTool) ? RESULT_TYPES.WIN : RESULT_TYPES.LOOSE;
     }
 
     getResultText(result) {
-        if (result === 'd') {
+        if (result === RESULT_TYPES.DRAW) {
             return 'It is a Draw.';
         }
-        return result === 'w' ? 'You are Victorious!' : 'You were Defeated.'
+        return result === RESULT_TYPES.WIN ? 'You are Victorious!' : 'You were Defeated.';
     }
 
-    setResultText = result => {
-        this.setState({ resultText: this.getResultText(result) });
-    };
-
-    updateStats = result => {
+    getUpdateStats = result => {
         const { stats } = this.state;
         const newStat = get(stats, result) + 1;
-        const updatedStats = assign({}, stats, { [result]: newStat });
-        this.setState({ stats: updatedStats });
+        return assign({}, stats, { [result]: newStat });
     };
 
     onToolClick = userTool => () => {
@@ -80,10 +98,10 @@ export default class RockPaperScissors extends Component {
         this.gameStateTimeoutFunction = setTimeout(() => {
             const opponentTool = this.getRandomTool();
             const result = this.getResult(userTool, opponentTool);
-            this.setResultText(result);
-            this.updateStats(result);
+
             this.setState({
                 updatedStat: result,
+                stats: this.getUpdateStats(result),
                 opponentTool,
                 resultText: this.getResultText(result),
                 animationToggled: false
@@ -96,6 +114,7 @@ export default class RockPaperScissors extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         const { userTool, animationToggled } = this.state;
 
         return (
@@ -104,7 +123,7 @@ export default class RockPaperScissors extends Component {
                     dataMapping={dataMapping}
                     data={[this.state.stats]}
                 />
-                <Grid container>
+                <Grid container className={classes.rpsGameContainer}>
                     <Grid item xs={4}>
                         <UserBlock
                             userTool={userTool}
@@ -130,3 +149,9 @@ export default class RockPaperScissors extends Component {
         );
     }
 }
+
+RockPaperScissors.propTypes = {
+    classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(RockPaperScissors);

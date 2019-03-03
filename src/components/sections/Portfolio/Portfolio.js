@@ -22,7 +22,7 @@ const styles = theme => ({
 
 class Portfolio extends Component {
     state = {
-        portfolioItemId: '',
+        portfolioItemId: 'rps',
     };
 
     togglePortfolioModal = portfolioItemId => () => {

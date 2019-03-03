@@ -5,13 +5,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = ({ spacing, breakpoints }) => ({
     modalContent: {
-        margin: `${spacing.unit * 16}px 0 ${spacing.unit * 3}px`,
+        margin: `${spacing.unit * 16}px 0 ${spacing.unit * 6}px`,
 
         [breakpoints.down('md')]: {
-            margin: `${spacing.unit * 15.5}px 0 ${spacing.unit * 3}px`,
+            margin: `${spacing.unit * 15.5}px 0 ${spacing.unit * 6}px`,
         },
         [breakpoints.down('sm')]: {
-            margin: `${spacing.unit * 14.5}px 0 ${spacing.unit * 3}px`,
+            margin: `${spacing.unit * 14.5}px 0 ${spacing.unit * 6}px`,
         },
     }
 });
