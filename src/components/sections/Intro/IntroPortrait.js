@@ -5,14 +5,14 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const IMAGE_ROTATION_COUNT = 4;
 
-const styles = theme => ({
+const styles = ({ breakpoints, spacing }) => ({
     portraitContainer: {
-        [theme.breakpoints.up('md')]: {
+        [breakpoints.up('md')]: {
             marginLeft: 'auto'
         },
     },
     introImage: {
-        borderRadius: 500,
+        borderRadius: '50%',
         transition: 'all 3s ease',
         width: 0,
         transform: 'rotate(0deg)',
@@ -21,23 +21,25 @@ const styles = theme => ({
             transform: `rotate(${360 * IMAGE_ROTATION_COUNT}deg)`,
         },
 
-        [theme.breakpoints.up('xs')]: {
-            maxWidth: 240,
+        [breakpoints.up('xs')]: {
+            maxWidth: spacing.unit * 30, // 240px
         },
-        [theme.breakpoints.up('sm')]: {
-            maxWidth: 280,
+        [breakpoints.up('sm')]: {
+            maxWidth: spacing.unit * 35, // 280px
         },
-        [theme.breakpoints.up('md')]: {
-            maxWidth: 320,
+        [breakpoints.up('md')]: {
+            maxWidth: spacing.unit * 40 // 320px
         },
-        [theme.breakpoints.up('lg')]: {
-            maxWidth: 360,
+        [breakpoints.up('lg')]: {
+            maxWidth: spacing.unit * 45 // 360px
         },
     }
 });
 
 class IntroPortrait extends Component {
-    state = { portraitShown: false };
+    state = {
+        portraitShown: false
+    };
 
     componentDidMount = () => {
         setTimeout(() => this.setState({ portraitShown: true }), 0);

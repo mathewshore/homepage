@@ -15,9 +15,9 @@ import OpponentBlock from './OpponentBlock';
 import tools from './tools';
 
 
-const styles = theme => ({
+const styles = ({ spacing }) => ({
     rpsGameContainer: {
-        marginTop: theme.spacing.unit * 5
+        marginTop: spacing.unit * 5
     }
 });
 

@@ -6,8 +6,11 @@ import TicTacToe from './TicTacToe';
 
 // ToDo: Add proper portfolio item images.
 import testImg from '../../../bg_intro.jpg';
+import rpsImage from './portfolio_images/rps_portfolio.png';
+import fledgeImage from './portfolio_images/fledge_launchscreen_portfolio.png';
 
 
+// ToDo: Add descriptive tags to portfolio items.
 const portfolioItems = [
     {
         id: 'stream_portal',
@@ -28,7 +31,7 @@ const portfolioItems = [
     {
         id: 'fledge',
         title: 'Fledge the Hedgehog',
-        imgSrc: testImg,
+        imgSrc: fledgeImage,
         shortDescription: 'Mobile game for Apple phones',
         longDescription: 'Add modal description here',
         Component: () => <div>Add component here</div>,
@@ -36,7 +39,7 @@ const portfolioItems = [
     {
         id: 'rps',
         title: 'Rock Paper Scissors',
-        imgSrc: testImg,
+        imgSrc: rpsImage,
         shortDescription: 'A small project for testing out React and learning simplistic designing',
         longDescription: 'Add modal description here',
         Component: RockPaperScissors,

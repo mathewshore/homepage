@@ -22,7 +22,7 @@ const styles = theme => ({
 
 class Portfolio extends Component {
     state = {
-        portfolioItemId: 'rps',
+        portfolioItemId: 'ttt',
     };
 
     togglePortfolioModal = portfolioItemId => () => {
@@ -31,6 +31,7 @@ class Portfolio extends Component {
 
     render() {
         // ToDo: Upgrade react version and use hook here.
+        // ToDo: Add tags to portfolio items.
         const { classes } = this.props;
         const portfolioItem = find(portfolioItems, { id: this.state.portfolioItemId });
 

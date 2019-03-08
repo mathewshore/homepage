@@ -8,25 +8,41 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 
-const styles = theme => ({
+const styles = ({ spacing }) => ({
     statusBlockContainer: {
         textAlign: 'center'
     },
     versusTextRoot: {
-        marginTop: theme.spacing.unit * 3
+        marginTop: spacing.unit * 4
+    },
+    statusTypographyRoot: {
+        margin: `${spacing.unit * 2}px 0`
     }
 });
 
-const renderStatusText = (animationToggled, resultText) => {
-    if (animationToggled || !resultText) {
-        return <p>{animationToggled ? 'Opponent is choosing' : 'Choose your tool'}</p>;
+const renderStatusText = (animationToggled, resultText, classes) => {
+    const typographyProps = {
+        classes: {
+            root: classes.statusTypographyRoot
+        }
+    };
+
+    if (!resultText) {
+        return (
+            <Typography {...typographyProps}>
+                {animationToggled ? 'Opponent is choosing' : 'Choose your tool'}
+            </Typography>
+        );
     }
+
     const textStrings = resultText.split(' ');
     const result = textStrings.splice((size(textStrings) - 1), 1);
     return (
-        <p>{join(textStrings, ' ')} <b>{result}</b></p>
+        <Typography {...typographyProps}>
+            {join(textStrings, ' ')} <b>{result}</b>
+        </Typography>
     );
-}
+};
 
 const StatusBlock = props => {
     const { classes } = props;
@@ -39,7 +55,7 @@ const StatusBlock = props => {
             >
                 VS
             </Typography>
-            {renderStatusText(props.animationToggled, props.resultText)}
+            {renderStatusText(props.animationToggled, props.resultText, classes)}
             {props.resultText && (
                 <div>
                     <Button

@@ -8,9 +8,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import grey from '@material-ui/core/colors/grey';
 
 
-const styles = theme => ({
+const styles = ({ spacing }) => ({
     buttonRoot: {
-        margin: `${theme.spacing.unit * 0.5}px ${theme.spacing.unit}px`,
+        margin: `${spacing.unit * 0.5}px ${spacing.unit}px`,
         background: '#fff',
         '&.selected': {
             border: `2px solid ${grey[400]}`,

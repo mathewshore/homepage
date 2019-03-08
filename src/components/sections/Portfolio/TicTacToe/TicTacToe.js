@@ -1,89 +1,52 @@
 import React, { Component } from 'react';
+
 import times from 'lodash/times';
 import get from 'lodash/get';
 import assign from 'lodash/assign';
-import includes from 'lodash/includes';
+import pick from 'lodash/pick';
+import reduce from 'lodash/reduce';
+import concat from 'lodash/concat';
 
-import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-
-import XIcon from '@material-ui/icons/Close';
-import OIcon from '@material-ui/icons/PanoramaFishEye';
-import blue from '@material-ui/core/colors/blue';
-import red from '@material-ui/core/colors/red';
-import green from '@material-ui/core/colors/green';
-import grey from '@material-ui/core/colors/grey';
 
 import Table from '../../../common/Table';
+import GameBoard from './GameBoard';
+import PlayerIcon from './PlayerIcon';
+import StatusText from './StatusText';
 
 
-const styles = theme => ({
-    gridWrapper: {
-        margin: 'auto',
-    },
-    boardTable: {
-        margin: 'auto',
-        boxShadow: `${grey[300]} 1px 2px 3px`,
-    },
-    boardTableCell: {
-        width: 75,
-        height: 75,
-        textAlign: 'center',
-        border: `1px solid ${grey[500]}`,
-        cursor: 'pointer',
-        boxShadow: 'none',
-        transition: 'all 0.3s',
-        '&:hover': {
-            boxShadow: `${grey[800]} 1px 1px 5px 1px`,
-        },
-        '&.disabled': {
-            cursor: 'initial',
-            boxShadow: 'none',
-        },
-        '&.win-cell': {
-            backgroundColor: green[100],
-        },
-    },
-    resetButton: {
-        display: 'block',
-        margin: 'auto',
-    },
-    xIcon: {
-        color: red[500],
-    },
-    oIcon: {
-        color: blue[500],
-    },
-});
+const GAME_BOARD_CELL_COUNT = 9;
+const ROW_CELL_COUNT = GAME_BOARD_CELL_COUNT / 3;
+const POSSIBLE_WIN_ROUND_NUMBER = (ROW_CELL_COUNT * 2) - 1;
 
 const dataMapping = [
     { dataKey: 'player', label: 'Player' },
     { dataKey: 'wins', label: 'Wins' }
 ];
 
+const getGridKeys = rowCellCount =>
+    concat(...times(rowCellCount, (i) =>
+        times(rowCellCount, (j) => `${i}_${j}`)
+));
+
+const getEmptyGrid = () =>
+    reduce(getGridKeys(ROW_CELL_COUNT), (grid, key) => (
+        assign({}, grid, { [key]: null })
+    ), {});
+
 class TicTacToe extends Component {
     state = {
         x: { wins: 0 },
         o: { wins: 0 },
-        grid: this.getEmptyGrid(),
+        grid: getEmptyGrid(),
         turnCount: 1,
         gameIsRunning: true,
         winner: null,
         winCells: null,
     };
 
-    getEmptyGrid() {
-        const grid = {};
-        times(3, (i) => {
-            times(3, (j) => {
-                grid[`${i}_${j}`] = null;
-            });
-        });
-        return grid;
-    }
-
     getWinner(grid) {
+        // ToDo: Horrible logic, improve it ;<
         if ( // Check if grid has a cross win.
             ((grid['0_0'] === grid['1_1'] && grid['1_1'] === grid['2_2']) ||
             (grid['0_2'] === grid['1_1'] && grid['1_1'] === grid['2_0']))
@@ -99,7 +62,7 @@ class TicTacToe extends Component {
 
         let winner = null;
         let winCells = null;
-        times(3, (i) => {
+        times(ROW_CELL_COUNT, (i) => {
             if (!winner) {
                 if ( // Check if grid row has same cell values.
                     (grid[`${i}_0`] === grid[`${i}_1`]) &&
@@ -123,7 +86,7 @@ class TicTacToe extends Component {
 
     checkForWin(grid) {
         const { winner, winCells } = this.getWinner(grid);
-        const isLastTurn = (this.state.turnCount === 9);
+        const isLastTurn = (this.state.turnCount === GAME_BOARD_CELL_COUNT);
 
         if (winner || isLastTurn) {
             if (isLastTurn && !winner) {
@@ -147,111 +110,65 @@ class TicTacToe extends Component {
         this.setState({ turnCount: this.state.turnCount + 1 });
     }
 
-    onCellClick(cellKey) {
-        const { grid, turnCount } = this.state;
-        const playerKey = (turnCount % 2 === 0) ? 'o' : 'x';
-        grid[cellKey] = playerKey;
-        this.setState({ grid });
+    getUpdatedGrid = (cellKey, iconType) =>
+        assign({}, this.state.grid, { [cellKey]: iconType });
 
-        if (turnCount >= 5) {
-            this.checkForWin(grid);
-        } else {
-            this.incrementTurnCount();
-        }
-    }
+    onCellClick = (cellKey) => () => {
+        // Wait for the click animation to finish before the cell is disabled.
+        setTimeout(() => {
+            // Prevent additional clicks from being registered.
+            if (this.state.grid[cellKey]) {
+                return;
+            }
+            const { turnCount } = this.state;
+            const iconType = (turnCount % 2 === 0) ? 'o' : 'x';
+            const grid = this.getUpdatedGrid(cellKey, iconType);
+            this.setState({ grid });
 
-    renderTTTGrid() {
-        const { classes } = this.props;
-        const { winCells, grid, gameIsRunning } = this.state;
-        // ToDo: Refactor this to divs
-        return (
-            <div className={classes.gridWrapper}>
-                <table className={classes.boardTable}>
-                    <tbody>
-                        {times(3, (i) => (
-                            <tr key={i}>
-                                {times(3, (j) => {
-                                    const cellKey = `${i}_${j}`;
-                                    const playerKey = get(grid, cellKey);
-
-                                    const isWinCell = includes(winCells, cellKey);
-                                    const isDisabled = playerKey || !gameIsRunning;
-                                    const cellClassName = `${isWinCell ? ' win-cell' : ''} ${isDisabled ? ' disabled' : ''}`;
-
-                                    return (
-                                        <td
-                                            key={cellKey}
-                                            className={classes.boardTableCell + cellClassName}
-                                            onClick={() => (!playerKey && gameIsRunning) && this.onCellClick(cellKey)}
-                                        >
-                                            {playerKey && this.getPlayerIcon(playerKey)}
-                                        </td>
-                                    );
-                                })}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <Button
-                    classes={{ root: classes.resetButton }}
-                    color="primary"
-                    onClick={this.resetGame}
-                >
-                    Reset board
-                </Button>
-            </div>
-        );
-    }
+            if (turnCount >= (POSSIBLE_WIN_ROUND_NUMBER)) {
+                this.checkForWin(grid);
+            } else {
+                this.incrementTurnCount();
+            }
+        }, 200);
+    };
 
     resetGame = () => {
         this.setState({
-            grid: this.getEmptyGrid(),
+            grid: getEmptyGrid(),
             turnCount: 1,
             gameIsRunning: true,
             winner: null,
-            winCells: null,
+            winCells: null
         });
-    }
+    };
 
-    getPlayerIcon(playerKey) {
-        const { classes } = this.props;
-        const Icon = playerKey === 'x' ? XIcon : OIcon;
-        const iconClassName = playerKey === 'x' ? classes.xIcon : classes.oIcon;
-        return <Icon classes={{ root: iconClassName }} />;
-    }
+    getPlayerIcon = iconType => <PlayerIcon iconType={iconType} />;
 
-    getStatusText() {
+    getStatusText = () => {
         if (this.state.winner) {
             return 'won!';
         } else if (this.state.gameIsRunning) {
             return 'turn';
         }
         return 'Draw!';
-    }
-
-    renderGameStatusText() {
-        const { winner, turnCount, gameIsRunning } = this.state;
-        const playerKey = winner || ((turnCount % 2 === 0) ? 'o' : 'x');
-        
-        return (
-            <div style={{ textAlign: 'center' }}>
-                {(gameIsRunning || winner) && this.getPlayerIcon(playerKey)}
-                {this.getStatusText()}
-            </div>
-        );
-    }
+    };
 
     render() {
         const data = [
             {
-                player: this.getPlayerIcon('x'),
+                player: <PlayerIcon iconType="x" />,
                 wins: this.state.x.wins
             },
             {
-                player: this.getPlayerIcon('o'),
+                player: <PlayerIcon iconType="o" />,
                 wins: this.state.o.wins
             }
         ];
+
+        const { winner } = this.state;
+        const iconType = winner || ((this.state.turnCount % 2 === 0) ? 'o' : 'x');
+        const withIcon = this.state.gameIsRunning || winner;
 
         return (
             <Grid container>
@@ -259,12 +176,23 @@ class TicTacToe extends Component {
                     <Table dataMapping={dataMapping} data={data} />
                 </Grid>
                 <Grid item md={8} xs={12}>
-                    {this.renderGameStatusText()}
-                    {this.renderTTTGrid()}
+                    <StatusText>
+                        {withIcon && <PlayerIcon iconType={iconType} />}
+                        {this.getStatusText()}
+                    </StatusText>
+                    <GameBoard
+                        {...pick(this.state, [
+                            'winCells',
+                            'grid',
+                            'gameIsRunning'
+                        ])}
+                        onCellClick={this.onCellClick}
+                        resetGame={this.resetGame}
+                    />
                 </Grid>
             </Grid>
         );
     }
 }
 
-export default withStyles(styles, { withTheme: true })(TicTacToe);
+export default TicTacToe;
