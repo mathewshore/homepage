@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import withStyles from '@material-ui/core/styles/withStyles';
 import blue from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/red';
@@ -18,10 +20,22 @@ const styles = {
 };
 
 const PlayerIcon = props => {
-    const { classes, iconType } = props;
+    const { classes, iconType, style } = props;
     const Icon = iconType === 'x' ? XIcon : OIcon;
     const iconClassName = iconType === 'x' ? classes.xIcon : classes.oIcon;
-    return <Icon classes={{ root: iconClassName }} />;
+    return <Icon classes={{ root: iconClassName }} style={style} />;
+};
+
+PlayerIcon.defaultProps = {
+    style: {
+        fontSize: 24
+    }
+};
+
+PlayerIcon.propTypes = {
+    classes: PropTypes.object.isRequired,
+    iconType: PropTypes.string.isRequired,
+    style: PropTypes.object
 };
 
 export default withStyles(styles)(PlayerIcon);

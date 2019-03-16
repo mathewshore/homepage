@@ -3,19 +3,25 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 
-const styles = {
+
+const styles = ({ spacing }) => ({
     textContainerRoot: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        fontSize: 20,
+        marginBottom: spacing.unit
     }
-};
+});
 
 const StatusText = props => {
     const { classes } = props;
     
     return (
-        <Typography classes={{ root: classes.textContainerRoot }}>
+        <Typography
+            variant="body2"
+            classes={{ root: classes.textContainerRoot }}
+        >
             {props.children}
         </Typography>
     );

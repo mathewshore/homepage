@@ -7,6 +7,7 @@ import TicTacToe from './TicTacToe';
 // ToDo: Add proper portfolio item images.
 import testImg from '../../../bg_intro.jpg';
 import rpsImage from './portfolio_images/rps_portfolio.png';
+import tttImage from './portfolio_images/tictactoe_portfolio.png';
 import fledgeImage from './portfolio_images/fledge_launchscreen_portfolio.png';
 
 
@@ -47,7 +48,7 @@ const portfolioItems = [
     {
         id: 'ttt',
         title: 'Tic Tac Toe',
-        imgSrc: testImg,
+        imgSrc: tttImage,
         shortDescription: 'A project for improving programming logic',
         longDescription: 'A practise project for improving logical approach of stuff',
         Component: TicTacToe,

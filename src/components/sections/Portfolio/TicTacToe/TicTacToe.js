@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import times from 'lodash/times';
 import get from 'lodash/get';
@@ -7,7 +8,7 @@ import pick from 'lodash/pick';
 import reduce from 'lodash/reduce';
 import concat from 'lodash/concat';
 
-import Grid from '@material-ui/core/Grid';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import Table from '../../../common/Table';
 import GameBoard from './GameBoard';
@@ -15,8 +16,33 @@ import PlayerIcon from './PlayerIcon';
 import StatusText from './StatusText';
 
 
+const styles = ({ breakpoints, spacing }) => ({
+    tttContainer: {
+        [breakpoints.up('md')]: {
+            display: 'flex',
+            justifyContent: 'center',
+        },
+    },
+    statTableContainer: {
+        width: spacing.unit * 50,
+        [breakpoints.up('md')]: {
+            marginRight: spacing.unit * 5,
+            
+        },
+        [breakpoints.down('sm')]: {
+            margin: 'auto'
+        }
+    },
+    gameContainer: {
+        marginTop: 24
+    }
+});
+
+// Keep these constants in here incase
+// these are moved to state for dynamic grid.
 const GAME_BOARD_CELL_COUNT = 9;
-const ROW_CELL_COUNT = GAME_BOARD_CELL_COUNT / 3;
+const ROW_COUNT = 3;
+const ROW_CELL_COUNT = GAME_BOARD_CELL_COUNT / ROW_COUNT;
 const POSSIBLE_WIN_ROUND_NUMBER = (ROW_CELL_COUNT * 2) - 1;
 
 const dataMapping = [
@@ -143,8 +169,6 @@ class TicTacToe extends Component {
         });
     };
 
-    getPlayerIcon = iconType => <PlayerIcon iconType={iconType} />;
-
     getStatusText = () => {
         if (this.state.winner) {
             return 'won!';
@@ -154,30 +178,42 @@ class TicTacToe extends Component {
         return 'Draw!';
     };
 
-    render() {
-        const data = [
-            {
-                player: <PlayerIcon iconType="x" />,
-                wins: this.state.x.wins
-            },
-            {
-                player: <PlayerIcon iconType="o" />,
-                wins: this.state.o.wins
-            }
-        ];
+    getPlayerData = playerKey => ({
+        player: <PlayerIcon iconType={playerKey} />,
+        wins: get(this.state, `${playerKey}.wins`)
+    });
 
+    getStatTableData = () => [
+        this.getPlayerData('x'),
+        this.getPlayerData('o')
+    ];
+    
+    render() {
+        // ToDo: Store game data to localStorage.
+        const { classes, theme } = this.props;
         const { winner } = this.state;
         const iconType = winner || ((this.state.turnCount % 2 === 0) ? 'o' : 'x');
         const withIcon = this.state.gameIsRunning || winner;
 
         return (
-            <Grid container>
-                <Grid item md={4} xs={12}>
-                    <Table dataMapping={dataMapping} data={data} />
-                </Grid>
-                <Grid item md={8} xs={12}>
+            <div className={classes.tttContainer}>
+                <div className={classes.statTableContainer}>
+                    <Table
+                        dataMapping={dataMapping}
+                        data={this.getStatTableData()}
+                    />
+                </div>
+                <div className={classes.gameContainer}>
                     <StatusText>
-                        {withIcon && <PlayerIcon iconType={iconType} />}
+                        {withIcon && (
+                            <PlayerIcon
+                                iconType={iconType}
+                                style={{
+                                    fontSize: 36,
+                                    marginLeft: theme.spacing.unit * -0.5
+                                }}
+                            />
+                        )}
                         {this.getStatusText()}
                     </StatusText>
                     <GameBoard
@@ -186,13 +222,20 @@ class TicTacToe extends Component {
                             'grid',
                             'gameIsRunning'
                         ])}
+                        rowCount={ROW_COUNT}
+                        rowCellCount={ROW_CELL_COUNT}
                         onCellClick={this.onCellClick}
                         resetGame={this.resetGame}
                     />
-                </Grid>
-            </Grid>
+                </div>
+            </div>
         );
     }
 }
 
-export default TicTacToe;
+TicTacToe.propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired
+};
+
+export default withStyles(styles, { withTheme: true })(TicTacToe);

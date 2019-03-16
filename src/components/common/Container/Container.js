@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
-const styles = theme => ({
+const styles = ({ breakpoints, spacing }) => ({
     container: {
         paddingLeft: 0,
         paddingRight: 0,        
@@ -11,17 +11,17 @@ const styles = theme => ({
         marginRight: 'auto',
         width: '100%',
 
-        [theme.breakpoints.up('xs')]: {
-            maxWidth: theme.spacing.unit * 67.5 // 540px,
+        [breakpoints.up('xs')]: {
+            maxWidth: spacing.unit * 67.5 // 540px,
         },
-        [theme.breakpoints.up('sm')]: {
-            maxWidth: theme.spacing.unit * 90, // 720px,
+        [breakpoints.up('sm')]: {
+            maxWidth: spacing.unit * 90, // 720px,
         },
-        [theme.breakpoints.up('md')]: {
-            maxWidth: theme.spacing.unit * 120, // 960px,
+        [breakpoints.up('md')]: {
+            maxWidth: spacing.unit * 120, // 960px,
         },
-        [theme.breakpoints.up('lg')]: {
-            maxWidth: theme.spacing.unit * 142.5 // 1140px,
+        [breakpoints.up('lg')]: {
+            maxWidth: spacing.unit * 142.5 // 1140px,
         },
     },
 });
