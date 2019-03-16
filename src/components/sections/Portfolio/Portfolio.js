@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Section from '../Section';
 import Modal from '../../common/Modal';
-import PortfolioCard from './PortfolioCard';
+import PortfolioItem from './PortfolioItem';
 import portfolioItems from './portfolioItems';
 
 import { SECTIONS } from '../../constants';
@@ -43,7 +43,7 @@ class Portfolio extends Component {
                 <Grid container spacing={24}>
                     {map(portfolioItems, ({ id, imgSrc, title, shortDescription }) => (
                         <Grid item md={6} xs={12} key={id}>
-                            <PortfolioCard
+                            <PortfolioItem
                                 title={title}
                                 imageSrc={imgSrc}
                                 description={shortDescription}

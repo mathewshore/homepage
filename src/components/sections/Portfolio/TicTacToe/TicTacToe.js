@@ -210,7 +210,8 @@ class TicTacToe extends Component {
                                 iconType={iconType}
                                 style={{
                                     fontSize: 36,
-                                    marginLeft: theme.spacing.unit * -0.5
+                                    marginLeft: theme.spacing.unit * -0.5,
+                                    marginRight: theme.spacing.unit * 0.5
                                 }}
                             />
                         )}
