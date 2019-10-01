@@ -21,7 +21,7 @@ const styles = ({ spacing, palette, breakpoints }) => ({
         background: palette.background.sections.paper,
 
         [breakpoints.up('xs')]: {
-            padding: spacing.unit * 4,
+            padding: `${spacing.unit * 6}px ${spacing.unit * 4}px`,
         },
         [breakpoints.up('sm')]: {
             padding: spacing.unit * 6,

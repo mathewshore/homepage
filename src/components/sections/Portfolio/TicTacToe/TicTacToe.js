@@ -10,7 +10,7 @@ import concat from 'lodash/concat';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import Table from '../../../common/Table';
+// import Table from '../../../common/Table';
 import GameBoard from './GameBoard';
 import PlayerIcon from './PlayerIcon';
 import StatusText from './StatusText';
@@ -197,12 +197,12 @@ class TicTacToe extends Component {
 
         return (
             <div className={classes.tttContainer}>
-                <div className={classes.statTableContainer}>
+                {/* <div className={classes.statTableContainer}>
                     <Table
                         dataMapping={dataMapping}
                         data={this.getStatTableData()}
                     />
-                </div>
+                </div> */}
                 <div className={classes.gameContainer}>
                     <StatusText>
                         {withIcon && (

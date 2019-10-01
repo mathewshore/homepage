@@ -8,6 +8,9 @@ import assign from 'lodash/assign';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+
+import TextLink from '../../../common/TextLink';
 import Table from '../../../common/Table';
 import UserBlock from './UserBlock';
 import StatusBlock from './StatusBlock';
@@ -18,6 +21,9 @@ import tools from './tools';
 const styles = ({ spacing }) => ({
     rpsGameContainer: {
         marginTop: spacing.unit * 5
+    },
+    sourceCodeTypography: {
+        marginTop: spacing.unit
     }
 });
 
@@ -119,30 +125,50 @@ class RockPaperScissors extends Component {
 
         return (
             <div>
-                <Table
-                    dataMapping={dataMapping}
-                    data={[this.state.stats]}
-                />
-                <Grid container className={classes.rpsGameContainer}>
-                    <Grid item xs={4}>
-                        <UserBlock
-                            userTool={userTool}
-                            onToolClick={this.onToolClick}
-                        />
+                <Grid container spacing={24}>
+                    <Grid item xs={12} sm={4} md={3}>
+                        <Typography variant="body2">
+                            Wanted to play around with animations combined with some simple
+                            user interactions enabled by React. My 7th sense told be me to
+                            tackle this issue in a playful approach and I ended up creating
+                            the old classic – Rock Paper Scissors. Do you have what it
+                            takes to beat the opponent before it takes over the world?!
+                        </Typography>
+                        <Typography variant="body2" className={classes.sourceCodeTypography}>
+                            Check out the
+                            <TextLink href="https://github.com/madzesu/homepage/tree/master/src/components/sections/Portfolio/RockPaperScissors">
+                                source code
+                            </TextLink>
+                            from GitHub for possible cheats.
+                        </Typography>
                     </Grid>
-                    <Grid item xs={4}>
-                        <StatusBlock
-                            userTool={userTool}
-                            animationToggled={animationToggled}
-                            resultText={this.state.resultText}
-                            onPlayAgainClick={this.nullifySelections}
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <OpponentBlock
-                            opponentTool={this.state.opponentTool}
-                            animationToggled={animationToggled}
-                        />
+                    <Grid item xs={12} sm={8} md={9}>
+                        {/* <Table
+                            dataMapping={dataMapping}
+                            data={[this.state.stats]}
+                        /> */}
+                        <Grid container className={classes.rpsGameContainer}>
+                            <Grid item xs={4}>
+                                <UserBlock
+                                    userTool={userTool}
+                                    onToolClick={this.onToolClick}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <StatusBlock
+                                    userTool={userTool}
+                                    animationToggled={animationToggled}
+                                    resultText={this.state.resultText}
+                                    onPlayAgainClick={this.nullifySelections}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <OpponentBlock
+                                    opponentTool={this.state.opponentTool}
+                                    animationToggled={animationToggled}
+                                />
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </div>

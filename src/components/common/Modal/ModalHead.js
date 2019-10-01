@@ -43,17 +43,14 @@ const ModalHead = props => {
     const { classes } = props;
     return (
         <div className={classes.modalHead}>
-            <div>
-                <Typography variant='display1'>
-                    {props.title}
-                </Typography>
-                <Typography variant='caption' className={classes.modalCaption}>
-                    {props.description}
-                </Typography>
-            </div>
-            <IconButton className={classes.closeButton} onClick={props.onClose}>
-                <CloseIcon className={classes.closeIcon} />
-            </IconButton>
+                <div>
+                    <Typography variant='display1'>
+                        {props.title}
+                    </Typography>
+                </div>
+                <IconButton className={classes.closeButton} onClick={props.onClose}>
+                    <CloseIcon className={classes.closeIcon} />
+                </IconButton>
         </div>
     );
 };

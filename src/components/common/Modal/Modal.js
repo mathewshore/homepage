@@ -14,7 +14,7 @@ import ModalContent from './ModalContent';
 const styles = ({ spacing, breakpoints }) => ({
     modalPaper: {
         position: 'relative',
-        maxHeight: `calc(100vh - ${spacing.unit * 5 * 2}px)`,
+        height: `calc(100vh - ${spacing.unit * 5 * 2}px)`,
         overflow: 'auto',
         margin: `${spacing.unit * 5}px 0`,
         padding: `0 ${spacing.unit * 5}px`,
@@ -22,16 +22,16 @@ const styles = ({ spacing, breakpoints }) => ({
         [breakpoints.down('md')]: {
             padding: `0 ${spacing.unit * 3}px`,
             margin: `${spacing.unit * 3}px 0`,
-            maxHeight: `calc(100vh - ${spacing.unit * 3 * 2}px)`,
+            height: `calc(100vh - ${spacing.unit * 3 * 2}px)`,
         },
         [breakpoints.down('sm')]: {
             padding: `0 ${spacing.unit * 1.5}px`,
             margin: `${spacing.unit * 1.5}px 0`,
-            maxHeight: `calc(100vh - ${spacing.unit * 1.5 * 2}px)`,
+            height: `calc(100vh - ${spacing.unit * 1.5 * 2}px)`,
         },
         [breakpoints.down('xs')]: {
             margin: 0,
-            maxHeight: '100vh'
+            height: '100vh'
         },
     },
 });

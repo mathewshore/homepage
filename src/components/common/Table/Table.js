@@ -8,7 +8,7 @@ import TableBody from './TableBody';
 
 const styles = ({ spacing }) => ({
     tableContainer: {
-        margin: `${spacing.unit * 2}px 0`
+        marginBottom: spacing.unit * 2
     }
 });
 

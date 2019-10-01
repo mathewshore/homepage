@@ -36,6 +36,10 @@ const styles = ({ spacing }) => ({
     },
     portfolioImage: {
         width: '100%',
+        maxHeight: 260
+    },
+    itemContentContainer: {
+        maxHeight: 260
     },
     itemTitle: {
         color: grey[50]
@@ -60,6 +64,7 @@ class PortfolioItem extends Component {
     };
 
     render() {
+        // ToDo: Split into smaller components.
         const { classes } = this.props;
     
         return (
@@ -73,11 +78,18 @@ class PortfolioItem extends Component {
                     classes={{ root: classes.card }}
                     onClick={this.props.onClick}
                 >
-                    <img
-                        src={this.props.imageSrc}
-                        className={classes.portfolioImage}
-                        alt={this.props.title}
-                    />
+                    {this.props.children ? (
+                        <div className={classes.itemContentContainer}>
+
+                            {this.props.children}
+                        </div>
+                    ) : (
+                        <img
+                            src={this.props.imageSrc}
+                            className={classes.portfolioImage}
+                            alt={this.props.title}
+                        />
+                    )}
                 </Paper>
                 <Paper
                     component={ButtonBase}

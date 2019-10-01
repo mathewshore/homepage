@@ -17,7 +17,7 @@ const styles = ({ spacing, palette }) => ({
         padding: `${spacing.unit * 2}px ${spacing.unit * 3}px`,
     },
     listItem: {
-        padding: `${spacing.unit}px 0`
+        padding: `${spacing.unit * 1.5}px 0`
     },
     listTitleIcon: {
         marginLeft: 'auto'

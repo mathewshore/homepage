@@ -1,13 +1,14 @@
 import red from '@material-ui/core/colors/red';
 import grey from '@material-ui/core/colors/grey';
 import brown from '@material-ui/core/colors/brown';
+import green from '@material-ui/core/colors/green';
+import blue from '@material-ui/core/colors/blue';
 
 
 // Potential colors
-// Primary: #f8c687 - light brown/orange
-// Secondary: #45b29a - light green
+// Primary: #45b29a - green
 
-const sectionBgColor = '#fae8d3';
+const sectionBgColor = '#99DBDB'; // light blue
 
 const palette = {
     primary: {
@@ -43,6 +44,21 @@ const palette = {
             dark: grey[900],
             light: grey[50],
         }
+    },
+    info: {
+        light: blue[200],
+        main: blue[400],
+        dark: blue[600]
+    },
+    success: {
+        light: green[200],
+        main: green[400],
+        dark: green[600]
+    },
+    danger: {
+        light: red[100],
+        main: red[600],
+        dark: red[900]
     },
     transparent: 'transparent'
 };

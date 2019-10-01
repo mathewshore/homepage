@@ -6,17 +6,16 @@ import TicTacToe from './TicTacToe';
 
 // ToDo: Add proper portfolio item images.
 import testImg from '../../../bg_intro.jpg';
+import streamPortalImg from './portfolio_images/stream_portal_portfolio.png';
 import rpsImage from './portfolio_images/rps_portfolio.png';
 import tttImage from './portfolio_images/tictactoe_portfolio.png';
-import fledgeImage from './portfolio_images/fledge_launchscreen_portfolio.png';
-
 
 // ToDo: Add descriptive tags to portfolio items.
 const portfolioItems = [
     {
         id: 'stream_portal',
         title: 'Stream Portal',
-        imgSrc: testImg,
+        imgSrc: streamPortalImg,
         shortDescription: 'A web application for connecting streaming platforms',
         longDescription: 'Add modal description here',
         Component: StreamPortal,
@@ -32,7 +31,6 @@ const portfolioItems = [
     {
         id: 'fledge',
         title: 'Fledge the Hedgehog',
-        imgSrc: fledgeImage,
         shortDescription: 'Mobile game for Apple phones',
         longDescription: 'Add modal description here',
         Component: () => <div>Add component here</div>,

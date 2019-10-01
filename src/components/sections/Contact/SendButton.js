@@ -1,102 +1,59 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+
 import withStyles from '@material-ui/core/styles/withStyles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
-import green from '@material-ui/core/colors/green';
 // import CheckIcon from 'material-ui-icons/Check';
 // import SaveIcon from 'material-ui-icons/Save';
 
-const styles = theme => ({
-    wrapper: {
-        padding: '20px 0',
-        textAlign: 'center',
-        position: 'relative',
+const styles = ({ palette, spacing }) => ({
+    submitButtonRoot: {
+        margin: 'auto',
+        color: palette.text.light,
+        fontSize: 16,
+        padding: `${spacing.unit * 1.5}px ${spacing.unit * 3}px`
     },
-    buttonSuccess: {
-        backgroundColor: green[500],
-        '&:hover': {
-            backgroundColor: green[700],
-        },
+    submitButtonLabel: {
+        paddingTop: 2,
+        minWidth: spacing.unit * 25
     },
-    fabProgress: {
-        color: green[500],
+    circularProgress: {
         position: 'absolute',
-        top: -6,
-        left: -6,
-        zIndex: 1,
-    },
-    buttonProgress: {
-        color: green[500],
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        marginTop: -12,
-        marginLeft: -12,
     },
 });
 
 class SendButton extends React.Component {
-    state = {
-        loading: false,
-        success: false,
+    renderSendAnimation = () => {
+        const { classes } = this.props;
+        return this.props.loading && (
+            <CircularProgress
+                size={24}
+                className={classes.circularProgress}
+            />
+        );
     };
-
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
-
-    handleButtonClick = () => {
-        if (!this.state.loading) {
-            this.setState(
-                {
-                    success: false,
-                    loading: true,
-                },
-                () => {
-                this.timer = setTimeout(() => {
-                    this.setState({
-                        loading: false,
-                        success: true,
-                    });
-                }, 2000);
-                },
-                () => {
-                this.timer = setTimeout(() => {
-                    this.setState({
-                        loading: false,
-                        success: false,
-                    });
-                }, 4000);
-                },
-            );
-        }
-    };
-
-    timer = undefined;
 
     render() {
-        const { loading, success } = this.state;
         const { classes } = this.props;
-        const buttonClassname = classNames({
-            [classes.buttonSuccess]: success,
-        });
 
         return (
             <div className={classes.wrapper}>
                 <Button
                     variant="raised"
                     color="primary"
-                    className={buttonClassname}
-                    disabled={loading}
-                    onClick={this.handleButtonClick}
-                    type="submit" // not sure if this is needed
+                    type="submit"
+                    size="large"
+                    disabled={this.props.loading}
+                    classes={{
+                        root: classes.submitButtonRoot,
+                        label: classes.submitButtonLabel
+                    }}
                 >
-                    {success ? 'Message was Sent!' : 'Send Message'}
+                    {this.renderSendAnimation()}
+                    {this.props.children}
                 </Button>
-                {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
             </div>
         );
     }
