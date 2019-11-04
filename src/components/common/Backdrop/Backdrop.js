@@ -20,7 +20,7 @@ const Backdrop = props => {
     return (
         <div
             className={classes.backdrop}
-            onClick={this.onMenuToggleClick}
+            onClick={props.onClick}
         />
     );
 };

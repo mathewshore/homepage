@@ -134,13 +134,6 @@ class RockPaperScissors extends Component {
                             the old classic – Rock Paper Scissors. Do you have what it
                             takes to beat the opponent before it takes over the world?!
                         </Typography>
-                        <Typography variant="body2" className={classes.sourceCodeTypography}>
-                            Check out the
-                            <TextLink href="https://github.com/madzesu/homepage/tree/master/src/components/sections/Portfolio/RockPaperScissors">
-                                source code
-                            </TextLink>
-                            from GitHub for possible cheats.
-                        </Typography>
                     </Grid>
                     <Grid item xs={12} sm={8} md={9}>
                         {/* <Table

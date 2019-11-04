@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import omit from 'lodash/omit';
 import withStyles from '@material-ui/core/styles/withStyles';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Button from '@material-ui/core/Button';
@@ -14,18 +14,14 @@ const styles = ({ spacing }) => ({
     },
 });
 
-const SocialMediaLink = (props) => {
+const SocialMediaLink = props => {
     const { classes } = props;
     return (
         <Button
-            component="a"
-            variant="outlined"
-            color="primary"
-            target={props.target}
-            href={props.href}
+            {...omit(props, ['classes', 'children'])}
             classes={{ root: classes.buttonRoot }}
         >
-            <SvgIcon style={props.iconStyle}>
+            <SvgIcon {...props.IconProps}>
                 {props.children}
             </SvgIcon>
         </Button>
@@ -33,7 +29,11 @@ const SocialMediaLink = (props) => {
 };
 
 SocialMediaLink.defaultProps = {
-    target: "_blank" // Open new browser tab on link click.
+    target: '_blank', // Open new browser tab on link click.
+    component: 'a',
+    variant: 'outlined',
+    color: 'primary',
+
 };
 
 SocialMediaLink.propTypes = {
@@ -43,7 +43,10 @@ SocialMediaLink.propTypes = {
         PropTypes.element,
         PropTypes.arrayOf(PropTypes.element)
     ]),
-    iconStyle: PropTypes.object
+    target: PropTypes.string,
+    variant: PropTypes.string,
+    color: PropTypes.string,
+    style: PropTypes.object
 };
 
 export default withStyles(styles)(SocialMediaLink);

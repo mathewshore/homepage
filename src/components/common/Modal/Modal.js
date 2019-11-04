@@ -9,23 +9,21 @@ import { toggleBodyScroll } from '../../utils';
 import Container from '../Container';
 import ModalHead from './ModalHead';
 import ModalContent from './ModalContent';
+import ModalFooter from './ModalFooter';
 
 
 const styles = ({ spacing, breakpoints }) => ({
     modalPaper: {
         position: 'relative',
-        height: `calc(100vh - ${spacing.unit * 5 * 2}px)`,
+        height: `calc(100vh - ${spacing.unit * 10}px)`,
         overflow: 'auto',
         margin: `${spacing.unit * 5}px 0`,
-        padding: `0 ${spacing.unit * 5}px`,
 
         [breakpoints.down('md')]: {
-            padding: `0 ${spacing.unit * 3}px`,
             margin: `${spacing.unit * 3}px 0`,
             height: `calc(100vh - ${spacing.unit * 3 * 2}px)`,
         },
         [breakpoints.down('sm')]: {
-            padding: `0 ${spacing.unit * 1.5}px`,
             margin: `${spacing.unit * 1.5}px 0`,
             height: `calc(100vh - ${spacing.unit * 1.5 * 2}px)`,
         },
@@ -54,7 +52,7 @@ class Modal extends Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, ModalFooterContent } = this.props;
 
         return (
             <MuiModal
@@ -63,7 +61,10 @@ class Modal extends Component {
                 onClose={this.props.onClose}
             >
                 <Container>
-                    <Paper classes={{ root: classes.modalPaper }} elevation={10}>
+                    <Paper
+                        classes={{ root: classes.modalPaper }}
+                        elevation={10}
+                    >
                         <ModalHead
                             title={this.props.title}
                             description={this.props.description}
@@ -72,6 +73,11 @@ class Modal extends Component {
                         <ModalContent>
                             {this.props.children}
                         </ModalContent>
+                        {ModalFooterContent && (
+                            <ModalFooter verticalSpacing="dense">
+                                {this.props.ModalFooterContent}
+                            </ModalFooter>
+                        )}
                     </Paper>
                 </Container>
             </MuiModal>
@@ -84,7 +90,8 @@ Modal.propTypes = {
     onClose: PropTypes.func,
     children: PropTypes.element,
     title: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.string,
+    ModalFooterContent: PropTypes.any
 };
 
-export default withStyles(styles, { withTheme: true })(Modal);
+export default withStyles(styles)(Modal);

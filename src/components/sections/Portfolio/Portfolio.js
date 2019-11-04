@@ -12,7 +12,6 @@ import PortfolioItem from './PortfolioItem';
 import portfolioItems from './portfolioItems';
 
 import { SECTIONS } from '../../constants';
-import FledgePortfolioItem from './FledgePortfolioItem';
 
 
 const styles = theme => ({
@@ -23,7 +22,7 @@ const styles = theme => ({
 
 class Portfolio extends Component {
     state = {
-        portfolioItemId: '',
+        portfolioItemId: 'snake',
     };
 
     togglePortfolioModal = portfolioItemId => () => {
@@ -33,7 +32,6 @@ class Portfolio extends Component {
     renderPortfolioItemContent = ({
         id,
         imgSrc,
-        content,
         title,
         shortDescription
     }) => {
@@ -42,13 +40,13 @@ class Portfolio extends Component {
             description: shortDescription,
             onClick: this.togglePortfolioModal(id)
         };
-        if (id === 'fledge') {
-            return (
-                <PortfolioItem {...defaultProps}>
-                    <FledgePortfolioItem />
-                </PortfolioItem>
-            );
-        }
+        // if (id === 'fledge') {
+        //     return (
+        //         <PortfolioItem {...defaultProps}>
+        //             <FledgePortfolioItem />
+        //         </PortfolioItem>
+        //     );
+        // }
         return <PortfolioItem {...defaultProps} imageSrc={imgSrc} />;
     };
 
@@ -75,6 +73,7 @@ class Portfolio extends Component {
                         onClose={this.togglePortfolioModal(null)}
                         title={portfolioItem.title}
                         description={portfolioItem.longDescription}
+                        ModalFooterContent={portfolioItem.FooterContent}
                     >
                         <portfolioItem.Component />
                     </Modal>

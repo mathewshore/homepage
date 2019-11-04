@@ -1,26 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
+import ModalSpacingContainer from './ModalSpacingContainer';
 
 
-const styles = ({ spacing, breakpoints }) => ({
+const styles = ({ breakpoints, spacing }) => ({
     modalContent: {
-        margin: `${spacing.unit * 16}px 0 ${spacing.unit * 6}px`,
-
+        overflow: 'auto',
+        height: `calc(100vh - ${spacing.unit * 31}px)`,
         [breakpoints.down('md')]: {
-            margin: `${spacing.unit * 15.5}px 0 ${spacing.unit * 6}px`,
+            height: `calc(100vh - ${spacing.unit * 25}px)`,
         },
         [breakpoints.down('sm')]: {
-            margin: `${spacing.unit * 14.5}px 0 ${spacing.unit * 6}px`,
+            height: `calc(100vh - ${spacing.unit * 20}px)`,
         },
+        [breakpoints.down('xs')]: {
+            height: `calc(100vh - ${spacing.unit * 17}px)`,
+        }
     }
 });
 
-const ModalContent = props => (
-    <div className={props.classes.modalContent}>
-        {props.children}
-    </div>
-);
+const ModalContent = props => {
+    const { classes } = props;
+    return (
+        <div className={classes.modalContent}>
+            <ModalSpacingContainer>
+                {props.children}
+            </ModalSpacingContainer>
+        </div>
+    );
+};
 
 ModalContent.propTypes = {
     children: PropTypes.oneOfType([

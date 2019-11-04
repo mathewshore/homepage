@@ -80,7 +80,6 @@ class PortfolioItem extends Component {
                 >
                     {this.props.children ? (
                         <div className={classes.itemContentContainer}>
-
                             {this.props.children}
                         </div>
                     ) : (

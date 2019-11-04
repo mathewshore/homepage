@@ -1,55 +1,103 @@
 import React from 'react';
+
+import PortfolioModalFooterContent from './PortfolioModalFooterContent';
 import StreamPortal from './StreamPortal';
 import Flexer from './Flexer';
 import RockPaperScissors from './RockPaperScissors';
 import TicTacToe from './TicTacToe';
+import Snake from './Snake';
 
 // ToDo: Add proper portfolio item images.
 import testImg from '../../../bg_intro.jpg';
-import streamPortalImg from './portfolio_images/stream_portal_portfolio.png';
-import rpsImage from './portfolio_images/rps_portfolio.png';
-import tttImage from './portfolio_images/tictactoe_portfolio.png';
+import fledgeImageSrc from './portfolio_images/fledge_thumbnail_1280x720.png';
+import streamPortalImageSrc from './portfolio_images/stream_portal_thumbnail_1280x720.png';
+import rpsImageSrc from './portfolio_images/rps_thumbnail_1280x720.png';
+import tttImageSrc from './portfolio_images/tic_tac_toe_thumbnail_1280x720.png';
 
-// ToDo: Add descriptive tags to portfolio items.
+
+const gitUrlBase = 'https://github.com/madzesu';
+
+const portfolioUrlBase = `${gitUrlBase}/homepage/tree/master/src/components/sections/Portfolio`
+
+// ToDo: Add descriptive tags to portfolio items
+//       e.g. Adobe Illustrator, Mobile and Flat Design for Fledge.
 const portfolioItems = [
+    {
+        id: 'snake',
+        title: 'Snake',
+        imgSrc: testImg,
+        shortDescription: 'The old classic, snake',
+        Component: Snake
+    },
     {
         id: 'stream_portal',
         title: 'Stream Portal',
-        imgSrc: streamPortalImg,
+        imgSrc: streamPortalImageSrc,
         shortDescription: 'A web application for connecting streaming platforms',
-        longDescription: 'Add modal description here',
         Component: StreamPortal,
+        FooterContent: (
+            <PortfolioModalFooterContent
+                itemTitle="Stream Portal"
+                href={`${gitUrlBase}/stream-portal`}
+            />
+        )
     },
-    {
-        id: 'flexer',
-        title: 'Flexer',
-        imgSrc: testImg,
-        shortDescription: 'Flexible time management system',
-        longDescription: 'Add modal description here',
-        Component: Flexer,
-    },
+    // {
+    //     id: 'flexer',
+    //     title: 'Flexer',
+    //     imgSrc: testImg,
+    //     shortDescription: 'Flexible time management system',
+    //     Component: Flexer,
+    //     FooterContent: (
+    //         <PortfolioModalFooterContent
+    //             itemTitle="Flexer"
+    //             href="https://github.com/madzesu/flexer"
+    //         />
+    //     )
+    // },
     {
         id: 'fledge',
         title: 'Fledge the Hedgehog',
+        imgSrc: fledgeImageSrc,
         shortDescription: 'Mobile game for Apple phones',
-        longDescription: 'Add modal description here',
         Component: () => <div>Add component here</div>,
+        // FooterContent: (
+        //     <div>
+        //         <IconButton
+        //             component="a"
+        //             target="_blank"
+        //             href="https://github.com/madzesu/stream-portal"
+        //         >
+        //             <GitHubIcon />
+        //         </IconButton>
+        //     </div>
+        // )
     },
     {
         id: 'rps',
         title: 'Rock Paper Scissors',
-        imgSrc: rpsImage,
+        imgSrc: rpsImageSrc,
         shortDescription: 'A small project for testing out React and learning simplistic designing',
-        longDescription: 'Add modal description here',
         Component: RockPaperScissors,
+        FooterContent: (
+            <PortfolioModalFooterContent
+                itemTitle="Rock Paper Scissors"
+                href={`${portfolioUrlBase}/RockPaperScissors`}
+            />
+        )
     },
     {
         id: 'ttt',
         title: 'Tic Tac Toe',
-        imgSrc: tttImage,
+        imgSrc: tttImageSrc,
         shortDescription: 'A project for improving programming logic',
-        longDescription: 'A practise project for improving logical approach of stuff',
         Component: TicTacToe,
+        FooterContent: (
+            <PortfolioModalFooterContent
+                itemTitle="Tic Tac Toe"
+                href={`${portfolioUrlBase}/TicTacToe`}
+            />
+        )
     }
 ];
 

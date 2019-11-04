@@ -26,7 +26,7 @@ const styles = ({ palette, spacing }) => ({
         position: 'absolute',
         top: (spacing.unit * 7.5) - 2, 
         // ToDo: Set mediascreen based right position according to different paddings (?)
-        right: 0,
+        right: spacing.unit * -1.5,
         background: palette.background.navBar,
         borderRadius: 2
     },
@@ -58,7 +58,7 @@ class MobileNavMenu extends Component {
                         </div>
                     )}
                 </div>
-                {isOpen && <Backdrop />}
+                {isOpen && <Backdrop onClick={this.onMenuToggleClick} />}
             </div>
         );
     }

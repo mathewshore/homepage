@@ -18,23 +18,22 @@ import StatusText from './StatusText';
 
 const styles = ({ breakpoints, spacing }) => ({
     tttContainer: {
-        [breakpoints.up('md')]: {
-            display: 'flex',
-            justifyContent: 'center',
-        },
+        // [breakpoints.up('md')]: {
+        //     display: 'flex',
+        //     justifyContent: 'center',
+        // },
     },
     statTableContainer: {
         width: spacing.unit * 50,
         [breakpoints.up('md')]: {
             marginRight: spacing.unit * 5,
-            
         },
         [breakpoints.down('sm')]: {
             margin: 'auto'
         }
     },
     gameContainer: {
-        marginTop: 24
+        marginTop: spacing.unit * 2
     }
 });
 
@@ -197,12 +196,6 @@ class TicTacToe extends Component {
 
         return (
             <div className={classes.tttContainer}>
-                {/* <div className={classes.statTableContainer}>
-                    <Table
-                        dataMapping={dataMapping}
-                        data={this.getStatTableData()}
-                    />
-                </div> */}
                 <div className={classes.gameContainer}>
                     <StatusText>
                         {withIcon && (

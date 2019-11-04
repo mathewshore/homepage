@@ -21,16 +21,22 @@ const styles = ({ spacing, palette }) => ({
         },
         '&.mobile': {
             margin: 0,
-            textAlign: 'center'
+            textAlign: 'right'
         },
         '&:hover': {
             color: palette.primary.main,
             textDecoration: 'none',
-            transform: 'scale(1.1)'
+            transform: 'scale(1.1)',
+            '&.mobile': {
+                transform: 'scale(1)'
+            }
         },
         '&.active': {
             color: palette.primary.light,
-            transform: 'scale(1.1)'
+            transform: 'scale(1.1)',
+            '&.mobile': {
+                transform: 'scale(1)'
+            }
         },
     },
     link: {
