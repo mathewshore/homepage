@@ -11,9 +11,6 @@ import { collides } from './Snake';
 
 
 const styles = ({ spacing }) => ({
-    container: {
-        border: '1px solid black',
-    },
     row: {
         display: 'flex'
     },
@@ -38,7 +35,7 @@ const GameGrid = props => {
     const [domainHeight, domainWidth] = props.domain;
 
     return (
-        <div className={classes.container}>
+        <div>
             {times(domainHeight, i => (
                 <div className={classes.row} key={i}>
                     {times(domainWidth, j => {

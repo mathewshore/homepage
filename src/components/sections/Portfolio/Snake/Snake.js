@@ -8,14 +8,40 @@ import random from 'lodash/random';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 import { GRID_HEIGHT, GRID_WIDTH, INITIAL_GAME_TEMPO } from './constants';
 
 import GameGrid from './GameGrid';
-import Score from './Score';
+// import Score from './Score';
 
 
-const styles = () => ({});
+const styles = ({ spacing }) => ({
+    container: {
+        display: 'flex'
+    },
+    snakeContainer: {
+        position: 'relative',
+        marginLeft: 'auto'
+    },
+    startButtonContainer: {
+        background: 'rgba(185, 185, 185, 0.8)',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: GRID_WIDTH * (spacing.unit * 2) + (GRID_WIDTH * 2),
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    gameStatus: {
+        textAlign: 'center'
+    },
+    startButtonRoot: {
+        color: 'white'
+    }
+});
 
 const directions = {
     w: 'up',
@@ -240,22 +266,40 @@ class Snake extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
+        const { gameOver, gameIsRunning } = this.state;
+
         return (
-            <div>
-                <Button
-                    onClick={this.startGame}
-                    disabled={this.state.gameIsRunning}
-                    variant="outlined"
-                >
-                    Start
-                </Button>
-                {this.state.gameOver && <div>GAME OVER</div>}
-                <Score />
-                <GameGrid
-                    snakeTrail={this.state.snakeTrail}
-                    domain={[GRID_HEIGHT, GRID_WIDTH]}
-                    foodLocation={this.state.foodLocation}
-                />
+            <div className={classes.container}>
+                <div>
+                    Add description text here...
+                    - interaction
+                    - game logic
+                    - intervals
+                </div>
+                <div className={classes.snakeContainer}>
+                    {!gameIsRunning && (
+                        <div className={classes.startButtonContainer}>
+                            <div className={classes.gameStatus}>
+                                {gameOver && <div>GAME OVER</div>}
+                                <Button
+                                    onClick={this.startGame}
+                                    variant="contained"
+                                    color="primary"
+                                    classes={{ root: classes.startButtonRoot }}
+                                >
+                                    {gameOver ? 'Play again' : 'Start'}
+                                </Button>
+                            </div>
+                        </div>
+                    )}
+                    {/* <Score /> */}
+                    <GameGrid
+                        snakeTrail={this.state.snakeTrail}
+                        domain={[GRID_HEIGHT, GRID_WIDTH]}
+                        foodLocation={this.state.foodLocation}
+                    />
+                </div>
             </div>
         );
     }
