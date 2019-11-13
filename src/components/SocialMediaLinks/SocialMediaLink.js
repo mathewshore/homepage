@@ -18,7 +18,11 @@ const SocialMediaLink = props => {
     const { classes } = props;
     return (
         <Button
-            {...omit(props, ['classes', 'children'])}
+            {...omit(props, [
+                'classes',
+                'children',
+                'IconProps'
+            ])}
             classes={{ root: classes.buttonRoot }}
         >
             <SvgIcon {...props.IconProps}>

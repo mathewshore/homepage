@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import get from 'lodash/get';
@@ -8,12 +8,12 @@ import random from 'lodash/random';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 
 import { GRID_HEIGHT, GRID_WIDTH, INITIAL_GAME_TEMPO } from './constants';
 
 import GameGrid from './GameGrid';
-// import Score from './Score';
+import GameOver from './GameOver';
+import Score from './Score';
 
 
 const styles = ({ spacing }) => ({
@@ -24,8 +24,8 @@ const styles = ({ spacing }) => ({
         position: 'relative',
         marginLeft: 'auto'
     },
-    startButtonContainer: {
-        background: 'rgba(185, 185, 185, 0.8)',
+    endScreenContainer: {
+        background: 'rgba(236, 236, 236, 0.8)',
         position: 'absolute',
         top: 0,
         left: 0,
@@ -188,9 +188,10 @@ class Snake extends React.Component {
     };
 
     handleFoodHit = (nextHeadLocation) => {
-        const { snakeTrail, tempoMultiplier } = this.state;
+        const { snakeTrail, score, tempoMultiplier } = this.state;
         snakeTrail.unshift(nextHeadLocation);
         this.setState({
+            score: score + 1,
             snakeTrail,
             tempoMultiplier: tempoMultiplier * 0.9
         }, () => {
@@ -254,11 +255,12 @@ class Snake extends React.Component {
         this.addKeyDownListener();
         
         this.setState({
+            score: 0,
             gameOver: false,
             gameIsRunning: true,
             tempoMultiplier: INITIAL_GAME_TEMPO,
             direction: ['up', 'down', 'left', 'right'][random(0, 3)],
-            snakeTrail: [[7, 8]]
+            snakeTrail: [[7, 8]] // Put snake in center.
         }, () => {
             this.spawnFood();
             this.setSnakeMoveInterval();
@@ -279,9 +281,14 @@ class Snake extends React.Component {
                 </div>
                 <div className={classes.snakeContainer}>
                     {!gameIsRunning && (
-                        <div className={classes.startButtonContainer}>
+                        <div className={classes.endScreenContainer}>
                             <div className={classes.gameStatus}>
-                                {gameOver && <div>GAME OVER</div>}
+                                {gameOver && (
+                                    <Fragment>
+                                        <GameOver />
+                                        <Score score={this.state.score} />
+                                    </Fragment>
+                                )}
                                 <Button
                                     onClick={this.startGame}
                                     variant="contained"
@@ -293,7 +300,6 @@ class Snake extends React.Component {
                             </div>
                         </div>
                     )}
-                    {/* <Score /> */}
                     <GameGrid
                         snakeTrail={this.state.snakeTrail}
                         domain={[GRID_HEIGHT, GRID_WIDTH]}
