@@ -15,9 +15,8 @@ import ModalFooter from './ModalFooter';
 const styles = ({ spacing, breakpoints }) => ({
     modalPaper: {
         position: 'relative',
-        height: `calc(100vh - ${spacing.unit * 10}px)`,
+        height: '100vh',
         overflow: 'auto',
-        margin: `${spacing.unit * 5}px 0`,
 
         [breakpoints.down('md')]: {
             margin: `${spacing.unit * 3}px 0`,

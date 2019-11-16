@@ -47,12 +47,16 @@ const getFormattedText = (text, props) => map(split(text, ' '), (word, i) => {
     );
 });
 
-
+// ToDo: use spread operator here for props.
+// ToDo: rename typegraphyClassName prop to className. 
 const TextHeader = (props) => {
     const { text, variant, typographyClassName } = props;
 
     return (
-        <Typography variant={variant} className={typographyClassName ? typographyClassName : ''}>
+        <Typography
+            variant={variant}
+            className={typographyClassName ? typographyClassName : ''}
+        >
             {getFormattedText(text, props)}
         </Typography>
     );

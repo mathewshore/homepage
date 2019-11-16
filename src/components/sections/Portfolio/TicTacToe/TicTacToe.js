@@ -32,8 +32,9 @@ const styles = ({ breakpoints, spacing }) => ({
             margin: 'auto'
         }
     },
-    gameContainer: {
-        marginTop: spacing.unit * 2
+    statusIcon: {
+        marginLeft: spacing.unit * -0.5,
+        marginRight: spacing.unit * 0.5,
     }
 });
 
@@ -55,9 +56,10 @@ const getGridKeys = rowCellCount =>
 ));
 
 const getEmptyGrid = () =>
-    reduce(getGridKeys(ROW_CELL_COUNT), (grid, key) => (
-        assign({}, grid, { [key]: null })
-    ), {});
+    reduce(getGridKeys(ROW_CELL_COUNT), (grid, key) => ({
+        ...grid,
+        [key]: null
+    }), {});
 
 class TicTacToe extends Component {
     state = {
@@ -122,7 +124,7 @@ class TicTacToe extends Component {
                 this.setState({
                     winner,
                     winCells,
-                    [winner]: assign({}, player, { wins }),
+                    [winner]: { ...player, wins },
                     gameIsRunning: false,
                 });
             }
@@ -189,7 +191,7 @@ class TicTacToe extends Component {
     
     render() {
         // ToDo: Store game data to localStorage.
-        const { classes, theme } = this.props;
+        const { classes } = this.props;
         const { winner } = this.state;
         const iconType = winner || ((this.state.turnCount % 2 === 0) ? 'o' : 'x');
         const withIcon = this.state.gameIsRunning || winner;
@@ -201,11 +203,7 @@ class TicTacToe extends Component {
                         {withIcon && (
                             <PlayerIcon
                                 iconType={iconType}
-                                style={{
-                                    fontSize: 36,
-                                    marginLeft: theme.spacing.unit * -0.5,
-                                    marginRight: theme.spacing.unit * 0.5
-                                }}
+                                className={classes.statusIcon}
                             />
                         )}
                         {this.getStatusText()}
@@ -228,8 +226,7 @@ class TicTacToe extends Component {
 }
 
 TicTacToe.propTypes = {
-    classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(TicTacToe);
+export default withStyles(styles)(TicTacToe);

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import map from 'lodash/map';
+import omit from 'lodash/omit';
 import find from 'lodash/find';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -29,27 +31,6 @@ class Portfolio extends Component {
         this.setState({ portfolioItemId });
     }
 
-    renderPortfolioItemContent = ({
-        id,
-        imgSrc,
-        title,
-        shortDescription
-    }) => {
-        const defaultProps = {
-            title,
-            description: shortDescription,
-            onClick: this.togglePortfolioModal(id)
-        };
-        // if (id === 'fledge') {
-        //     return (
-        //         <PortfolioItem {...defaultProps}>
-        //             <FledgePortfolioItem />
-        //         </PortfolioItem>
-        //     );
-        // }
-        return <PortfolioItem {...defaultProps} imageSrc={imgSrc} />;
-    };
-
     render() {
         // ToDo: Upgrade react version and use hook here.
         // ToDo: Add tags to portfolio items.
@@ -64,7 +45,11 @@ class Portfolio extends Component {
                 <Grid container spacing={24}>
                     {map(portfolioItems, (item) => (
                         <Grid item md={6} xs={12} key={item.id}>
-                            {this.renderPortfolioItemContent(item)}
+                            <PortfolioItem
+                                {...omit(item, ['id'])}
+                                onClick={this.togglePortfolioModal(item.id)}
+                            />
+                            {/* {this.renderPortfolioItemContent(item)} */}
                         </Grid>
                     ))}
                 </Grid>

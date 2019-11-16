@@ -40,6 +40,7 @@ const palette = {
     },
     text: {
         light: grey[50],
+        main: grey[700],
         header: {
             dark: grey[900],
             light: grey[50],

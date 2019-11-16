@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import get from 'lodash/get';
@@ -7,39 +7,21 @@ import toString from 'lodash/toString';
 import random from 'lodash/random';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import Button from '@material-ui/core/Button';
 
 import { GRID_HEIGHT, GRID_WIDTH, INITIAL_GAME_TEMPO } from './constants';
 
+import Description from './Description';
 import GameGrid from './GameGrid';
-import GameOver from './GameOver';
-import Score from './Score';
+import EndScreen from './EndScreen';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({
     container: {
         display: 'flex'
     },
     snakeContainer: {
         position: 'relative',
         marginLeft: 'auto'
-    },
-    endScreenContainer: {
-        background: 'rgba(236, 236, 236, 0.8)',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: GRID_WIDTH * (spacing.unit * 2) + (GRID_WIDTH * 2),
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    gameStatus: {
-        textAlign: 'center'
-    },
-    startButtonRoot: {
-        color: 'white'
     }
 });
 
@@ -84,6 +66,21 @@ const randomizeCoordinates = (
     return [x, y];
 };
 
+const getNextHeadLocation = (currentLocation, direction) => {
+    switch (direction) {
+    case 'up':
+        return [currentLocation[0] - 1, currentLocation[1]];
+    case 'down':
+        return [currentLocation[0] + 1, currentLocation[1]];
+    case 'left':
+        return [currentLocation[0], currentLocation[1] - 1];
+    case 'right':
+        return [currentLocation[0], currentLocation[1] + 1];
+    default:
+        return undefined;
+    }
+};
+
 class Snake extends React.Component {
     state = {
         gameIsRunning: false,
@@ -115,7 +112,7 @@ class Snake extends React.Component {
         if (snakeTrail.length === 1) {
             return false;
         }
-        const nextHeadLocation = this.getNextHeadLocation(snakeTrail[0], newDirection);
+        const nextHeadLocation = getNextHeadLocation(snakeTrail[0], newDirection);
         return collides(snakeTrail[1], nextHeadLocation);
     };
 
@@ -145,21 +142,6 @@ class Snake extends React.Component {
                 spawnIsValid = true;
                 this.setState({ foodLocation });
             }
-        }
-    };
-
-    getNextHeadLocation = (currentLocation, direction) => {
-        switch (direction) {
-        case 'up':
-            return [currentLocation[0] - 1, currentLocation[1]];
-        case 'down':
-            return [currentLocation[0] + 1, currentLocation[1]];
-        case 'left':
-            return [currentLocation[0], currentLocation[1] - 1];
-        case 'right':
-            return [currentLocation[0], currentLocation[1] + 1];
-        default:
-            return undefined;
         }
     };
 
@@ -217,8 +199,9 @@ class Snake extends React.Component {
 
     moveSnake = () => {
         const { snakeTrail, direction } = this.state;
-        const currentHeadLocation = snakeTrail[0];
-        const nextHeadLocation = this.getNextHeadLocation(currentHeadLocation, direction);
+        const headLocation = snakeTrail[0];
+        const nextHeadLocation = getNextHeadLocation(headLocation, direction);
+
         if (this.snakeHitsWall(nextHeadLocation)) {
             this.handleWallHit();
         } else if (this.snakeHitsFood(nextHeadLocation)) {
@@ -260,7 +243,7 @@ class Snake extends React.Component {
             gameIsRunning: true,
             tempoMultiplier: INITIAL_GAME_TEMPO,
             direction: ['up', 'down', 'left', 'right'][random(0, 3)],
-            snakeTrail: [[7, 8]] // Put snake in center.
+            snakeTrail: [[7, 8]] // Spawn snake in the center of the grid. ToDo: do this dynamically using grid width & height
         }, () => {
             this.spawnFood();
             this.setSnakeMoveInterval();
@@ -273,32 +256,14 @@ class Snake extends React.Component {
 
         return (
             <div className={classes.container}>
-                <div>
-                    Add description text here...
-                    - interaction
-                    - game logic
-                    - intervals
-                </div>
+                <Description />
                 <div className={classes.snakeContainer}>
                     {!gameIsRunning && (
-                        <div className={classes.endScreenContainer}>
-                            <div className={classes.gameStatus}>
-                                {gameOver && (
-                                    <Fragment>
-                                        <GameOver />
-                                        <Score score={this.state.score} />
-                                    </Fragment>
-                                )}
-                                <Button
-                                    onClick={this.startGame}
-                                    variant="contained"
-                                    color="primary"
-                                    classes={{ root: classes.startButtonRoot }}
-                                >
-                                    {gameOver ? 'Play again' : 'Start'}
-                                </Button>
-                            </div>
-                        </div>
+                        <EndScreen
+                            onStartClick={this.startGame}
+                            gameOver={gameOver}
+                            score={this.state.score}
+                        />
                     )}
                     <GameGrid
                         snakeTrail={this.state.snakeTrail}

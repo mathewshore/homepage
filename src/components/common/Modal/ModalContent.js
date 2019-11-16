@@ -7,7 +7,7 @@ import ModalSpacingContainer from './ModalSpacingContainer';
 const styles = ({ breakpoints, spacing }) => ({
     modalContent: {
         overflow: 'auto',
-        height: `calc(100vh - ${spacing.unit * 31}px)`,
+        height: `calc(100vh - ${spacing.unit * 21}px)`,
         [breakpoints.down('md')]: {
             height: `calc(100vh - ${spacing.unit * 25}px)`,
         },

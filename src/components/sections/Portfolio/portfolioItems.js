@@ -2,7 +2,7 @@ import React from 'react';
 
 import PortfolioModalFooterContent from './PortfolioModalFooterContent';
 import StreamPortal from './StreamPortal';
-import Flexer from './Flexer';
+// import Flexer from './Flexer';
 import RockPaperScissors from './RockPaperScissors';
 import TicTacToe from './TicTacToe';
 import Snake from './Snake';
@@ -25,15 +25,21 @@ const portfolioItems = [
     {
         id: 'snake',
         title: 'Snake',
-        imgSrc: testImg,
-        shortDescription: 'The old classic, snake',
-        Component: Snake
+        imageSrc: testImg,
+        description: 'The old classic, snake',
+        Component: Snake,
+        FooterContent: (
+            <PortfolioModalFooterContent
+                itemTitle="Snake"
+                href={`${portfolioUrlBase}/Snake`}
+            />
+        )
     },
     {
         id: 'stream_portal',
         title: 'Stream Portal',
-        imgSrc: streamPortalImageSrc,
-        shortDescription: 'A web application for connecting streaming platforms',
+        imageSrc: streamPortalImageSrc,
+        description: 'A web application for connecting streaming platforms',
         Component: StreamPortal,
         FooterContent: (
             <PortfolioModalFooterContent
@@ -45,8 +51,8 @@ const portfolioItems = [
     // {
     //     id: 'flexer',
     //     title: 'Flexer',
-    //     imgSrc: testImg,
-    //     shortDescription: 'Flexible time management system',
+    //     imageSrc: testImg,
+    //     description: 'Flexible time management system',
     //     Component: Flexer,
     //     FooterContent: (
     //         <PortfolioModalFooterContent
@@ -58,8 +64,8 @@ const portfolioItems = [
     {
         id: 'fledge',
         title: 'Fledge the Hedgehog',
-        imgSrc: fledgeImageSrc,
-        shortDescription: 'Mobile game for Apple phones',
+        imageSrc: fledgeImageSrc,
+        description: 'Mobile game for Apple phones',
         Component: () => <div>Add component here</div>,
         // FooterContent: (
         //     <div>
@@ -76,8 +82,8 @@ const portfolioItems = [
     {
         id: 'rps',
         title: 'Rock Paper Scissors',
-        imgSrc: rpsImageSrc,
-        shortDescription: 'A small project for testing out React and learning simplistic designing',
+        imageSrc: rpsImageSrc,
+        description: 'A small project for testing out React and learning simplistic designing',
         Component: RockPaperScissors,
         FooterContent: (
             <PortfolioModalFooterContent
@@ -89,8 +95,8 @@ const portfolioItems = [
     {
         id: 'ttt',
         title: 'Tic Tac Toe',
-        imgSrc: tttImageSrc,
-        shortDescription: 'A project for improving programming logic',
+        imageSrc: tttImageSrc,
+        description: 'A project for improving programming logic',
         Component: TicTacToe,
         FooterContent: (
             <PortfolioModalFooterContent

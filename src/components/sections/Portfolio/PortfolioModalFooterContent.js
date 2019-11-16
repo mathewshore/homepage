@@ -24,7 +24,7 @@ const PortfolioModalFooterContent = props => {
     return (
         <div className={classes.container}>
             <Button {...omit(props, ['classes', 'itemTitle'])}>
-                {`Check source code for ${props.itemTitle}`}
+                {`Source code for ${props.itemTitle}`}
                 <GitHubIcon className={classes.gitHubIcon} />
             </Button>
         </div>

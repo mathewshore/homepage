@@ -4,7 +4,7 @@ import Portfolio from './Portfolio';
 import Skills from './Skills';
 import Contact from './Contact';
 
-
+// ToDo: get rid of sections folder.
 export {
     Intro,
     About,

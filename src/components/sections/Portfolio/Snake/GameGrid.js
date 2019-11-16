@@ -18,8 +18,9 @@ const styles = ({ spacing }) => ({
         display: 'flex'
     },
     cell: {
-        height: spacing.unit * 2,
-        width: spacing.unit * 2,
+        // ToDo: define grid size using vw / vh and adjust for mediascreens
+        height: '2.5vh', // spacing.unit * 2,
+        width: '2.5vh', // spacing.unit * 2,
         border: `1px solid ${grey[200]}`,
         borderRadius: 2,
         transition: 'all 0.1s ease',
