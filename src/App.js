@@ -3,13 +3,12 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-import {
-    Intro,
-    About,
-    Portfolio,
-    Skills,
-    Contact
-} from './components/sections';
+
+import Intro from './components/Intro';
+import About from './components/About';
+import Portfolio from './components/Portfolio';
+import Skills from './components/Skills';
+import Contact from './components/Contact';
 
 import theme from './theme';
 

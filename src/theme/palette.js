@@ -26,15 +26,14 @@ const palette = {
         secondary: brown[400], // not used
         tertiary: '', // not used
 
-        sections: {
-            intro: grey[100],
-            about: sectionBgColor,
-            portfolio: sectionBgColor,
-            skills: sectionBgColor,
-            contact: sectionBgColor,
+        paper: grey[100],
 
-            paper: grey[100],
-        },
+        intro: grey[100],
+        about: sectionBgColor,
+        skills: sectionBgColor,
+        contact: sectionBgColor,
+        portfolio: sectionBgColor,
+
         navBar: grey[800],
         footer: grey[900],
     },
