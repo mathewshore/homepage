@@ -8,18 +8,21 @@ import assign from 'lodash/assign';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
 // import TextLink from '../../../common/TextLink';
 // import Table from '../../../common/Table';
+
 import UserBlock from './UserBlock';
 import StatusBlock from './StatusBlock';
 import OpponentBlock from './OpponentBlock';
 import tools from './tools';
+import Description from './Description';
 
 
 const styles = ({ spacing }) => ({
     rpsGameContainer: {
+        display: 'flex',
+        justifyContent: 'center',
         marginTop: spacing.unit * 5
     },
     sourceCodeTypography: {
@@ -82,14 +85,18 @@ class RockPaperScissors extends Component {
             return RESULT_TYPES.DRAW;
         }
         const tool = find(tools, { value: userTool });
-        return (tool.beats === opponentTool) ? RESULT_TYPES.WIN : RESULT_TYPES.LOOSE;
+        return (tool.beats === opponentTool)
+            ? RESULT_TYPES.WIN
+            : RESULT_TYPES.LOOSE;
     }
 
     getResultText(result) {
         if (result === RESULT_TYPES.DRAW) {
             return 'It is a Draw.';
         }
-        return result === RESULT_TYPES.WIN ? 'You are Victorious!' : 'You were Defeated.';
+        return result === RESULT_TYPES.WIN
+            ? 'You are Victorious!'
+            : 'You were Defeated.';
     }
 
     getUpdateStats = result => {
@@ -128,41 +135,29 @@ class RockPaperScissors extends Component {
             <div>
                 <Grid container spacing={24}>
                     <Grid item xs={12} sm={4} md={3}>
-                        <Typography variant="body2">
-                            Wanted to play around with animations combined with some simple
-                            user interactions enabled by React. My 7th sense told be me to
-                            tackle this issue in a playful approach and I ended up creating
-                            the old classic – Rock Paper Scissors. Do you have what it
-                            takes to beat the opponent before it takes over the world?!
-                        </Typography>
+                        <Description />
                     </Grid>
                     <Grid item xs={12} sm={8} md={9}>
                         {/* <Table
                             dataMapping={dataMapping}
                             data={[this.state.stats]}
                         /> */}
-                        <Grid container className={classes.rpsGameContainer}>
-                            <Grid item xs={4}>
-                                <UserBlock
-                                    userTool={userTool}
-                                    onToolClick={this.onToolClick}
-                                />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <StatusBlock
-                                    userTool={userTool}
-                                    animationToggled={animationToggled}
-                                    resultText={this.state.resultText}
-                                    onPlayAgainClick={this.nullifySelections}
-                                />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <OpponentBlock
-                                    opponentTool={this.state.opponentTool}
-                                    animationToggled={animationToggled}
-                                />
-                            </Grid>
-                        </Grid>
+                        <div className={classes.rpsGameContainer}>
+                            <UserBlock
+                                userTool={userTool}
+                                onToolClick={this.onToolClick}
+                            />
+                            <StatusBlock
+                                userTool={userTool}
+                                animationToggled={animationToggled}
+                                resultText={this.state.resultText}
+                                onPlayAgainClick={this.nullifySelections}
+                            />
+                            <OpponentBlock
+                                opponentTool={this.state.opponentTool}
+                                animationToggled={animationToggled}
+                            />
+                        </div>
                     </Grid>
                 </Grid>
             </div>

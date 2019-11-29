@@ -22,7 +22,7 @@ const styles = ({ spacing }) => ({
 });
 
 const ToolButton = props => {
-    const { classes, tool } = props;
+    const { classes } = props;
 
     const buttonClassNames = [classes.buttonRoot];
     if (props.selected) {
@@ -31,7 +31,7 @@ const ToolButton = props => {
 
     return (
         <Tooltip
-            title={tool.value}
+            title={props.tool.value}
             placement={props.tooltipPlacement}
         >
             <span>
@@ -57,7 +57,7 @@ ToolButton.propTypes = {
     classes: PropTypes.object.isRequired,
     tooltipPlacement: PropTypes.string,
     disabled: PropTypes.bool,
-    tool: PropTypes.object,
+    tool: PropTypes.object, // todo: define shape
     onClick: PropTypes.func,
     children: PropTypes.element
 };

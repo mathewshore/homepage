@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import map from 'lodash/map';
 import isNil from 'lodash/isNil';
 

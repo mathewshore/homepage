@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import join from 'lodash/join';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
@@ -11,12 +12,6 @@ const styles = ({ breakpoints, spacing }) => ({
         marginRight: 'auto',
         width: '100%',
 
-        [breakpoints.up('xs')]: {
-            maxWidth: spacing.unit * 67.5 // 540px,
-        },
-        [breakpoints.up('sm')]: {
-            maxWidth: spacing.unit * 90, // 720px,
-        },
         [breakpoints.up('md')]: {
             maxWidth: spacing.unit * 120, // 960px,
         },
@@ -28,8 +23,13 @@ const styles = ({ breakpoints, spacing }) => ({
 
 const Container = (props) => {
     const { classes, className, children } = props;
+    const classNames = [classes.container];
+    if (className) {
+        classNames.push(className);
+    }
+
     return (
-        <div className={`${classes.container}${className ? ` ${className}` : ''}`}>
+        <div className={join(classNames, ' ')}>
             {children}
         </div>
     );

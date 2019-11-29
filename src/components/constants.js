@@ -12,7 +12,6 @@ export const SECTIONS = {
     CONTACT: 'contact'
 };
 
-// Store element z-indexes here.
 export const Z_INDEX = {
     INTRO: 0,
     NAV_BAR: 10,

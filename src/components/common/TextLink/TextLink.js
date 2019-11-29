@@ -46,7 +46,7 @@ TextLink.defaultProps = {
 };
 
 TextLink.propTypes = {
-    classes: PropTypes.array.isRequired,
+    classes: PropTypes.object.isRequired,
     href: PropTypes.string,
     onClick: PropTypes.func,
     children: PropTypes.any,

@@ -24,7 +24,7 @@ const styles = ({ palette }) => ({
 
 class Portfolio extends Component {
     state = {
-        portfolioItemId: 'snake',
+        portfolioItemId: 'rps',
     };
 
     togglePortfolioModal = portfolioItemId => () => {

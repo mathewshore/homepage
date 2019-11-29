@@ -12,26 +12,13 @@ import ModalContent from './ModalContent';
 import ModalFooter from './ModalFooter';
 
 
-const styles = ({ spacing, breakpoints }) => ({
+const styles = {
     modalPaper: {
         position: 'relative',
         height: '100vh',
         overflow: 'auto',
-
-        [breakpoints.down('md')]: {
-            margin: `${spacing.unit * 3}px 0`,
-            height: `calc(100vh - ${spacing.unit * 3 * 2}px)`,
-        },
-        [breakpoints.down('sm')]: {
-            margin: `${spacing.unit * 1.5}px 0`,
-            height: `calc(100vh - ${spacing.unit * 1.5 * 2}px)`,
-        },
-        [breakpoints.down('xs')]: {
-            margin: 0,
-            height: '100vh'
-        },
-    },
-});
+    }
+};
 
 class Modal extends Component {
     componentDidMount() {

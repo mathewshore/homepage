@@ -9,13 +9,11 @@ const styles = ({ breakpoints, spacing }) => ({
         overflow: 'auto',
         background: 'white',
         height: `calc(100vh - ${spacing.unit * 21}px)`,
+
         [breakpoints.down('md')]: {
-            height: `calc(100vh - ${spacing.unit * 25}px)`,
+            height: `calc(100vh - ${spacing.unit * 19}px)`,
         },
         [breakpoints.down('sm')]: {
-            height: `calc(100vh - ${spacing.unit * 20}px)`,
-        },
-        [breakpoints.down('xs')]: {
             height: `calc(100vh - ${spacing.unit * 17}px)`,
         }
     }

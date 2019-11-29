@@ -7,15 +7,26 @@ import Description from './Description';
 import streamPortalImage from '../portfolio_images/stream_portal_portfolio.png';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, breakpoints }) => ({
     container: {
-        display: 'flex'
-    },
-    imageContainer: {
-        // todo: define container width
+        [breakpoints.up('md')]: {
+            display: 'flex'
+        },
     },
     landingPageImage: {
-        width: '100%'
+        width: '100%',
+        [breakpoints.up('xs')]: {
+            maxWidth: spacing.unit * 67.5 // 540px
+        },
+        [breakpoints.up('sm')]: {
+            maxWidth: spacing.unit * 70 // 560px
+        },
+        [breakpoints.up('md')]: {
+            minWidth: spacing.unit * 70 // 560px
+        },
+        [breakpoints.up('lg')]: {
+            minWidth: spacing.unit * 75 // 600px
+        },
     },
 });
 
@@ -24,7 +35,7 @@ const StreamPortal = props => {
     return (
         <div className={classes.container}>
             <Description />
-            <div className={classes.imageContainer}>
+            <div>
                 <img
                     className={classes.landingPageImage}
                     src={streamPortalImage}
