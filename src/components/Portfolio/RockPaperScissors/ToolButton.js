@@ -7,31 +7,48 @@ import join from 'lodash/join';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
-import grey from '@material-ui/core/colors/grey';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, palette }) => ({
     buttonRoot: {
         margin: `${spacing.unit * 0.5}px ${spacing.unit}px`,
         background: '#fff',
+
         '&.selected': {
-            border: `2px solid ${grey[400]}`,
+            border: `2px solid ${palette.primary.light}`,
             background: '#fff'
-        }
-    },
+        },
+        '&.bg-transparent': {
+            background: palette.transparent
+        },
+    }
 });
 
 const ToolButton = props => {
-    const { classes } = props;
+    const {
+        classes,
+        className,
+        tool: {
+            value,
+            Icon
+        }
+    } = props;
 
     const buttonClassNames = [classes.buttonRoot];
+
+    if (className) {
+        buttonClassNames.push(className);
+    }
     if (props.selected) {
         buttonClassNames.push('selected');
+    }
+    if (props.noBgColor) {
+        buttonClassNames.push('bg-transparent')
     }
 
     return (
         <Tooltip
-            title={props.tool.value}
+            title={value}
             placement={props.tooltipPlacement}
         >
             <span>
@@ -39,23 +56,31 @@ const ToolButton = props => {
                     {...pick(props, [
                         'disabled',
                         'onClick',
-                        'children'
+                        'variant'
                     ])}
-                    variant="fab"
                     classes={{ root: join(buttonClassNames, ' ') }}
-                />
+                >
+                    <Icon
+                        {...pick(props, [
+                            'withLargeIcon',
+                            'selected'
+                        ])}
+                    />
+                </Button>
             </span>
         </Tooltip>
     );
 };
 
 ToolButton.defaultProps = {
-    tooltipPlacement: 'right'
+    tooltipPlacement: 'right',
+    variant: 'fab'
 };
 
 ToolButton.propTypes = {
     classes: PropTypes.object.isRequired,
     tooltipPlacement: PropTypes.string,
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     tool: PropTypes.object, // todo: define shape
     onClick: PropTypes.func,

@@ -1,8 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-import size from 'lodash/size';
-import join from 'lodash/join';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
@@ -20,15 +17,7 @@ const getStatusText = (resultText, animationToggled) => {
             ? 'Opponent is choosing'
             : 'Choose your tool';
     }
-
-    // Todo: simplify the text formatting.
-    const textStrings = resultText.split(' ');
-    const result = textStrings.splice((size(textStrings) - 1), 1);
-    return (
-        <Fragment>
-            {join(textStrings, ' ')} <b>{result}</b>
-        </Fragment>
-    );
+    return <b>{resultText}</b>;
 };
 
 const StatusText = (props) => {
@@ -44,8 +33,7 @@ const StatusText = (props) => {
 StatusText.propTypes = {
     userTool: PropTypes.string,
     animationToggled: PropTypes.bool,
-    resultText: PropTypes.string,
-    onPlayAgainClick: PropTypes.func.isRequired
+    resultText: PropTypes.string
 };
 
 export default withStyles(styles)(StatusText);

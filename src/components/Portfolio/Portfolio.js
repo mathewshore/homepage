@@ -49,7 +49,6 @@ class Portfolio extends Component {
                                 {...omit(item, ['id'])}
                                 onClick={this.togglePortfolioModal(item.id)}
                             />
-                            {/* {this.renderPortfolioItemContent(item)} */}
                         </Grid>
                     ))}
                 </Grid>

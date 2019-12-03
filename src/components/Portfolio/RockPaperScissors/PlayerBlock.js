@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography';
 
 
 const styles = ({ spacing }) => ({
-    playerBlockContainer: {
+    container: {
         textAlign: 'center'
     },
-    blockTitleRoot: {
+    titleTypographyRoot: {
         marginBottom: spacing.unit * 2
     },
 });
@@ -18,16 +18,14 @@ const PlayerBlock = props => {
     const { classes } = props;
 
     return (
-        <div className={classes.playerBlockContainer}>
+        <div className={classes.container}>
             <Typography
                 variant="display1"
-                classes={{ root: classes.blockTitleRoot }}
+                classes={{ root: classes.titleTypographyRoot }}
             >
                 {props.title}
             </Typography>
-            <div>
-                {props.children}
-            </div>
+            {props.children}
         </div>
     );
 };

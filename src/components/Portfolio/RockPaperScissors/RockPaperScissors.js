@@ -7,49 +7,27 @@ import get from 'lodash/get';
 import assign from 'lodash/assign';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from '@material-ui/core/Grid';
 
-// import TextLink from '../../../common/TextLink';
-// import Table from '../../../common/Table';
-
-import UserBlock from './UserBlock';
-import StatusBlock from './StatusBlock';
-import OpponentBlock from './OpponentBlock';
+import User from './User';
+import GameStatus from './GameStatus';
+import Opponent from './Opponent';
 import tools from './tools';
 import Description from './Description';
 
+import { RESULT_TYPES } from './constants';
+
 
 const styles = ({ spacing }) => ({
+    container: {
+        display: 'flex'
+    },
     rpsGameContainer: {
         display: 'flex',
         justifyContent: 'center',
+        margin: 'auto',
         marginTop: spacing.unit * 5
-    },
-    sourceCodeTypography: {
-        marginTop: spacing.unit
     }
 });
-
-const RESULT_TYPES = {
-    WIN: 'w',
-    LOOSE: 'l',
-    DRAW: 'd'
-};
-
-// const dataMapping = [
-//     {
-//         dataKey: RESULT_TYPES.WIN,
-//         label: 'Victories'
-//     },
-//     {
-//         dataKey: RESULT_TYPES.DRAW,
-//         label: 'Draws'
-//     },
-//     {
-//         dataKey: RESULT_TYPES.LOOSE,
-//         label: 'Defeats'
-//     }
-// ];
 
 const nullifiedGameState = {
     userTool: null,
@@ -92,11 +70,11 @@ class RockPaperScissors extends Component {
 
     getResultText(result) {
         if (result === RESULT_TYPES.DRAW) {
-            return 'It is a Draw.';
+            return 'Draw';
         }
         return result === RESULT_TYPES.WIN
-            ? 'You are Victorious!'
-            : 'You were Defeated.';
+            ? 'You won!'
+            : 'You lost';
     }
 
     getUpdateStats = result => {
@@ -132,34 +110,24 @@ class RockPaperScissors extends Component {
 
         // todo: split description into separate component
         return (
-            <div>
-                <Grid container spacing={24}>
-                    <Grid item xs={12} sm={4} md={3}>
-                        <Description />
-                    </Grid>
-                    <Grid item xs={12} sm={8} md={9}>
-                        {/* <Table
-                            dataMapping={dataMapping}
-                            data={[this.state.stats]}
-                        /> */}
-                        <div className={classes.rpsGameContainer}>
-                            <UserBlock
-                                userTool={userTool}
-                                onToolClick={this.onToolClick}
-                            />
-                            <StatusBlock
-                                userTool={userTool}
-                                animationToggled={animationToggled}
-                                resultText={this.state.resultText}
-                                onPlayAgainClick={this.nullifySelections}
-                            />
-                            <OpponentBlock
-                                opponentTool={this.state.opponentTool}
-                                animationToggled={animationToggled}
-                            />
-                        </div>
-                    </Grid>
-                </Grid>
+            <div className={classes.container}>
+                <Description stats={this.state.stats} />
+                <div className={classes.rpsGameContainer}>
+                    <User
+                        userTool={userTool}
+                        onToolClick={this.onToolClick}
+                    />
+                    <GameStatus
+                        userTool={userTool}
+                        animationToggled={animationToggled}
+                        resultText={this.state.resultText}
+                        onPlayAgainClick={this.nullifySelections}
+                    />
+                    <Opponent
+                        opponentTool={this.state.opponentTool}
+                        animationToggled={animationToggled}
+                    />
+                </div>
             </div>
         );
     }

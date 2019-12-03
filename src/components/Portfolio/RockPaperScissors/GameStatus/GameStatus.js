@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import pick from 'lodash/pick';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -10,25 +9,24 @@ import Typography from '@material-ui/core/Typography';
 import StatusText from './StatusText';
 
 
-const styles = ({ spacing, breakpoints }) => ({
+const styles = ({ spacing }) => ({
     container: {
-        // todo: define minwidth for media screens
         minWidth: spacing.unit * 25,
         textAlign: 'center'
     },
-    versusTextRoot: {
+    versusTypographyRoot: {
         marginTop: spacing.unit * 4
     }
 });
 
-const StatusBlock = props => {
+const GameStatus = props => {
     const { classes } = props;
 
     return (
         <div className={classes.container}>
             <Typography
                 variant="display2"
-                classes={{ root: classes.versusTextRoot }}
+                classes={{ root: classes.versusTypographyRoot }}
             >
                 VS
             </Typography>
@@ -46,11 +44,11 @@ const StatusBlock = props => {
     );
 };
 
-StatusBlock.propTypes = {
+GameStatus.propTypes = {
     userTool: PropTypes.string,
     animationToggled: PropTypes.bool,
     resultText: PropTypes.string,
     onPlayAgainClick: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(StatusBlock);
+export default withStyles(styles)(GameStatus);

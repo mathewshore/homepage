@@ -5,25 +5,27 @@ import map from 'lodash/map';
 import pick from 'lodash/pick';
 
 import PlayerBlock from '../PlayerBlock';
+import ToolContainer from '../ToolContainer';
 import tools from '../tools';
 import OpponentBlockContent from './OpponentBlockContent';
 
 
-const OpponentBlock = props => (
+const Opponent = props => (
     <PlayerBlock title="Opponent">
-        <OpponentBlockContent
-            {...pick(props, [
-                'animationToggled',
-                'opponentTool'
-            ])}
-        />
+        <ToolContainer>
+            <OpponentBlockContent
+                {...pick(props, [
+                    'animationToggled',
+                    'opponentTool'
+                ])}
+            />
+        </ToolContainer>
     </PlayerBlock>
 );
 
-OpponentBlock.propTypes = {
-    classes: PropTypes.object.isRequired,
+Opponent.propTypes = {
     animationToggled: PropTypes.bool,
     opponentTool: PropTypes.oneOf([null, ...map(tools, 'value')])
 };
 
-export default OpponentBlock;
+export default Opponent;

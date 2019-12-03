@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import map from 'lodash/map';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import Tooltip from '@material-ui/core/Tooltip';
-import HelpOutline from '@material-ui/icons/HelpOutline';
 import grey from '@material-ui/core/colors/grey';
+import Tooltip from '@material-ui/core/Tooltip';
+import QuestionMarkIcon from '@material-ui/icons/HelpOutline';
 
 import RPSAnimation from '../RPSAnimation';
 import ToolButton from '../ToolButton';
@@ -15,31 +14,35 @@ import tools from '../tools';
 import { getTool } from '../helpers';
 
 
-const styles = {
-    waitingIcon: {
-        fontSize: 56,
-        fill: grey[600]
+const styles = ({
+    questionMarkIcon: {
+        fontSize: 80,
+        fill: grey[500]
     }
-};
+});
 
 const OpponentBlockContent = (props) => {
     if (props.animationToggled) {
-        return <RPSAnimation />;
+        return <RPSAnimation withLargeIcon />;
     }
 
+    const { classes } = props;
     const tool = getTool(props.opponentTool);
+
     if (tool) {
         return (
-            <ToolButton disabled tool={tool}>
-                {tool.icon}
-            </ToolButton>
+            <ToolButton
+                disabled
+                noBgColor
+                withLargeIcon
+                tool={tool}
+            />
         );
     }
 
-    const { classes } = props;
     return (
         <Tooltip title="Opponent is waiting for your selection.">
-            <HelpOutline className={classes.waitingIcon} />
+            <QuestionMarkIcon className={classes.questionMarkIcon} />
         </Tooltip>
     );
 };

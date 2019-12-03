@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import join from 'lodash/join';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
@@ -12,10 +13,15 @@ const styles = ({ spacing, breakpoints }) => ({
 });
 
 const DescriptionContainer = props => {
-    const { classes } = props;
+    const { classes, className } = props;
+
+    const classNames = [classes.container];
+    if (className) {
+        classNames.push(className);
+    }
 
     return (
-        <div className={classes.container}>
+        <div className={join(classNames, ' ')}>
             {props.children}
         </div>
     );
@@ -23,6 +29,7 @@ const DescriptionContainer = props => {
 
 DescriptionContainer.propTypes = {
     classes: PropTypes.object.isRequired,
+    className: PropTypes.string,
     children: PropTypes.any
 };
 

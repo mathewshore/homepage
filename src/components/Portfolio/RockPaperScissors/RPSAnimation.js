@@ -32,12 +32,14 @@ export default class RPSAnimation extends React.Component {
 
     render() {
         const tool = tools[this.state.toolIndex];
+
         return (
-            <div>
-                <ToolButton disabled tool={tool}>
-                    {tool.icon}
-                </ToolButton>
-            </div>
+            <ToolButton
+                disabled
+                noBgColor
+                withLargeIcon={this.props.withLargeIcon}
+                tool={tool}
+            />
         )
     }
 }
