@@ -29,7 +29,7 @@ const Description = props => {
 
     return (
         <DescriptionContainer>
-            <Typography variant="body2">
+            <Typography>
                 Stream Portal is my demo web app project for calling external APIs
                 and rendering live data in single page application architecture. The longterm
                 idea is to combine multiple streaming platforms and have only one website for

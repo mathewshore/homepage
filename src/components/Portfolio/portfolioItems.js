@@ -9,7 +9,7 @@ import Snake from './Snake';
 
 // ToDo: Add proper portfolio item images.
 import testImg from '../../bg_intro.jpg';
-import fledgeImageSrc from './portfolio_images/fledge_thumbnail_1280x720.png';
+// import fledgeImageSrc from './portfolio_images/fledge_thumbnail_1280x720.png';
 import streamPortalImageSrc from './portfolio_images/stream_portal_thumbnail_1280x720.png';
 import rpsImageSrc from './portfolio_images/rps_thumbnail_1280x720.png';
 import tttImageSrc from './portfolio_images/tic_tac_toe_thumbnail_1280x720.png';
@@ -21,12 +21,14 @@ const portfolioUrlBase = `${gitUrlBase}/homepage/tree/master/src/components/sect
 
 // ToDo: Add descriptive tags to portfolio items
 //       e.g. Adobe Illustrator, Mobile and Flat Design for Fledge.
+
 const portfolioItems = [
     {
+        // ToDo: Add proper snake portfolio image.
         id: 'snake',
         title: 'Snake',
         imageSrc: testImg,
-        description: 'The old classic, snake',
+        description: 'The old Nokia phone classic',
         Component: Snake,
         FooterContent: (
             <PortfolioModalFooterContent
@@ -61,24 +63,19 @@ const portfolioItems = [
     //         />
     //     )
     // },
-    {
-        id: 'fledge',
-        title: 'Fledge the Hedgehog',
-        imageSrc: fledgeImageSrc,
-        description: 'Mobile game for Apple phones',
-        Component: () => <div>Add component here</div>,
-        // FooterContent: (
-        //     <div>
-        //         <IconButton
-        //             component="a"
-        //             target="_blank"
-        //             href="https://github.com/madzesu/stream-portal"
-        //         >
-        //             <GitHubIcon />
-        //         </IconButton>
-        //     </div>
-        // )
-    },
+    // {
+    //     id: 'fledge',
+    //     title: 'Fledge the Hedgehog',
+    //     imageSrc: fledgeImageSrc,
+    //     description: 'Mobile game for Apple phones',
+    //     Component: () => <div>Add component here</div>,
+    //     FooterContent: (
+    //         <PortfolioModalFooterContent
+    //             itemTitle="Stream Portal"
+    //             href={`${gitUrlBase}/stream-portal`}
+    //         />
+    //     )
+    // },
     {
         id: 'rps',
         title: 'Rock Paper Scissors',

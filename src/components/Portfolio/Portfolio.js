@@ -24,7 +24,7 @@ const styles = ({ palette }) => ({
 
 class Portfolio extends Component {
     state = {
-        portfolioItemId: 'rps',
+        portfolioItemId: undefined,
     };
 
     togglePortfolioModal = portfolioItemId => () => {
@@ -34,6 +34,8 @@ class Portfolio extends Component {
     render() {
         // ToDo: Upgrade react version and use hook here.
         // ToDo: Add tags to portfolio items.
+        // ToDo: Add url hash router for items to enable browser back feature.
+
         const { classes } = this.props;
         const portfolioItem = find(portfolioItems, { id: this.state.portfolioItemId });
 
@@ -44,7 +46,7 @@ class Portfolio extends Component {
             >
                 <Grid container spacing={24}>
                     {map(portfolioItems, (item) => (
-                        <Grid item md={6} xs={12} key={item.id}>
+                        <Grid item sm={6} xs={12} key={item.id}>
                             <PortfolioItem
                                 {...omit(item, ['id'])}
                                 onClick={this.togglePortfolioModal(item.id)}
@@ -54,7 +56,7 @@ class Portfolio extends Component {
                 </Grid>
                 {portfolioItem && (
                     <Modal
-                        onClose={this.togglePortfolioModal(null)}
+                        onClose={this.togglePortfolioModal()}
                         title={portfolioItem.title}
                         description={portfolioItem.longDescription}
                         ModalFooterContent={portfolioItem.FooterContent}
@@ -68,7 +70,7 @@ class Portfolio extends Component {
 }
 
 Portfolio.propTypes = {
-    classes: PropTypes.object
+    classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Portfolio);

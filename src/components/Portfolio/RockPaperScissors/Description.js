@@ -43,10 +43,7 @@ const Description = props => {
 
     return (
         <DescriptionContainer className={classes.container}>
-            <Typography
-                variant="body2"
-                className={classes.bodyTypography}
-            >
+            <Typography className={classes.bodyTypography}>
                 Wanted to play around with animations combined with some simple
                 user interactions enabled by React. My 7th sense told be me to
                 tackle this issue in a playful approach and I ended up creating

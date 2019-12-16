@@ -30,8 +30,8 @@ const styles = theme => ({
     },
     navContent: {
         display: 'flex',
-        height: theme.spacing.unit * 10,
         alignItems: 'center',
+        height: theme.spacing.unit * 9,
 
         [theme.breakpoints.up('xs')]: {
             padding: `0 ${theme.spacing.unit * 4}px`,
@@ -41,9 +41,11 @@ const styles = theme => ({
         },
         [theme.breakpoints.up('md')]: {
             padding: `0 ${theme.spacing.unit * 8}px`,
+            height: theme.spacing.unit * 10,
         },
         [theme.breakpoints.up('lg')]: {
             padding: `0 ${theme.spacing.unit * 10}px`,
+            height: theme.spacing.unit * 12,
         },
     }
 });
@@ -51,7 +53,7 @@ const styles = theme => ({
 const sectionIds = map(SECTIONS, section => section);
 
 const getSectionActivationOffset = () => {
-    // ToDo: Scale offset according to mediascreen.
+    // ToDo: Scale offset according to mediascreens.
     return 200;
 };
 
@@ -69,7 +71,9 @@ const getActiveSection = () => {
 };
 
 class NavBar extends Component {
-    state = { activeSection: null };
+    state = {
+        activeSection: null
+    };
 
     componentDidMount() {
         this.setState({ activeSection: getActiveSection() });

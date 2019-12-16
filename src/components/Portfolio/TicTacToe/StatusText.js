@@ -6,12 +6,13 @@ import Typography from '@material-ui/core/Typography';
 
 
 const styles = ({ spacing }) => ({
-    textContainerRoot: {
+    typographyRoot: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 20,
-        marginBottom: spacing.unit
+        marginBottom: spacing.unit * 1.5,
+        height: spacing.unit * 5
     }
 });
 
@@ -19,10 +20,7 @@ const StatusText = props => {
     const { classes } = props;
     
     return (
-        <Typography
-            variant="body2"
-            classes={{ root: classes.textContainerRoot }}
-        >
+        <Typography classes={{ root: classes.typographyRoot }}>
             {props.children}
         </Typography>
     );

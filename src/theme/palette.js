@@ -17,9 +17,9 @@ const palette = {
         dark: '#399984'
     },
     secondary: {
-        light: red[200],
-        main: red[400],
-        dark: red[800],
+        light: green[100],
+        main: green[400],
+        dark: green[800],
     },
     background: {
         primary: grey[200], // not used

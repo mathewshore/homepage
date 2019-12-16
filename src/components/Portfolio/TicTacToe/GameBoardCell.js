@@ -18,8 +18,9 @@ const styles = ({ spacing, shadows }) => ({
         cursor: 'pointer',
         transition: 'all 0.3s',
         boxShadow: shadows[6],
+        background: grey[50],
         '&:hover': {
-            background: grey[100]
+            background: grey[300]
         },
         '&.disabled': {
             cursor: 'initial',

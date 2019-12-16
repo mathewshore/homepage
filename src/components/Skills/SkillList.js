@@ -39,7 +39,6 @@ const SkillList = props => {
                 {map(props.skills, ({ name }, i) => (
                     <Typography
                         key={i}
-                        variant="body2"
                         classes={{ root: classes.listItem }}
                     >
                         {name}

@@ -36,6 +36,8 @@ const nullifiedGameState = {
     resultText: null
 };
 
+const getRandomTool = () => get(tools[random(0, 2)], 'value');
+
 class RockPaperScissors extends Component {
     state = {
         ...nullifiedGameState,
@@ -51,12 +53,11 @@ class RockPaperScissors extends Component {
 
     componentWillUnmount() {
         if (this.gameStateTimeoutFunction) {
-            // Stop animation and state update if modal is closed before round is finished.
+            // Stop animation and state update if
+            // modal is closed before round is finished.
             clearTimeout(this.gameStateTimeoutFunction);
         }
     }
-
-    getRandomTool = () => get(tools[random(0, 2)], 'value');
 
     getResult(userTool, opponentTool) {
         if (userTool === opponentTool) {
@@ -87,7 +88,7 @@ class RockPaperScissors extends Component {
         this.setState({ userTool, animationToggled: true });
 
         this.gameStateTimeoutFunction = setTimeout(() => {
-            const opponentTool = this.getRandomTool();
+            const opponentTool = getRandomTool();
             const result = this.getResult(userTool, opponentTool);
 
             this.setState({
@@ -108,7 +109,6 @@ class RockPaperScissors extends Component {
         const { classes } = this.props;
         const { userTool, animationToggled } = this.state;
 
-        // todo: split description into separate component
         return (
             <div className={classes.container}>
                 <Description stats={this.state.stats} />

@@ -9,7 +9,7 @@ import TextHeader from '../common/TextHeader';
 
 
 const styles = ({ spacing, palette }) => ({
-    navLink: {
+    container: {
         display: 'block',
         cursor: 'pointer',
         textTransform: 'uppercase',
@@ -55,24 +55,24 @@ const styles = ({ spacing, palette }) => ({
     },
 });
 
-const getExtraClassNames = (isActive, withDarkColor) => {
-    const classNames = [' '];
-    const textColorClass = withDarkColor ? 'dark' : 'light';
-    classNames.push(textColorClass);
-    if (isActive) {
-        classNames.push('active');
-    }
-    return join(classNames, ' ');
-};
-
 const NavLink = props => {
     const { classes } = props;
-    const additionalClasses = getExtraClassNames(props.isActive, props.withDarkColor);
+    const containerClassNames = [classes.container];
+    const textClassNames = [classes.navLinkText];
+    const textTypographyClassNames = [classes.navLinkTypography];
+
+    if (props.isActive) {
+        containerClassNames.push('active');
+    }
+    if (props.isMobile) {
+        containerClassNames.push('mobile');
+        textTypographyClassNames.push('mobile');
+    }
+
     const scrollOffset = spacing.unit * (props.first ? -3 : -10);
-    const mobileClassName = props.isMobile ? ' mobile' : '';
                 
     return (
-        <div className={`${classes.navLink}${mobileClassName}${additionalClasses}`}>
+        <div className={join(containerClassNames, ' ')}>
             <Link
                 smooth
                 to={props.linkTo}
@@ -82,8 +82,8 @@ const NavLink = props => {
                 <TextHeader
                     variant="subheading"
                     text={props.text}
-                    className={`${classes.navLinkText}${additionalClasses}`}
-                    typographyClassName={`${classes.navLinkTypography}${mobileClassName}`}
+                    className={join(textClassNames, ' ')}
+                    typographyClassName={join(textTypographyClassNames, ' ')}
                 />
             </Link>
         </div>

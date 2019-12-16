@@ -198,7 +198,7 @@ class TicTacToe extends Component {
 
         return (
             <div className={classes.tttContainer}>
-                <div className={classes.gameContainer}>
+                <div>
                     <StatusText>
                         {withIcon && (
                             <PlayerIcon

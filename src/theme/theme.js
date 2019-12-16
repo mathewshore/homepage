@@ -11,8 +11,6 @@ const theme = createMuiTheme({
         height: 5,
         margin: `${spacing.unit * 2.5}px 0 ${spacing.unit * 4}px`,
         width: `${spacing.unit * 8}px`,
-        // ToDo: define divider background-color in theme/palette and use it here.
-        // backgroundColor: `${blue[400]} !important`,
     },
 });
 

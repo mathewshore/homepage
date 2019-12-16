@@ -6,8 +6,10 @@ import join from 'lodash/join';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, palette }) => ({
     link: {
+        color: palette.primary.dark,
+        textDecoration: 'none',
         '&.with-right-margin': {
             marginRight: spacing.unit * 0.75
         },
@@ -20,6 +22,9 @@ const styles = ({ spacing }) => ({
 const TextLink = props => {
     const { classes } = props;
     const classNames = [classes.link];
+    if (props.className) {
+        classNames.push(props.className);
+    }
     if (props.withRightMargin) {
         classNames.push('with-right-margin');
     }
@@ -30,6 +35,7 @@ const TextLink = props => {
         <a
             {...omit(props, [
                 'classes',
+                'className',
                 'withRightMargin',
                 'withLeftMargin'
             ])}

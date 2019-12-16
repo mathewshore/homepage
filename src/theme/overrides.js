@@ -35,6 +35,12 @@ const overrides = {
     },
     MuiTooltip: {
         ...tooltipPlacementClasses
+    },
+    MuiTypography: {
+        body1: {
+            fontSize: spacing.unit * 2,
+            lineHeight: 1.5
+        }
     }
 };
 
