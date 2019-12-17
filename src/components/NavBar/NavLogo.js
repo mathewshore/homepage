@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import join from 'lodash/join';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-scroll';
@@ -7,29 +8,32 @@ import TextHeader from '../common/TextHeader';
 import { SECTIONS } from '../constants';
 
 
-const styles = ({ palette }) => ({
+const styles = ({ palette, spacing }) => ({
     logoContainer: {
         cursor: 'pointer',
-        transition: 'all 0.3s',
         textDecoration: 'none',
+    },
+    logoText: {
+        transition: 'all 0.3s ease',
         color: palette.text.header.light,
 
         '&:hover': {
             color: palette.primary.light,
         },
-    },
-    logoText: {
-        color: 'inherit',
-
-        '&:hover': {
-            color: 'inherit',
-        },
+        '&.dense': {
+            transform: 'scale(0.9)',
+            marginLeft: -spacing.unit * 1.5
+        }
     }
 });
 
 
 const NavLogo = props => {
     const { classes } = props;
+    const logoTextClassNames = [classes.logoText];
+    if (props.dense) {
+        logoTextClassNames.push('dense');
+    }
 
     return (
         <div className={classes.logoContainer}>
@@ -37,7 +41,7 @@ const NavLogo = props => {
                 <TextHeader
                     variant="display1"
                     text="MATIAS RANTA"
-                    typographyClassName={classes.logoText}
+                    typographyClassName={join(logoTextClassNames, ' ')}
                 />
             </Link>
         </div>

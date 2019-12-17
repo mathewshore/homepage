@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 
 const styles = ({ spacing }) => ({
-    navLinksContainer: {
+    container: {
         marginTop: spacing.unit * 0.5,
         marginLeft: 'auto',
         width: '100%',
@@ -16,7 +16,7 @@ const styles = ({ spacing }) => ({
 const NavLinks = props => {
     const { classes } = props;
     return (
-        <div className={classes.navLinksContainer}>
+        <div className={classes.container}>
             {props.children}
         </div>
     );

@@ -58,15 +58,14 @@ const styles = ({ spacing, palette }) => ({
 const NavLink = props => {
     const { classes } = props;
     const containerClassNames = [classes.container];
-    const textClassNames = [classes.navLinkText];
-    const textTypographyClassNames = [classes.navLinkTypography];
+    const textHeaderClassNames = [classes.navLinkTypography];
 
     if (props.isActive) {
         containerClassNames.push('active');
     }
     if (props.isMobile) {
         containerClassNames.push('mobile');
-        textTypographyClassNames.push('mobile');
+        textHeaderClassNames.push('mobile');
     }
 
     const scrollOffset = spacing.unit * (props.first ? -3 : -10);
@@ -82,8 +81,7 @@ const NavLink = props => {
                 <TextHeader
                     variant="subheading"
                     text={props.text}
-                    className={join(textClassNames, ' ')}
-                    typographyClassName={join(textTypographyClassNames, ' ')}
+                    typographyClassName={join(textHeaderClassNames, ' ')}
                 />
             </Link>
         </div>
@@ -94,11 +92,7 @@ NavLink.propTypes = {
     classes: PropTypes.object.isRequired,
     first: PropTypes.bool,
     linkTo: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    activeSection: PropTypes.oneOfType([
-        PropTypes.oneOf([null]),
-        PropTypes.string
-    ])
+    text: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(NavLink);

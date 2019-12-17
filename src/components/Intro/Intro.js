@@ -35,7 +35,7 @@ const styles = ({ palette, spacing, breakpoints }) => ({
             padding: `${spacing.unit * 3}px ${spacing.unit * 8}px 0`,
         },
         [breakpoints.up('lg')]: {
-            padding: `${spacing.unit * 3}px ${spacing.unit * 10}px 0`,
+            padding: `${spacing.unit * 4}px ${spacing.unit * 10}px 0`,
         },
     },
     introFixedContainer: {

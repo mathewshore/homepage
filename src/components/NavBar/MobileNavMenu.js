@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Z_INDEX } from '../constants';
 import Backdrop from '../common/Backdrop';
+import { Z_INDEX } from '../constants';
 
 
 const styles = ({ palette, spacing }) => ({
@@ -33,7 +33,9 @@ const styles = ({ palette, spacing }) => ({
 });
 
 class MobileNavMenu extends Component {
-    state = { isOpen: false };
+    state = {
+        isOpen: false
+    };
 
     onMenuToggleClick = () => {
         this.setState({ isOpen: !this.state.isOpen });

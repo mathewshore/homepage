@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+
+import join from 'lodash/join';
 import map from 'lodash/map';
+import isNil from 'lodash/isNil';
 import last from 'lodash/last';
 import includes from 'lodash/includes';
 import pull from 'lodash/pull';
@@ -16,7 +19,7 @@ import NavLogo from './NavLogo';
 import MobileNavMenu from './MobileNavMenu';
 
 
-const styles = theme => ({
+const styles = ({ spacing, palette, shadows, breakpoints }) => ({
     navBarContainer: {
         zIndex: Z_INDEX.NAV_BAR,
         position: 'fixed',
@@ -25,28 +28,40 @@ const styles = theme => ({
         width: '100%',
 
         transition: 'all 0.3s',
-        background: theme.palette.background.navBar,
-        boxShadow: theme.shadows[5]
+        background: palette.background.navBar,
+        boxShadow: shadows[5]
     },
     navContent: {
         display: 'flex',
         alignItems: 'center',
-        height: theme.spacing.unit * 9,
+        height: spacing.unit * 9,
+        transition: 'height 0.5s ease',
 
-        [theme.breakpoints.up('xs')]: {
-            padding: `0 ${theme.spacing.unit * 4}px`,
+        [breakpoints.up('xs')]: {
+            padding: `0 ${spacing.unit * 4}px`,
         },
-        [theme.breakpoints.up('sm')]: {
-            padding: `0 ${theme.spacing.unit * 6}px`,
+        [breakpoints.up('sm')]: {
+            padding: `0 ${spacing.unit * 6}px`,
         },
-        [theme.breakpoints.up('md')]: {
-            padding: `0 ${theme.spacing.unit * 8}px`,
-            height: theme.spacing.unit * 10,
+        [breakpoints.up('md')]: {
+            padding: `0 ${spacing.unit * 8}px`,
+            height: spacing.unit * 10,
         },
-        [theme.breakpoints.up('lg')]: {
-            padding: `0 ${theme.spacing.unit * 10}px`,
-            height: theme.spacing.unit * 12,
+        [breakpoints.up('lg')]: {
+            padding: `0 ${spacing.unit * 10}px`,
+            height: spacing.unit * 12,
         },
+
+        '&.dense': {
+            height: spacing.unit * 7.5,
+
+            [breakpoints.up('md')]: {
+                height: spacing.unit * 8.5,
+            },
+            [breakpoints.up('lg')]: {
+                height: spacing.unit * 9,
+            },
+        }
     }
 });
 
@@ -90,15 +105,23 @@ class NavBar extends Component {
 
     render() {
         const { classes } = this.props;
+        const { activeSection } = this.state;
+
         const isMobile = includes(['xs', 'sm'], this.props.width);
         const NavLinksContainer = isMobile ? MobileNavMenu : NavLinks;
+        const isDense = !isNil(activeSection);
+
+        const navContentClassNames = [classes.navContent];
+        if (isDense) {
+            navContentClassNames.push('dense');
+        }
 
         return (
             <div className={classes.navBarContainer}>
                 <Container>
-                    <div className={classes.navContent}>
-                        <NavLogo />
-                        <NavLinksContainer>
+                    <div className={join(navContentClassNames, ' ')}>
+                        <NavLogo dense={isDense} />
+                        <NavLinksContainer dense={isDense}>
                             {/* Intro section link is not rendered in nav. */}
                             {map(pull(sectionIds, SECTIONS.INTRO), (id, i) => (
                                 <NavLink
@@ -107,7 +130,8 @@ class NavBar extends Component {
                                     first={i === 0}
                                     linkTo={id}
                                     text={id}
-                                    isActive={id === this.state.activeSection}
+                                    isActive={id === activeSection}
+                                    dense={isDense}
                                 />
                             ))}
                         </NavLinksContainer>

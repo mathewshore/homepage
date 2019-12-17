@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import join from 'lodash/join';
 import get from 'lodash/get';
 import size from 'lodash/size';
 import toUpper from 'lodash/toUpper';
@@ -53,10 +55,10 @@ class IntroText extends Component {
     };
 
     componentDidMount = () => {
-        setTimeout(this.activatePhraseIntervals(4000), 500);
+        setTimeout(this.activateIntervals(), 500);
     };
     
-    activatePhraseIntervals = phraseInterval => {
+    activateIntervals = (phraseInterval = 4000) => {
         setInterval(this.setPhraseTransition, phraseInterval)
         setTimeout(() => setInterval(this.changePhrase, phraseInterval), 500);
     };
@@ -65,8 +67,13 @@ class IntroText extends Component {
         this.setState({ phraseIsChanging: true });
     };
 
-    componentWillUnmount = () => {
+    clearInvervals = () => {
         clearInterval(this.changePhrase);
+        clearInterval(this.setPhraseTransition);
+    };
+
+    componentWillUnmount = () => {
+        this.clearInvervals();
     };
 
     changePhrase = () => {
@@ -76,18 +83,12 @@ class IntroText extends Component {
         this.setState({ phraseIndex, phraseIsChanging: false });
     };
 
-    // ToDo: Add onMouseEnter & on 
-    onPhraseMouseEnter = () => {
-        // ToDo: Disable phrase loop.
-    };
-
-    onPhraseMouseExit = () => {
-        // ToDo: Enable phrase loop again.
-    };
-
     render() {
         const { classes } = this.props;
-        // ToDo: Loop different text phrases.
+        const phraseClassNames = [classes.textPhrase];
+        if (this.state.phraseIsChanging) {
+            phraseClassNames.push('animated');
+        }
     
         return (
             <div className={classes.textContainer}>
@@ -96,7 +97,7 @@ class IntroText extends Component {
                 <Divider classes={{ root: classes.dividerRoot }}/>
                 <Typography
                     variant="display1"
-                    classes={{ root: `${classes.textPhrase}${this.state.phraseIsChanging ? ' animated' : ''}` }}
+                    classes={{ root: join(phraseClassNames, ' ') }}
                 >
                     {toUpper(get(textPhrases, this.state.phraseIndex, ''))}
                 </Typography>
