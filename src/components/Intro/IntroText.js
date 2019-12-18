@@ -92,8 +92,14 @@ class IntroText extends Component {
     
         return (
             <div className={classes.textContainer}>
-                <TextHeader variant="display3" text="MATIAS RANTA" />
-                <TextHeader variant="display1" text="SOFTWARE DEVELOPER" />
+                <TextHeader
+                    variant="display3"
+                    text="MATIAS RANTA"
+                />
+                <TextHeader
+                    variant="display1"
+                    text="SOFTWARE DEVELOPER"
+                />
                 <Divider classes={{ root: classes.dividerRoot }}/>
                 <Typography
                     variant="display1"

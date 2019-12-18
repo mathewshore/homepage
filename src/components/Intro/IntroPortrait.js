@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import join from 'lodash/join';
 // todo move img to this folder
 import portraitImage from '../../images/intro_matias.png';
 import withStyles from '@material-ui/core/styles/withStyles';
+
 
 const IMAGE_ROTATION_COUNT = 4;
 
@@ -39,21 +42,27 @@ const styles = ({ breakpoints, spacing }) => ({
 
 class IntroPortrait extends Component {
     state = {
-        portraitShown: false
+        shouldShowImage: false
     };
 
     componentDidMount = () => {
-        setTimeout(() => this.setState({ portraitShown: true }), 0);
+        setTimeout(() => this.setState({ shouldShowImage: true }), 0);
     };
 
     render() {
         const { classes } = this.props;
+
+        const imageClassNames = [classes.introImage];
+        if (this.state.shouldShowImage) {
+            imageClassNames.push('show');
+        }
+
         return (
             <div className={classes.portraitContainer}>
                 <img
                     src={portraitImage}
-                    className={`${classes.introImage}${this.state.portraitShown ? ' show' : ''}`}
-                    alt="Portrait of Matias Ranta"
+                    className={join(imageClassNames, ' ')}
+                    alt="Matias Ranta"
                 />
             </div>
         );

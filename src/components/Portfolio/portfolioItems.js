@@ -7,9 +7,9 @@ import RockPaperScissors from './RockPaperScissors';
 import TicTacToe from './TicTacToe';
 import Snake from './Snake';
 
-// ToDo: Add proper portfolio item images.
-import testImg from '../../bg_intro.jpg';
+// import testImg from '../../bg_intro.jpg';
 // import fledgeImageSrc from './portfolio_images/fledge_thumbnail_1280x720.png';
+import snakeImageSrc from './portfolio_images/snake_thumbnail_1280x720.png';
 import streamPortalImageSrc from './portfolio_images/stream_portal_thumbnail_1280x720.png';
 import rpsImageSrc from './portfolio_images/rps_thumbnail_1280x720.png';
 import tttImageSrc from './portfolio_images/tic_tac_toe_thumbnail_1280x720.png';
@@ -27,7 +27,7 @@ const portfolioItems = [
         // ToDo: Add proper snake portfolio image.
         id: 'snake',
         title: 'Snake',
-        imageSrc: testImg,
+        imageSrc: snakeImageSrc,
         description: 'The old Nokia phone classic',
         Component: Snake,
         FooterContent: (

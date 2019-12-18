@@ -15,7 +15,7 @@ const styles = ({ spacing, palette }) => ({
         textTransform: 'uppercase',
         margin: `0 ${spacing.unit * 2}px`,
         color: palette.text.header.light,
-        transition: 'transform 0.3s ease',
+        transition: 'all 0.3s ease',
         '&:last-of-type': {
             marginRight: 0
         },

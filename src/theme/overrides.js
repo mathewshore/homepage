@@ -39,7 +39,7 @@ const overrides = {
     MuiTypography: {
         body1: {
             fontSize: spacing.unit * 2,
-            lineHeight: 1.5
+            lineHeight: 1.6
         }
     }
 };
