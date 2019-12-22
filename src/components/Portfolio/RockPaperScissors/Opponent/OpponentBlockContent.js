@@ -14,10 +14,13 @@ import tools from '../tools';
 import { getTool } from '../helpers';
 
 
-const styles = ({
+const styles = ({ breakpoints }) => ({
     questionMarkIcon: {
         fontSize: 80,
-        fill: grey[500]
+        fill: grey[500],
+        [breakpoints.down('sm')]: {
+            fontSize: 60
+        }
     }
 });
 

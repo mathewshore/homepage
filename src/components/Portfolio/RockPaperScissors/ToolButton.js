@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 
 
-const styles = ({ spacing, palette }) => ({
+const styles = ({ spacing, palette, breakpoints }) => ({
     buttonRoot: {
         margin: `${spacing.unit * 0.5}px ${spacing.unit}px`,
         background: '#fff',
@@ -21,6 +21,11 @@ const styles = ({ spacing, palette }) => ({
         '&.bg-transparent': {
             background: palette.transparent
         },
+        [breakpoints.down('sm')]: {
+            padding: 12,
+            width: spacing.unit * 6,
+            height: spacing.unit * 6
+        }
     }
 });
 

@@ -5,9 +5,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, breakpoints }) => ({
     statusTypographyRoot: {
-        margin: `${spacing.unit * 2}px 0`
+        margin: `${spacing.unit * 2}px 0`,
+        [breakpoints.down('sm')]: {
+            fontSize: 14
+        }
     }
 });
 

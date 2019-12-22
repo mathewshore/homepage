@@ -7,7 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const styles = ({ spacing, breakpoints }) => ({
     container: {
         [breakpoints.up('md')]: {
-            marginRight: spacing.unit * 3
+            marginRight: spacing.unit * 5
         },
     }
 });

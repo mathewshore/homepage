@@ -9,10 +9,13 @@ import Table from '../../common/Table';
 import { RESULT_TYPES } from './constants';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, breakpoints }) => ({
     container: {
         // todo: adjust for mediascreens
-        width: '30%'
+        width: '30%',
+        [breakpoints.down('lg')]: {
+            width: '100%'
+        }
     },
     bodyTypography: {
         marginBottom: spacing.unit * 3

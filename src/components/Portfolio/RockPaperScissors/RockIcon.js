@@ -7,7 +7,7 @@ import brown from '@material-ui/core/colors/brown';
 import MuiRockIcon from '@material-ui/icons/ThumbUp';
 
 
-const styles = ({
+const styles = ({ breakpoints }) => ({
     icon: {
         color: brown[500],
         transition: 'all 0.4s ease',
@@ -17,6 +17,15 @@ const styles = ({
         },
         '&.large': {
             fontSize: 48
+        },
+        [breakpoints.down('sm')]: {
+            fontSize: 20,
+            '&.selected': {
+                fontSize: 21
+            },
+            '&.large': {
+                fontSize: 36
+            }
         }
     }
 });

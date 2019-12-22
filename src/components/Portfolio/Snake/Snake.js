@@ -27,7 +27,7 @@ const styles = ({ spacing, breakpoints }) => ({
         display: 'flex',
         justifyContent: 'center',
         marginTop: spacing.unit * 3,
-        marginBottom: spacing.unit * 2,
+        marginBottom: spacing.unit * 5,
 
         [breakpoints.up('md')]: {
             marginTop: 0,

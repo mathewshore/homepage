@@ -7,7 +7,7 @@ import green from '@material-ui/core/colors/green';
 import MuiPaperIcon from '@material-ui/icons/Note';
 
 
-const styles = ({
+const styles = ({ breakpoints }) => ({
     icon: {
         transform: 'rotate(-90deg)',
         color: green[400],
@@ -18,6 +18,15 @@ const styles = ({
         },
         '&.large': {
             fontSize: 48
+        },
+        [breakpoints.down('sm')]: {
+            fontSize: 20,
+            '&.selected': {
+                fontSize: 21
+            },
+            '&.large': {
+                fontSize: 36
+            }
         }
     }
 });

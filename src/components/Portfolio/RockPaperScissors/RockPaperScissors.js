@@ -17,15 +17,17 @@ import Description from './Description';
 import { RESULT_TYPES } from './constants';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, breakpoints }) => ({
     container: {
-        display: 'flex'
+        display: 'flex',
+        [breakpoints.down('sm')]: {
+            display: 'block'
+        }
     },
     rpsGameContainer: {
         display: 'flex',
         justifyContent: 'center',
-        margin: 'auto',
-        marginTop: spacing.unit * 5
+        margin: `${spacing.unit * 5}px auto`
     }
 });
 

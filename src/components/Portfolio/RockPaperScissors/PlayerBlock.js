@@ -5,12 +5,16 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, breakpoints }) => ({
     container: {
         textAlign: 'center'
     },
     titleTypographyRoot: {
-        marginBottom: spacing.unit * 2
+        marginBottom: spacing.unit * 2,
+        [breakpoints.down('sm')]: {
+            fontSize: 20,
+            marginBottom: spacing.unit
+        }
     },
 });
 

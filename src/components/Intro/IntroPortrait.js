@@ -1,73 +1,56 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-import join from 'lodash/join';
-// todo move img to this folder
 import portraitImage from '../../images/intro_matias.png';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
-const IMAGE_ROTATION_COUNT = 4;
-
 const styles = ({ breakpoints, spacing }) => ({
-    portraitContainer: {
-        [breakpoints.up('md')]: {
-            marginLeft: 'auto'
-        },
-    },
     introImage: {
         borderRadius: '50%',
-        transition: 'all 3s ease',
-        width: 0,
-        transform: 'rotate(0deg)',
-        '&.show': {
-            width: '100%',
-            transform: `rotate(${360 * IMAGE_ROTATION_COUNT}deg)`,
-        },
 
-        [breakpoints.up('xs')]: {
-            maxWidth: spacing.unit * 30, // 240px
+        [breakpoints.down('sm')]: {
+            maxWidth: spacing.unit * 30
         },
-        [breakpoints.up('sm')]: {
-            maxWidth: spacing.unit * 35, // 280px
+        [breakpoints.down('md')]: {
+            width: '100%',
+            marginLeft: 0,
+            marginTop: 20
         },
         [breakpoints.up('md')]: {
-            maxWidth: spacing.unit * 40 // 320px
+            width: '40%',
+            marginLeft: '10%'
         },
         [breakpoints.up('lg')]: {
-            maxWidth: spacing.unit * 45 // 360px
+            width: '35%',
+            marginLeft: '10%'
         },
+        [breakpoints.up('xl')]: {
+            width: '35%',
+            marginLeft: '15%'
+        }
     }
 });
 
-class IntroPortrait extends Component {
-    state = {
-        shouldShowImage: false
-    };
+const IntroPortrait = props => {
+    const { classes } = props;
 
-    componentDidMount = () => {
-        setTimeout(() => this.setState({ shouldShowImage: true }), 0);
-    };
-
-    render() {
-        const { classes } = this.props;
-
-        const imageClassNames = [classes.introImage];
-        if (this.state.shouldShowImage) {
-            imageClassNames.push('show');
-        }
-
-        return (
-            <div className={classes.portraitContainer}>
-                <img
-                    src={portraitImage}
-                    className={join(imageClassNames, ' ')}
-                    alt="Matias Ranta"
-                />
-            </div>
-        );
-    }
-}
+    return (
+        <img
+            src={portraitImage}
+            className={classes.introImage}
+            alt="Matias Ranta"
+        />
+    );
+    // return (
+    //     <div className={classes.portraitContainer}>
+    //         <img
+    //             src={portraitImage}
+    //             className={join(imageClassNames, ' ')}
+    //             alt="Matias Ranta"
+    //         />
+    //     </div>
+    // );
+};
 
 IntroPortrait.propTypes = {
     classes: PropTypes.object.isRequired

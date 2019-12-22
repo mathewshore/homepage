@@ -13,11 +13,11 @@ const styles = ({ breakpoints, spacing }) => ({
         width: '100%',
 
         [breakpoints.up('md')]: {
-            maxWidth: spacing.unit * 120, // 960px,
+            maxWidth: '80%', // spacing.unit * 120, // 960px,
         },
-        [breakpoints.up('lg')]: {
-            maxWidth: spacing.unit * 142.5 // 1140px,
-        },
+        // [breakpoints.up('lg')]: {
+        //     maxWidth: '85%' // 1140px,
+        // },
     },
 });
 

@@ -9,13 +9,31 @@ import Typography from '@material-ui/core/Typography';
 import StatusText from './StatusText';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, breakpoints }) => ({
     container: {
+        textAlign: 'center',
         minWidth: spacing.unit * 25,
-        textAlign: 'center'
+        [breakpoints.down('lg')]: {
+            minWidth: spacing.unit * 28
+        },
+        [breakpoints.down('md')]: {
+            minWidth: spacing.unit * 22
+        },
+        [breakpoints.down('sm')]: {
+            minWidth: spacing.unit * 16
+        }
     },
     versusTypographyRoot: {
-        marginTop: spacing.unit * 4
+        marginTop: spacing.unit * 4,
+        [breakpoints.down('sm')]: {
+            fontSize: 24
+        }
+    },
+    buttonRoot: {
+        [breakpoints.down('sm')]: {
+            padding: spacing.unit,
+            fontSize: 12
+        }
     }
 });
 
@@ -36,6 +54,7 @@ const GameStatus = props => {
                     color="primary"
                     variant="outlined"
                     onClick={props.onPlayAgainClick}
+                    classes={{ root: classes.buttonRoot }}
                 >
                     Play again
                 </Button>

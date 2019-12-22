@@ -7,16 +7,25 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import orange from '@material-ui/core/colors/orange';
 
 
-const styles = ({
+const styles = ({ breakpoints }) => ({
     scissorsIcon: {
         color: orange[400],
         transition: 'all 0.4s ease',
 
         '&.selected': {
-            fontSize: 32
+            fontSize: 32,
         },
-        '&.large-icon': {
+        '&.large': {
             fontSize: 48
+        },
+        [breakpoints.down('sm')]: {
+            fontSize: 20,
+            '&.selected': {
+                fontSize: 21
+            },
+            '&.large': {
+                fontSize: 36
+            }
         }
     }
 });
@@ -29,7 +38,7 @@ const ScissorsIcon = (props) => {
         classNames.push('selected');
     }
     if (props.withLargeIcon) {
-        classNames.push('large-icon');
+        classNames.push('large');
     }
 
     return (
