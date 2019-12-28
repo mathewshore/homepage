@@ -17,7 +17,7 @@ const styles = ({ breakpoints, spacing }) => ({
         [breakpoints.up('xs')]: {
             textAlign: 'center',
             minWidth: '100%',
-            marginTop: spacing.unit * 3
+            marginTop: '2vh'
         },
         [breakpoints.up('md')]: {
             textAlign: 'initial',
@@ -32,6 +32,12 @@ const styles = ({ breakpoints, spacing }) => ({
         '&.animated': {
             fontSize: 28,
             color: 'transparent',
+        },
+        [breakpoints.down('sm')]: {
+            fontSize: 16,
+            '&.animated': {
+                fontSize: 24
+            }
         }
     },
     dividerRoot: {
@@ -41,6 +47,8 @@ const styles = ({ breakpoints, spacing }) => ({
         },
     },
 });
+
+const PHRASE_INTERVAL_TIME = 4000;
 
 const textPhrases = [
     'pixel perfectionist',
@@ -54,26 +62,23 @@ class IntroText extends Component {
         phraseIndex: 0
     };
 
+    phraseChangeInterval = undefined;
+
+    phraseAnimationInterval = undefined;
+
     componentDidMount = () => {
-        setTimeout(this.activateIntervals(), 500);
-    };
-    
-    activateIntervals = (phraseInterval = 4000) => {
-        setInterval(this.setPhraseTransition, phraseInterval)
-        setTimeout(() => setInterval(this.changePhrase, phraseInterval), 500);
+        this.activateIntervals();
     };
 
-    setPhraseTransition = () => {
-        this.setState({ phraseIsChanging: true });
+    activateIntervals = () => {
+        this.setPhraseChangeInterval();
+        this.setPhraseAnimationInterval();
     };
 
-    clearInvervals = () => {
-        clearInterval(this.changePhrase);
-        clearInterval(this.setPhraseTransition);
-    };
-
-    componentWillUnmount = () => {
-        this.clearInvervals();
+    setPhraseChangeInterval = (interval = PHRASE_INTERVAL_TIME) => {
+        setTimeout(() => {
+            this.phraseChangeInterval = setInterval(this.changePhrase, interval);
+        }, 500);
     };
 
     changePhrase = () => {
@@ -81,6 +86,23 @@ class IntroText extends Component {
         const currentIsLast = (this.state.phraseIndex + 1) === phraseCount;
         const phraseIndex = currentIsLast ? 0 : this.state.phraseIndex + 1;
         this.setState({ phraseIndex, phraseIsChanging: false });
+    };
+
+    setPhraseAnimationInterval = (interval = PHRASE_INTERVAL_TIME) => {
+        this.phraseAnimationInterval = setInterval(this.setPhraseAnimation, interval)
+    };
+
+    setPhraseAnimation = () => {
+        this.setState({ phraseIsChanging: true });
+    };
+
+    componentWillUnmount = () => {
+        this.clearInvervals();
+    };
+
+    clearInvervals = () => {
+        clearInterval(this.phraseChangeInterval);
+        clearInterval(this.phraseAnimationInterval);
     };
 
     render() {

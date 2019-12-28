@@ -6,7 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import grey from '@material-ui/core/colors/grey';
 
 
-const styles = ({ spacing, palette }) => ({
+const styles = ({ spacing, palette, breakpoints }) => ({
     container: {
         padding: spacing.unit,
         margin: spacing.unit * 0.5,
@@ -21,6 +21,12 @@ const styles = ({ spacing, palette }) => ({
         color: palette.text.main,
         '&.hidden': {
             opacity: 0
+        },
+        [breakpoints.down('md')]: {
+            padding: spacing.unit * 0.5,
+            width: spacing.unit * 2.5,
+            height: spacing.unit * 2.5,
+            fontSize: spacing.unit * 1.5
         }
     }
 });

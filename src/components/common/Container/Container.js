@@ -4,13 +4,15 @@ import join from 'lodash/join';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
-const styles = ({ breakpoints, spacing }) => ({
+const styles = ({ breakpoints }) => ({
     container: {
         paddingLeft: 0,
         paddingRight: 0,        
         marginLeft: 'auto',
         marginRight: 'auto',
-        width: '100%',
+        width: 'inherit',
+        display: 'inherit',
+        alignItems: 'inherit',
 
         [breakpoints.up('md')]: {
             maxWidth: '80%', // spacing.unit * 120, // 960px,

@@ -11,15 +11,18 @@ import purple from '@material-ui/core/colors/purple';
 import grey from '@material-ui/core/colors/grey';
 import green from '@material-ui/core/colors/green';
 import { collides } from './Snake';
+import { CELL_SIZE, CELL_SIZE_MIN } from './constants';
 
 
-const styles = ({ breakpoints }) => ({
+const styles = ({ breakpoints, spacing }) => ({
     row: {
         display: 'flex'
     },
     cell: {
-        height: '2.5vh',
-        width: '2.5vh',
+        height: `${CELL_SIZE.XS.VALUE}${CELL_SIZE.XS.UNIT}`,
+        minHeight: CELL_SIZE_MIN.VALUE,
+        width: `${CELL_SIZE.XS.VALUE}${CELL_SIZE.XS.UNIT}`,
+        minWidth: CELL_SIZE_MIN.VALUE,
         border: `1px solid ${grey[200]}`,
         borderRadius: 2,
         transition: 'all 0.1s ease',
@@ -35,8 +38,8 @@ const styles = ({ breakpoints }) => ({
         },
 
         [breakpoints.up('md')]: {
-            height: '3vh',
-            width: '3vh'
+            height: `${CELL_SIZE.MD.VALUE}${CELL_SIZE.MD.UNIT}`,
+            width: `${CELL_SIZE.MD.VALUE}${CELL_SIZE.MD.UNIT}`
         },
     }
 });

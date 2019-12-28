@@ -2,16 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
 import CloseIcon from '@material-ui/icons/Close';
-import ModalSpacingContainer from './ModalSpacingContainer';
+import { Link } from 'react-router-dom';
+
+import SpacingContainer from './SpacingContainer';
 
 
 const styles = ({ palette, spacing }) => ({
-    modalHead: {
+    container: {
+        position: 'sticky',
+        top: 0,
+        left: 0,
+        zIndex: 10000,
         background: palette.primary.light,
-        // height: spacing.unit * 10,
         display: 'flex',
         alignItems: 'center',
         width: '100%'
@@ -27,29 +32,34 @@ const styles = ({ palette, spacing }) => ({
     },
 });
 
-const ModalHead = props => {
+const PortfolioViewHead = props => {
     const { classes } = props;
+
     return (
-        <div className={classes.modalHead}>
-            <ModalSpacingContainer>
+        <div className={classes.container}>
+            <SpacingContainer>
                 <Typography variant='display1'>
                     {props.title}
                 </Typography>
-                <IconButton
+                <ButtonBase
+                    component={Link}
+                    to={`/#${props.id}`}
                     className={classes.closeButton}
-                    onClick={props.onClose}
                 >
                     <CloseIcon className={classes.closeIcon} />
-                </IconButton>
-            </ModalSpacingContainer>
+                </ButtonBase>
+            </SpacingContainer>
         </div>
     );
 };
 
-ModalHead.propTypes = {
+PortfolioViewHead.defaultProps = {
+    id: 'portfolio'
+};
+
+PortfolioViewHead.propTypes = {
     classes: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
     title: PropTypes.string
 };
 
-export default withStyles(styles, { withTheme: true })(ModalHead);
+export default withStyles(styles)(PortfolioViewHead);

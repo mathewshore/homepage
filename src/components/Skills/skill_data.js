@@ -58,15 +58,3 @@ export const design = [
         level: 3
     }
 ];
-
-export const operatingSystems = [
-    {
-        name: 'Windows'
-    },
-    {
-        name: 'Linux mint'
-    },
-    {
-        name: 'MacOS'
-    }
-];

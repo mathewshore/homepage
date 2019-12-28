@@ -38,29 +38,29 @@ const styles = ({ spacing, palette, shadows, breakpoints }) => ({
         transition: 'height 0.5s ease',
 
         [breakpoints.up('xs')]: {
-            padding: `0 ${spacing.unit * 4}px`,
+            padding: `0 ${spacing.unit * 4}px`
         },
         [breakpoints.up('sm')]: {
-            padding: `0 ${spacing.unit * 6}px`,
+            padding: `0 ${spacing.unit * 6}px`
         },
         [breakpoints.up('md')]: {
             padding: `0 ${spacing.unit * 8}px`,
-            height: spacing.unit * 10,
+            height: spacing.unit * 10
         },
         [breakpoints.up('lg')]: {
             padding: `0 ${spacing.unit * 10}px`,
-            height: spacing.unit * 12,
+            height: spacing.unit * 12
         },
 
         '&.dense': {
             height: spacing.unit * 7.5,
 
             [breakpoints.up('md')]: {
-                height: spacing.unit * 8.5,
+                height: spacing.unit * 8.5
             },
             [breakpoints.up('lg')]: {
-                height: spacing.unit * 9,
-            },
+                height: spacing.unit * 9
+            }
         }
     }
 });
@@ -91,6 +91,16 @@ class NavBar extends Component {
     };
 
     componentDidMount() {
+        const elementId = window.location.hash.split('#')[1];
+        if (elementId) {
+            // Wait for dom to render the portfolio element before scrolling into it.
+            setTimeout(() => {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.scrollIntoView({ block: 'center' });
+                }
+            }, 0)
+        }
         this.setState({ activeSection: getActiveSection() });
         window.addEventListener('scroll', this.handleScroll);
     }

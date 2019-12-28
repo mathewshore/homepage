@@ -10,9 +10,7 @@ const styles = ({ spacing }) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 20,
-        marginBottom: spacing.unit * 1.5,
-        height: spacing.unit * 5
+        marginBottom: spacing.unit * 2
     }
 });
 
@@ -20,7 +18,10 @@ const StatusText = props => {
     const { classes } = props;
     
     return (
-        <Typography classes={{ root: classes.typographyRoot }}>
+        <Typography
+            variant="title"
+            classes={{ root: classes.typographyRoot }}
+        >
             {props.children}
         </Typography>
     );

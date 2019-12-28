@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Description from './Description';
@@ -11,22 +10,20 @@ const styles = ({ spacing, breakpoints }) => ({
     container: {
         [breakpoints.up('md')]: {
             display: 'flex'
-        },
+        }
     },
     landingPageImage: {
         width: '100%',
+        height: '100%',
         [breakpoints.up('xs')]: {
-            maxWidth: spacing.unit * 67.5 // 540px
-        },
-        [breakpoints.up('sm')]: {
-            maxWidth: spacing.unit * 70 // 560px
+            maxWidth: '100%'
         },
         [breakpoints.up('md')]: {
-            minWidth: spacing.unit * 70 // 560px
+            maxWidth: '60%'
         },
-        [breakpoints.up('lg')]: {
-            minWidth: spacing.unit * 75 // 600px
-        },
+        [breakpoints.up('xl')]: {
+            maxWidth: '62%'
+        }
     },
 });
 
@@ -35,13 +32,11 @@ const StreamPortal = props => {
     return (
         <div className={classes.container}>
             <Description />
-            <div>
-                <img
-                    className={classes.landingPageImage}
-                    src={streamPortalImage}
-                    alt="stream-portal landing page"
-                />
-            </div>
+            <img
+                className={classes.landingPageImage}
+                src={streamPortalImage}
+                alt="stream-portal landing page"
+            />
         </div>
     );
 };

@@ -1,48 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import join from 'lodash/join';
 import map from 'lodash/map';
 import split from 'lodash/split';
 import size from 'lodash/size';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
+import FirstLetter from './FirstLetter';
+import RemainingLetters from './RemainingLetters';
 
 
-const styles = theme => ({
-    wordWrapper: {
-        marginRight: theme.spacing.unit,
+const styles = ({ spacing }) => ({
+    wordContainer: {
+        marginRight: spacing.unit,
 
         '&:last-of-type': {
             marginRight: 0,
-        },
-    },
-    remainingLetters: {
-        '&.display3': {
-            fontSize: 40,
-        },
-        '&.display2': {
-            fontSize: 36,
-        },
-        '&.display1': {
-            fontSize: 28,
-        },
-        '&.subheading': {
-            fontSize: 14,
         },
     }
 });
 
 
 const getFormattedText = (text, props) => map(split(text, ' '), (word, i) => {
-    const { classes, variant, className } = props;
+    const { classes, variant } = props;
     const firstLetter = word.substring(0, 1);
     const remainingLetters = word.substring(1, (size(word)));
-    const remainingLettersClass = `${classes.remainingLetters} ${variant}`
-    const wordWrapperClass = `${classes.wordWrapper}${className ? ` ${className}` : ''}`;
+
+    const wordContainerClassNames = [classes.wordContainer];
+    if (props.className) {
+        wordContainerClassNames.push(props.className);
+    }
 
     return (
-        <span key={i} className={wordWrapperClass}>
-            {firstLetter}<span className={remainingLettersClass}>{remainingLetters}</span>
+        <span key={i} className={join(wordContainerClassNames, ' ')}>
+            <FirstLetter variant={variant}>
+                {firstLetter}
+            </FirstLetter>
+            <RemainingLetters variant={variant}>
+                {remainingLetters}
+            </RemainingLetters>
         </span>
     );
 });

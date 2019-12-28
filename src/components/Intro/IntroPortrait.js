@@ -8,17 +8,15 @@ const styles = ({ breakpoints, spacing }) => ({
     introImage: {
         borderRadius: '50%',
 
-        [breakpoints.down('sm')]: {
-            maxWidth: spacing.unit * 30
-        },
-        [breakpoints.down('md')]: {
-            width: '100%',
-            marginLeft: 0,
-            marginTop: 20
+        [breakpoints.up('xs')]: {
+            width: spacing.unit * 28,
+            marginTop: '8vh', // spacing.unit * 10,
+            marginLeft: 0
         },
         [breakpoints.up('md')]: {
             width: '40%',
-            marginLeft: '10%'
+            marginLeft: '10%',
+            marginTop: 0
         },
         [breakpoints.up('lg')]: {
             width: '35%',
@@ -41,15 +39,6 @@ const IntroPortrait = props => {
             alt="Matias Ranta"
         />
     );
-    // return (
-    //     <div className={classes.portraitContainer}>
-    //         <img
-    //             src={portraitImage}
-    //             className={join(imageClassNames, ' ')}
-    //             alt="Matias Ranta"
-    //         />
-    //     </div>
-    // );
 };
 
 IntroPortrait.propTypes = {

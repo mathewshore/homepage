@@ -10,6 +10,7 @@ import Section from '../common/Section';
 import { SECTIONS } from '../constants';
 import * as skills from './skill_data';
 import SkillList from './SkillList';
+import GridContainer from '../common/GridContainer';
 
 
 const styles = ({ palette }) => ({
@@ -26,7 +27,7 @@ const Skills = props => {
             id={SECTIONS.SKILLS}
             containerClassName={classes.sectionContainer}
         >
-            <Grid container spacing={24}>
+            <GridContainer>
                 <Grid item md={6} xs={12}>
                     <SkillList
                         title="Programming"
@@ -41,14 +42,7 @@ const Skills = props => {
                         skills={skills.design}
                     />
                 </Grid>
-                {/* <Grid item md={4} xs={12}>
-                    <SkillList
-                        ListIcon={OSIcon}
-                        title="Operating systems"
-                        skills={skills.operatingSystems}
-                    />
-                </Grid> */}
-            </Grid>
+            </GridContainer>
         </Section>
     );
 };

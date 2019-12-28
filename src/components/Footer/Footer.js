@@ -10,7 +10,7 @@ const styles = ({ spacing, palette }) => ({
     footerContainer: {
         position: 'relative',
         background: palette.background.footer,
-        padding: `${spacing.unit * 10}px ${spacing.unit * 3}px ${spacing.unit * 12}px`,
+        padding: `${spacing.unit * 6}px 0px ${spacing.unit * 8}px`,
         color: 'white',
         textAlign: 'center',
         display: 'flex',

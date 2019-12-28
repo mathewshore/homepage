@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -48,25 +48,23 @@ const styles = ({ palette, spacing, breakpoints }) => ({
     },
 });
 
-class Intro extends Component {
-    render() {
-        const { classes } = this.props;
+const Intro = props => {
+    const { classes } = props;
 
-        return (
-            <div id={SECTIONS.INTRO}>
-                <div className={classes.introSectionContainer} />
-                <div className={classes.introFixedContainer}>
-                    <Container className={classes.introContainer}>
-                        <div className={classes.introContent}>
-                            <IntroText />
-                            <IntroPortrait />
-                        </div>
-                    </Container>
-                </div>
+    return (
+        <div id={SECTIONS.INTRO}>
+            <div className={classes.introSectionContainer} />
+            <div className={classes.introFixedContainer}>
+                <Container className={classes.introContainer}>
+                    <div className={classes.introContent}>
+                        <IntroText />
+                        <IntroPortrait />
+                    </div>
+                </Container>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 Intro.propTypes = {
     classes: PropTypes.object

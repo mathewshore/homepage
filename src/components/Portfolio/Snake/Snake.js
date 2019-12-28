@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import get from 'lodash/get';
+import round from 'lodash/round';
 import findIndex from 'lodash/findIndex';
 import toString from 'lodash/toString';
 import random from 'lodash/random';
@@ -30,7 +31,7 @@ const styles = ({ spacing, breakpoints }) => ({
         marginBottom: spacing.unit * 5,
 
         [breakpoints.up('md')]: {
-            marginTop: 0,
+            marginTop: spacing.unit,
             marginBottom: 0
         },
     }
@@ -79,16 +80,16 @@ const randomizeCoordinates = (
 
 const getNextHeadLocation = (currentLocation, direction) => {
     switch (direction) {
-    case 'up':
-        return [currentLocation[0] - 1, currentLocation[1]];
-    case 'down':
-        return [currentLocation[0] + 1, currentLocation[1]];
-    case 'left':
-        return [currentLocation[0], currentLocation[1] - 1];
-    case 'right':
-        return [currentLocation[0], currentLocation[1] + 1];
-    default:
-        return undefined;
+        case 'up':
+            return [currentLocation[0] - 1, currentLocation[1]];
+        case 'down':
+            return [currentLocation[0] + 1, currentLocation[1]];
+        case 'left':
+            return [currentLocation[0], currentLocation[1] - 1];
+        case 'right':
+            return [currentLocation[0], currentLocation[1] + 1];
+        default:
+            return undefined;
     }
 };
 
@@ -244,18 +245,24 @@ class Snake extends React.Component {
         this.snakeMoveInterval = setInterval(this.moveSnake, interval);
     };
 
+    getSnakeSpawnLocation = () => {
+        // Spawn snake in the center of the grid
+        const x = round(GRID_HEIGHT / 2);
+        const y = round(GRID_WIDTH / 2);
+        return [x, y];
+    };
+
     startGame = () => {
         clearInterval(this.snakeMoveInterval);
         this.addKeyDownListener();
-        // const snakeTrail = [[4, 10], [4, 9], [5, 9], [5, 8], [5, 7], [5, 6], [5, 5], [4, 5], [3, 5], [3, 4], [3, 3], [3, 2], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [9, 2], [9, 3], [9, 4], [9, 5], [10, 5], [11, 5], [12, 5], [13, 5], [14, 5], [14, 6], [14, 7], [14, 8], [14, 9], [14, 10], [13, 10], [12, 10], [11, 10], [10, 10], [10, 9], [10, 8], [9, 8], [8, 8], [7, 8], [7, 9], [7, 10], [7, 11], [7, 12], [7, 13]]
-        
+
         this.setState({
             score: 0,
             gameOver: false,
             gameIsRunning: true,
             tempoMultiplier: INITIAL_GAME_TEMPO,
             direction: ['up', 'down', 'left', 'right'][random(0, 3)],
-            snakeTrail: [[7, 8]] // Spawn snake in the center of the grid. ToDo: do this dynamically using grid width & height
+            snakeTrail: [this.getSnakeSpawnLocation()]
         }, () => {
             this.spawnFood();
             this.setSnakeMoveInterval();

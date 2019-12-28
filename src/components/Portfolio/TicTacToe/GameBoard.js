@@ -7,10 +7,10 @@ import includes from 'lodash/includes';
 import isNil from 'lodash/isNil';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import Button from '@material-ui/core/Button';
 
 import GameBoardCell from './GameBoardCell';
 import PlayerIcon from './PlayerIcon';
+import ResetButton from './ResetButton';
 
 
 const styles = ({ spacing, shadows }) => ({
@@ -22,11 +22,6 @@ const styles = ({ spacing, shadows }) => ({
         margin: 'auto',
         padding: spacing.unit,
         boxShadow: shadows[1]
-    },
-    resetButton: {
-        display: 'block',
-        margin: 'auto',
-        marginTop: spacing.unit * 2
     }
 });
 
@@ -56,14 +51,7 @@ const GameBoard = props => {
                     </div>
                 ))}
             </div>
-            <Button
-                classes={{ root: classes.resetButton }}
-                color="primary"
-                variant="outlined"
-                onClick={props.resetGame}
-            >
-                Reset board
-            </Button>
+            <ResetButton onClick={props.resetGame} />
         </div>
     );
 };

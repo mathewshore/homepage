@@ -19,6 +19,7 @@ const styles = ({ spacing }) => ({
         zIndex: 2,
         color: 'white',
         background: `${grey[900]}e9`, // e9 for transparency
+        padding: spacing.unit * 2,
         transition: 'opacity 0.3s ease',
         opacity: 0,
         '&.visible': {

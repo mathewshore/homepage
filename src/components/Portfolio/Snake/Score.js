@@ -36,7 +36,7 @@ const Score = props => {
 
 Score.propTypes = {
     classes: PropTypes.object.isRequired,
-    score: PropTypes.number,
+    score: PropTypes.number
 };
 
 export default withStyles(styles)(Score);

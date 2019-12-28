@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import join from 'lodash/join';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import MenuIcon from '@material-ui/icons/Menu';
+import HamburgerIcon from '@material-ui/icons/Menu';
 import Backdrop from '../common/Backdrop';
 import { Z_INDEX } from '../constants';
 
@@ -29,7 +29,6 @@ const styles = ({ palette, spacing, shadows }) => ({
         }
     },
     menuList: {
-        // Todo: adjust menu-list location based on density of nav
         padding: spacing.unit * 1.5,
         display: 'block',
         position: 'absolute',
@@ -79,7 +78,7 @@ class MobileNavMenu extends Component {
         return (
             <div className={classes.menuContainer}>
                 <div className={classes.menuDropDown}>
-                    <MenuIcon
+                    <HamburgerIcon
                         className={classes.menuIcon}
                         onClick={this.onMenuToggleClick}
                     />

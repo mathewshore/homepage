@@ -6,7 +6,7 @@ import join from 'lodash/join';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
-const styles = ({ spacing, palette }) => ({
+const styles = ({ spacing, palette, breakpoints }) => ({
     link: {
         color: palette.primary.dark,
         textDecoration: 'none',
@@ -15,6 +15,14 @@ const styles = ({ spacing, palette }) => ({
         },
         '&.with-left-margin': {
             marginLeft: spacing.unit * 0.75
+        },
+        [breakpoints.up('xl')]: {
+            '&.with-right-margin': {
+                marginRight: spacing.unit * 2
+            },
+            '&.with-left-margin': {
+                marginLeft: spacing.unit * 2
+            },
         }
     }
 });

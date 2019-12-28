@@ -6,25 +6,27 @@ import Button from '@material-ui/core/Button';
 
 import GameOver from './GameOver';
 import Score from './Score';
-import { GRID_WIDTH } from './constants';
+import { GRID_WIDTH, CELL_SIZE, CELL_SIZE_MIN } from './constants';
 
 
-const getEndScreenSize = (sizeFactor) =>
-    `calc((${GRID_WIDTH * sizeFactor}vh) + ${GRID_WIDTH * 2}px)`;
+const endScreenSize = (factor, unit) =>
+    `calc((${GRID_WIDTH * factor}${unit}) + ${GRID_WIDTH * 2}px)`;
 
 const styles = ({ breakpoints }) => ({
     endScreenContainer: {
         background: 'rgba(236, 236, 236, 0.8)',
         position: 'absolute',
-        width: getEndScreenSize(2.5),
-        height: getEndScreenSize(2.5),
+        width: endScreenSize(CELL_SIZE.XS.VALUE, CELL_SIZE.XS.UNIT),
+        height: endScreenSize(CELL_SIZE.XS.VALUE, CELL_SIZE.XS.UNIT),
+        minHeight: endScreenSize(CELL_SIZE_MIN.VALUE, CELL_SIZE_MIN.UNIT),
+        minWidth: endScreenSize(CELL_SIZE_MIN.VALUE, CELL_SIZE_MIN.UNIT),
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
 
         [breakpoints.up('md')]: {
-            width: getEndScreenSize(3),
-            height: getEndScreenSize(3),
+            width: endScreenSize(CELL_SIZE.MD.VALUE, CELL_SIZE.MD.UNIT),
+            height: endScreenSize(CELL_SIZE.MD.VALUE, CELL_SIZE.MD.UNIT)
         },
     },
     gameStatus: {

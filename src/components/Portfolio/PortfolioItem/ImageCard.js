@@ -6,14 +6,11 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Paper from '@material-ui/core/Paper';
 
 
-const styles = ({ spacing }) => ({
-    itemContentContainer: {
-        maxHeight: spacing.unit * 32.5 // 260px
-    },
+const styles = ({
     portfolioImage: {
         width: '100%',
-        maxHeight: spacing.unit * 32.5
-    },
+        maxHeight: '100%'
+    }
 });
 
 const ImageCard = props => {

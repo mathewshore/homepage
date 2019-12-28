@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PortfolioModalFooterContent from './PortfolioModalFooterContent';
+import PortfolioFooterContent from './PortfolioFooterContent';
 import StreamPortal from './StreamPortal';
 // import Flexer from './Flexer';
 import RockPaperScissors from './RockPaperScissors';
@@ -22,29 +22,35 @@ const portfolioUrlBase = `${gitUrlBase}/homepage/tree/master/src/components/sect
 // ToDo: Add descriptive tags to portfolio items
 //       e.g. Adobe Illustrator, Mobile and Flat Design for Fledge.
 
+export const PORTFOLIO_IDS = {
+    SNAKE: 'snake',
+    STREAM_PORTAL: 'stream_portal',
+    RPS: 'rock_paper_scissors',
+    TTT: 'tic_tac_toe'
+};
+
 const portfolioItems = [
     {
-        // ToDo: Add proper snake portfolio image.
-        id: 'snake',
+        id: PORTFOLIO_IDS.SNAKE,
         title: 'Snake',
         imageSrc: snakeImageSrc,
         description: 'The old Nokia phone classic',
         Component: Snake,
         FooterContent: (
-            <PortfolioModalFooterContent
+            <PortfolioFooterContent
                 itemTitle="Snake"
                 href={`${portfolioUrlBase}/Snake`}
             />
         )
     },
     {
-        id: 'stream_portal',
+        id: PORTFOLIO_IDS.STREAM_PORTAL,
         title: 'Stream Portal',
         imageSrc: streamPortalImageSrc,
         description: 'A web application for connecting streaming platforms',
         Component: StreamPortal,
         FooterContent: (
-            <PortfolioModalFooterContent
+            <PortfolioFooterContent
                 itemTitle="Stream Portal"
                 href={`${gitUrlBase}/stream-portal`}
             />
@@ -57,7 +63,7 @@ const portfolioItems = [
     //     description: 'Flexible time management system',
     //     Component: Flexer,
     //     FooterContent: (
-    //         <PortfolioModalFooterContent
+    //         <PortfolioFooterContent
     //             itemTitle="Flexer"
     //             href="https://github.com/madzesu/flexer"
     //         />
@@ -70,33 +76,33 @@ const portfolioItems = [
     //     description: 'Mobile game for Apple phones',
     //     Component: () => <div>Add component here</div>,
     //     FooterContent: (
-    //         <PortfolioModalFooterContent
+    //         <PortfolioFooterContent
     //             itemTitle="Stream Portal"
     //             href={`${gitUrlBase}/stream-portal`}
     //         />
     //     )
     // },
     {
-        id: 'rps',
+        id: PORTFOLIO_IDS.RPS,
         title: 'Rock Paper Scissors',
         imageSrc: rpsImageSrc,
         description: 'A small project for testing out React and learning simplistic designing',
         Component: RockPaperScissors,
         FooterContent: (
-            <PortfolioModalFooterContent
+            <PortfolioFooterContent
                 itemTitle="Rock Paper Scissors"
                 href={`${portfolioUrlBase}/RockPaperScissors`}
             />
         )
     },
     {
-        id: 'ttt',
+        id: PORTFOLIO_IDS.TTT,
         title: 'Tic Tac Toe',
         imageSrc: tttImageSrc,
         description: 'A project for improving programming logic',
         Component: TicTacToe,
         FooterContent: (
-            <PortfolioModalFooterContent
+            <PortfolioFooterContent
                 itemTitle="Tic Tac Toe"
                 href={`${portfolioUrlBase}/TicTacToe`}
             />

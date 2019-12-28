@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -6,8 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import Section from '../common/Section';
+import GridContainer from '../common/GridContainer';
+import TextLink from '../common/TextLink';
 import { SECTIONS } from '../constants';
-import TextLink from '../common/TextLink/TextLink';
 
 
 const styles = ({ palette }) => ({
@@ -24,7 +25,7 @@ const About = props => {
             id={SECTIONS.ABOUT}
             containerClassName={classes.aboutSectionContainer}
         >
-            <Grid container spacing={24}>
+            <GridContainer>
                 <Grid item sm={12} md={6}>
                     <Typography align='justify'>
                         I have been working as a Front End Web Developer
@@ -63,7 +64,7 @@ const About = props => {
                         and hone it to perfectness bit by bit.
                     </Typography>
                 </Grid>
-            </Grid>
+            </GridContainer>
         </Section>
     );
 };

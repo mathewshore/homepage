@@ -1,34 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import ModalSpacingContainer from './ModalSpacingContainer';
+import SpacingContainer from './SpacingContainer';
 
 
 const styles = ({ palette }) => ({
-    footerContainer: {
+    container: {
         background: palette.primary.light
     }
 });
 
-const ModalFooter = props => {
+const PortfolioViewFooter = props => {
     const { classes } = props;
     return (
-        <div className={classes.footerContainer}>
-            <ModalSpacingContainer verticalSpacing={props.verticalSpacing}>
+        <div className={classes.container}>
+            <SpacingContainer verticalSpacing={props.verticalSpacing}>
                 {props.children}
-            </ModalSpacingContainer>
+            </SpacingContainer>
         </div>
     );
 };
 
-ModalFooter.defaultProps = {
+PortfolioViewFooter.defaultProps = {
     verticalSpacing: 'normal'
 };
 
-ModalFooter.propTypes = {
+PortfolioViewFooter.propTypes = {
     classes: PropTypes.object.isRequired,
     children: PropTypes.any,
     verticalSpacing: PropTypes.oneOf(['normal', 'dense'])
 };
 
-export default withStyles(styles)(ModalFooter);
+export default withStyles(styles)(PortfolioViewFooter);

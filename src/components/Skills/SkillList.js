@@ -14,7 +14,8 @@ const styles = ({ spacing, palette }) => ({
         display: 'flex'
     },
     listContainer: {
-        padding: `${spacing.unit * 2}px ${spacing.unit * 3}px`
+        padding: `${spacing.unit * 2}px ${spacing.unit * 3}px`,
+        background: '#fff'
     },
     listItem: {
         padding: `${spacing.unit * 1.5}px 0`

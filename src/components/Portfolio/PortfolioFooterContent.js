@@ -13,15 +13,15 @@ const styles = ({ spacing }) => ({
         display: 'flex',
         justifyContent: 'center',
         marginTop: spacing.unit * 0.5,
-        marginBottom: 6
+        marginBottom: spacing.unit * 0.75
     },
     gitHubIcon: {
         marginLeft: spacing.unit,
-        marginTop: -2
+        marginTop: -spacing.unit * 0.25
     }
 });
 
-const PortfolioModalFooterContent = props => {
+const PortfolioFooterContent = props => {
     const { classes } = props;
     return (
         <div className={classes.container}>
@@ -33,16 +33,16 @@ const PortfolioModalFooterContent = props => {
     );
 };
 
-PortfolioModalFooterContent.defaultProps = {
+PortfolioFooterContent.defaultProps = {
     component: 'a',
     target: '_blank',
     disableTouchRipple: true,
     disableFocusRipple: true
 };
 
-PortfolioModalFooterContent.propTypes = {
+PortfolioFooterContent.propTypes = {
     itemTitle: PropTypes.string,
     IconButtonProps: PropTypes.object
 };
 
-export default withStyles(styles)(PortfolioModalFooterContent);
+export default withStyles(styles)(PortfolioFooterContent);

@@ -9,7 +9,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Paper from '@material-ui/core/Paper';
 
 
-const styles = ({ spacing, shadows }) => ({
+const styles = ({ spacing, shadows, breakpoints }) => ({
     boardCell: {
         margin: spacing.unit * 0.5,
         width: spacing.unit * 10,
@@ -17,7 +17,7 @@ const styles = ({ spacing, shadows }) => ({
         textAlign: 'center',
         cursor: 'pointer',
         transition: 'all 0.3s',
-        boxShadow: shadows[6],
+        boxShadow: shadows[5],
         background: grey[50],
         '&:hover': {
             background: grey[300]
@@ -30,6 +30,14 @@ const styles = ({ spacing, shadows }) => ({
         '&.win-cell': {
             backgroundColor: green[100],
         },
+        [breakpoints.up('xs')]: {
+            minWidth: '13vh',
+            minHeight: '13vh'
+        },
+        [breakpoints.up('md')]: {
+            minWidth: '13vh',
+            minHeight: '13vh'
+        }
     }
 });
 

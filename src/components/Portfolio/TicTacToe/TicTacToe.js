@@ -11,17 +11,22 @@ import concat from 'lodash/concat';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 // import Table from '../../../common/Table';
+import Description from './Description';
 import GameBoard from './GameBoard';
 import PlayerIcon from './PlayerIcon';
 import StatusText from './StatusText';
 
 
 const styles = ({ breakpoints, spacing }) => ({
-    tttContainer: {
-        // [breakpoints.up('md')]: {
-        //     display: 'flex',
-        //     justifyContent: 'center',
-        // },
+    container: {
+        // display: 'flex'
+        [breakpoints.up('md')]: {
+            display: 'flex',
+            justifyContent: 'center'
+        }
+    },
+    gameContainer: {
+        marginLeft: 'auto'
     },
     statTableContainer: {
         width: spacing.unit * 50,
@@ -197,8 +202,9 @@ class TicTacToe extends Component {
         const withIcon = this.state.gameIsRunning || winner;
 
         return (
-            <div className={classes.tttContainer}>
-                <div>
+            <div className={classes.container}>
+                <Description />
+                <div className={classes.gameContainer}>
                     <StatusText>
                         {withIcon && (
                             <PlayerIcon

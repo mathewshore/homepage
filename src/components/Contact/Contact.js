@@ -7,8 +7,6 @@ import get from 'lodash/get';
 import every from 'lodash/every';
 import keys from 'lodash/keys';
 import isNil from 'lodash/isNil';
-import reduce from 'lodash/reduce';
-import includes from 'lodash/includes';
 import isEmpty from 'lodash/isEmpty';
 import startCase from 'lodash/startCase';
 
@@ -17,10 +15,19 @@ import Grid from '@material-ui/core/Grid';
 import CheckIcon from '@material-ui/icons/CheckCircle';
 
 import Section from '../common/Section';
+import GridContainer from '../common/GridContainer';
+import { SECTIONS } from '../constants';
+
 import FormField from './FormField';
 import SendButton from './SendButton';
 import MessageBanner from './MessageBanner';
-import { SECTIONS } from '../constants';
+
+import {
+    getFieldError,
+    isRequired,
+    isValidEmail,
+    validateRequiredFields
+} from './helpers';
 
 
 const styles = ({ palette, spacing }) => ({
@@ -38,21 +45,6 @@ const styles = ({ palette, spacing }) => ({
 });
 
 const requiredFields = ['name', 'email', 'message'];
-
-// ToDo: Move validation functions to helpers. 
-const validateRequiredFields = (requiredFields, values) =>
-    reduce(requiredFields, (errors, key) => ({
-        ...errors,
-        ...getFieldError(key, get(values, key))
-    }), {});
-
-const getFieldError = (key, value) => ({
-    [key]: value ? undefined : `Please, insert ${key}.`
-});
-
-const isRequired = key => includes(requiredFields, key);
-
-const isValidEmail = email => email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
 class Contact extends Component {
     state = {
@@ -90,7 +82,7 @@ class Contact extends Component {
 
     validateEmail = () => {
         const { email } = this.state;
-        if (isRequired('email') && !email) {
+        if (isRequired(requiredFields, 'email') && !email) {
             return getFieldError('email', email);
         } else if (isValidEmail(email)) {
             return { email: "Invalid email address, expected format: 'example@email.com'." };
@@ -194,7 +186,7 @@ class Contact extends Component {
                 containerClassName={classes.contactSectionContainer}
             >
                 <form onSubmit={this.handleSubmit}>
-                    <Grid container spacing={24}>
+                    <GridContainer>
                         {this.state.messageBanner && (
                             <Grid item xs={12}>
                                 <MessageBanner
@@ -225,7 +217,7 @@ class Contact extends Component {
                                 placeholder="Type your message here..."
                             />
                         </Grid>
-                    </Grid>
+                    </GridContainer>
                     <div className={classes.submitButtonWrapper}>
                         <SendButton loading={this.state.isSending}>
                             {this.renderSendButtonText()}
