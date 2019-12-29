@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({
     container: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: spacing.unit * 18
+        minHeight: '100%'
     }
 });
 

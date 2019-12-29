@@ -12,6 +12,9 @@ const MuiTypography = {
         }
     },
     display1: {
+        [breakpoints.down('xs')]: {
+            fontSize: 28
+        },
         [breakpoints.up('xl')]: {
             fontSize: 40
         }

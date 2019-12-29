@@ -2,20 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import Typography from '@material-ui/core/Typography';
 
 
-const styles = ({ spacing, breakpoints }) => ({
+const styles = ({ breakpoints }) => ({
     container: {
-        textAlign: 'center'
-    },
-    titleTypographyRoot: {
-        marginBottom: spacing.unit * 2,
-        [breakpoints.down('sm')]: {
-            fontSize: 20,
-            marginBottom: spacing.unit
+        textAlign: 'center',
+        [breakpoints.up('xs')]: {
+            minWidth: '32%'
+        },
+        [breakpoints.up('md')]: {
+            minWidth: '28%'
         }
-    },
+    }
 });
 
 const PlayerBlock = props => {
@@ -23,12 +21,6 @@ const PlayerBlock = props => {
 
     return (
         <div className={classes.container}>
-            <Typography
-                variant="display1"
-                classes={{ root: classes.titleTypographyRoot }}
-            >
-                {props.title}
-            </Typography>
             {props.children}
         </div>
     );

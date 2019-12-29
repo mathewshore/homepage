@@ -17,7 +17,7 @@ import Description from './Description';
 import { RESULT_TYPES } from './constants';
 
 
-const styles = ({ spacing, breakpoints }) => ({
+const styles = ({ spacing, breakpoints, shadows }) => ({
     container: {
         display: 'flex',
         [breakpoints.down('sm')]: {
@@ -27,7 +27,16 @@ const styles = ({ spacing, breakpoints }) => ({
     rpsGameContainer: {
         display: 'flex',
         justifyContent: 'center',
-        margin: `${spacing.unit * 5}px auto`
+        height: 'max-content',
+        boxShadow: shadows[2],
+        [breakpoints.up('xs')]: {
+            padding: `${spacing.unit * 3}px ${spacing.unit * 2}px`,
+            width: 'auto'
+        },
+        [breakpoints.up('md')]: {
+            padding: spacing.unit * 5,
+            width: '100%',
+        }
     }
 });
 

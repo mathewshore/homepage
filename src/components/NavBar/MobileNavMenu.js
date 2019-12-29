@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import join from 'lodash/join';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Backdrop from '../common/Backdrop';
@@ -9,7 +8,7 @@ import MenuIcon from './MenuIcon';
 import MobileNavMenuList from './MobileNavMenuList';
 
 
-const styles = ({ palette, spacing, shadows }) => ({
+const styles = ({
     menuContainer: {
         width: '100%',
         display: 'flex'

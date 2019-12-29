@@ -11,20 +11,20 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = ({ spacing, palette, breakpoints }) => ({
     buttonRoot: {
-        margin: `${spacing.unit * 0.5}px ${spacing.unit}px`,
-        background: '#fff',
+        background: '#fff !important',
 
         '&.selected': {
-            border: `2px solid ${palette.primary.light}`,
-            background: '#fff'
-        },
-        '&.bg-transparent': {
-            background: palette.transparent
+            border: `2px solid ${palette.primary.light}`
         },
         [breakpoints.down('sm')]: {
-            padding: 12,
+            margin: spacing.unit,
             width: spacing.unit * 6,
-            height: spacing.unit * 6
+            height: spacing.unit * 6,
+        },
+        [breakpoints.up('md')]: {
+            margin: spacing.unit * 1.5,
+            display: 'flex',
+            justifyContent: 'center'
         }
     }
 });
@@ -46,9 +46,6 @@ const ToolButton = props => {
     }
     if (props.selected) {
         buttonClassNames.push('selected');
-    }
-    if (props.noBgColor) {
-        buttonClassNames.push('bg-transparent')
     }
 
     return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import join from 'lodash/join';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
@@ -7,28 +8,24 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = ({ spacing, breakpoints }) => ({
     statusTypographyRoot: {
-        margin: `${spacing.unit * 2}px 0`,
+        margin: `${spacing.unit * 1.5}px 0 ${spacing.unit * 2}px`,
+        fontWeight: 'bold',
         [breakpoints.down('sm')]: {
             fontSize: 14
         }
     }
 });
 
-const getStatusText = (resultText, animationToggled) => {
-    if (!resultText) {
-        return animationToggled
-            ? 'Opponent is choosing'
-            : 'Choose your tool';
-    }
-    return <b>{resultText}</b>;
-};
-
 const StatusText = (props) => {
     const { classes } = props;
+    const classNames = [classes.statusTypographyRoot];
+    if (props.className) {
+        classNames.push(props.className);
+    }
 
     return (
-        <Typography classes={{ root: classes.statusTypographyRoot }}>
-            {getStatusText(props.resultText, props.animationToggled)}
+        <Typography classes={{ root: join(classNames, ' ') }}>
+            {props.resultText}
         </Typography>
     );
 };

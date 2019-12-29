@@ -36,7 +36,6 @@ const OpponentBlockContent = (props) => {
         return (
             <ToolButton
                 disabled
-                noBgColor
                 withLargeIcon
                 tool={tool}
             />

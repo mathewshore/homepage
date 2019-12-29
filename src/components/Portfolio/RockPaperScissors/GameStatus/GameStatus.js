@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import pick from 'lodash/pick';
+import join from 'lodash/join';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
@@ -20,16 +21,36 @@ const styles = ({ spacing, breakpoints }) => ({
             minWidth: spacing.unit * 22
         },
         [breakpoints.down('sm')]: {
-            minWidth: spacing.unit * 16
+            minWidth: spacing.unit * 12
         }
     },
     versusTypographyRoot: {
-        marginTop: spacing.unit * 4,
+        marginTop: spacing.unit * 7,
+        transition: 'all 1s ease',
+        '&.result-position': {
+            marginTop: spacing.unit * 2
+        },
         [breakpoints.down('sm')]: {
-            fontSize: 24
+            fontSize: 24,
+            marginTop: spacing.unit * 10.5,
+            '&.result-position': {
+                marginTop: spacing.unit * 5
+            }
+        }
+    },
+    statusText: {
+        opacity: 0,
+        transition: 'all 0.3s ease',
+        '&.visible': {
+            opacity: 1
         }
     },
     buttonRoot: {
+        opacity: 0,
+        transition: 'all 0.3s ease',
+        '&.visible': {
+            opacity: 1
+        },
         [breakpoints.down('sm')]: {
             padding: spacing.unit,
             fontSize: 12
@@ -39,26 +60,38 @@ const styles = ({ spacing, breakpoints }) => ({
 
 const GameStatus = props => {
     const { classes } = props;
+    const versusTypographyClassNames = [classes.versusTypographyRoot];
+    if (props.animationToggled || props.resultText) {
+        versusTypographyClassNames.push('result-position');
+    }
+
+    const statusTextClassNames = [classes.statusText];
+    const buttonClassNames = [classes.buttonRoot];
+    if (props.resultText) {
+        statusTextClassNames.push('visible');
+        buttonClassNames.push('visible');
+    }
 
     return (
         <div className={classes.container}>
             <Typography
                 variant="display2"
-                classes={{ root: classes.versusTypographyRoot }}
+                classes={{ root: join(versusTypographyClassNames, ' ') }}
             >
                 VS
             </Typography>
-            <StatusText {...pick(props, ['animationToggled', 'resultText'])} />
-            {props.resultText && (
-                <Button
-                    color="primary"
-                    variant="outlined"
-                    onClick={props.onPlayAgainClick}
-                    classes={{ root: classes.buttonRoot }}
-                >
-                    Play again
-                </Button>
-            )}
+            <StatusText
+                {...pick(props, ['animationToggled', 'resultText'])}
+                className={join(statusTextClassNames, ' ')}
+            />
+            <Button
+                color="primary"
+                variant="outlined"
+                onClick={props.onPlayAgainClick}
+                classes={{ root: join(buttonClassNames, ' ') }}
+            >
+                Play again
+            </Button>
         </div>
     );
 };

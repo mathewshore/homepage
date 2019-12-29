@@ -12,12 +12,23 @@ import ToolButton from '../ToolButton';
 import tools from '../tools';
 
 
-const styles = {
-    bottomTools: {
+const styles = ({ spacing, breakpoints }) => ({
+    topContainer: {
         display: 'flex',
         justifyContent: 'center'
+    },
+    bottomContainer: {
+        [breakpoints.up('md')]: {
+            display: 'flex',
+            justifyContent: 'center'
+        }
+    },
+    paperButton: {
+        [breakpoints.up('md')]: {
+            marginRight: spacing.unit * 3
+        }
     }
-};
+});
 
 const User = props => {
     const { classes, userTool } = props;
@@ -25,18 +36,24 @@ const User = props => {
 
     const getButtonProps = tool => ({
         tool,
-        noBgColor: true,
         disabled: !isNil(userTool),
         onClick: props.onToolClick(tool.value),
-        selected: userTool === tool.value
+        selected: userTool === tool.value,
+        className: classes.toolButton
     });
 
     return (
         <PlayerBlock title="You">
             <ToolContainer>
-                <ToolButton {...getButtonProps(rock)} />
-                <div className={classes.bottomTools}>
-                    <ToolButton {...getButtonProps(paper)} tooltipPlacement="left" />
+                <div className={classes.topContainer}>
+                    <ToolButton {...getButtonProps(rock)} />
+                </div>
+                <div className={classes.bottomContainer}>
+                    <ToolButton
+                        {...getButtonProps(paper)}
+                        tooltipPlacement="left"
+                        className={classes.paperButton}
+                    />
                     <ToolButton {...getButtonProps(scissors)} />
                 </div>
             </ToolContainer>

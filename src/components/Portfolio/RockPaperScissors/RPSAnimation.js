@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import ToolButton from './ToolButton';
 import tools from './tools';
 
@@ -36,10 +36,15 @@ export default class RPSAnimation extends React.Component {
         return (
             <ToolButton
                 disabled
-                noBgColor
                 withLargeIcon={this.props.withLargeIcon}
+                className={this.props.className}
                 tool={tool}
             />
         )
     }
 }
+
+RPSAnimation.propTypes = {
+    className: PropTypes.string,
+    withLargeIcon: PropTypes.bool
+};

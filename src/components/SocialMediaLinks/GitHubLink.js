@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { GITHUB_PROFILE_URL } from '../../constants';
 import GitHubIcon from './GitHubIcon';
 import SocialMediaLink from './SocialMediaLink';
 
@@ -12,7 +13,7 @@ const GitHubLink = props => (
 );
 
 GitHubLink.defaultProps = {
-    url: 'https://github.com/madzesu'
+    url: GITHUB_PROFILE_URL
 };
 
 GitHubLink.propTypes = {
