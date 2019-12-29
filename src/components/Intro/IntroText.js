@@ -23,7 +23,7 @@ const styles = ({ breakpoints, spacing }) => ({
             textAlign: 'initial',
             minWidth: 'auto',
             marginTop: 0
-        },
+        }
     },
     textPhrase: {
         minHeight: spacing.unit * 5,
@@ -31,7 +31,7 @@ const styles = ({ breakpoints, spacing }) => ({
         transition: 'all 0.3s ease',
         '&.animated': {
             fontSize: 28,
-            color: 'transparent',
+            color: 'transparent'
         },
         [breakpoints.down('sm')]: {
             fontSize: 16,
@@ -43,9 +43,9 @@ const styles = ({ breakpoints, spacing }) => ({
     dividerRoot: {
         [breakpoints.down('sm')]: {
             marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
+            marginRight: 'auto'
+        }
+    }
 });
 
 const PHRASE_INTERVAL_TIME = 4000;
@@ -122,7 +122,7 @@ class IntroText extends Component {
                     variant="display1"
                     text="SOFTWARE DEVELOPER"
                 />
-                <Divider classes={{ root: classes.dividerRoot }}/>
+                <Divider classes={{ root: classes.dividerRoot }} />
                 <Typography
                     variant="display1"
                     classes={{ root: join(phraseClassNames, ' ') }}

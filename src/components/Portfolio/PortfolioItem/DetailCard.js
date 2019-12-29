@@ -4,12 +4,13 @@ import join from 'lodash/join';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import grey from '@material-ui/core/colors/grey';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, breakpoints }) => ({
     paperRoot: {
         position: 'absolute',
         left: 0,
@@ -19,7 +20,7 @@ const styles = ({ spacing }) => ({
         zIndex: 2,
         color: 'white',
         background: `${grey[900]}e9`, // e9 for transparency
-        padding: spacing.unit * 2,
+        padding: spacing.unit * 4,
         transition: 'opacity 0.3s ease',
         opacity: 0,
         '&.visible': {
@@ -31,7 +32,18 @@ const styles = ({ spacing }) => ({
     },
     typographyDescription: {
         color: grey[50],
-        marginTop: spacing.unit
+        marginTop: spacing.unit,
+        [breakpoints.up('xl')]: {
+            fontSize: 24
+        }
+    },
+    dividerRoot: {
+        background: 'white',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        [breakpoints.up('md')]: {
+            marginTop: spacing.unit * 4
+        }
     }
 });
 
@@ -56,7 +68,10 @@ const DetailCard = props => {
                 >
                     {props.title}
                 </Typography>
-                <Typography classes={{ root: classes.typographyDescription }}>
+                <Divider classes={{ root: classes.dividerRoot }} />
+                <Typography
+                    classes={{ root: classes.typographyDescription }}
+                >
                     {props.description}
                 </Typography>
             </div>

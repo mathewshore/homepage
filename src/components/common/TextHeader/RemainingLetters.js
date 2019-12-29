@@ -43,7 +43,7 @@ const styles = ({ breakpoints }) => ({
                 fontSize: 28
             },
             '&.subheading': {
-                fontSize: 22
+                fontSize: 20
             }
         }
     },

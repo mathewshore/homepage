@@ -51,6 +51,9 @@ const styles = ({ spacing, palette, shadows, breakpoints }) => ({
             padding: `0 ${spacing.unit * 10}px`,
             height: spacing.unit * 12
         },
+        [breakpoints.up('xl')]: {
+            height: spacing.unit * 16
+        },
 
         '&.dense': {
             height: spacing.unit * 7.5,
@@ -60,6 +63,9 @@ const styles = ({ spacing, palette, shadows, breakpoints }) => ({
             },
             [breakpoints.up('lg')]: {
                 height: spacing.unit * 9
+            },
+            [breakpoints.up('xl')]: {
+                height: spacing.unit * 13
             }
         }
     }

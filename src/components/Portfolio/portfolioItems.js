@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { GITHUB_PROFILE_URL } from '../../constants';
+
 import PortfolioFooterContent from './PortfolioFooterContent';
 import StreamPortal from './StreamPortal';
-// import Flexer from './Flexer';
 import RockPaperScissors from './RockPaperScissors';
 import TicTacToe from './TicTacToe';
 import Snake from './Snake';
+// import Flexer from './Flexer';
 
 // import testImg from '../../bg_intro.jpg';
 // import fledgeImageSrc from './portfolio_images/fledge_thumbnail_1280x720.png';
@@ -14,10 +16,8 @@ import streamPortalImageSrc from './portfolio_images/stream_portal_thumbnail_128
 import rpsImageSrc from './portfolio_images/rps_thumbnail_1280x720.png';
 import tttImageSrc from './portfolio_images/tic_tac_toe_thumbnail_1280x720.png';
 
-// todo: move this to constants
-const gitUrlBase = 'https://github.com/madzesu';
 
-const portfolioUrlBase = `${gitUrlBase}/homepage/tree/master/src/components/sections/Portfolio`
+const portfolioUrlBase = `${GITHUB_PROFILE_URL}/homepage/tree/master/src/components/Portfolio`
 
 // ToDo: Add descriptive tags to portfolio items
 //       e.g. Adobe Illustrator, Mobile and Flat Design for Fledge.
@@ -52,7 +52,7 @@ const portfolioItems = [
         FooterContent: (
             <PortfolioFooterContent
                 itemTitle="Stream Portal"
-                href={`${gitUrlBase}/stream-portal`}
+                href={`${GITHUB_PROFILE_URL}/stream-portal`}
             />
         )
     },

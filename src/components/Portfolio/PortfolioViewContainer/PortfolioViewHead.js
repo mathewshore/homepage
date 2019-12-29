@@ -22,13 +22,13 @@ const styles = ({ palette, spacing }) => ({
         width: '100%'
     },
     closeButton: {
-        marginLeft: 'auto',
+        marginLeft: 'auto'
     },
     closeIcon: {
-        fontSize: spacing.unit * 6
+        fontSize: spacing.unit * 5
     },
     modalCaption: {
-        marginTop: spacing.unit,
+        marginTop: spacing.unit
     },
 });
 
