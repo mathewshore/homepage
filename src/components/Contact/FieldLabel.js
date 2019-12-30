@@ -3,14 +3,25 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, breakpoints }) => ({
     fieldLabelContainer: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        [breakpoints.up('xl')]: {
+            fontSize: 32
+        }
     },
     requiredTextContainer: {
+        fontStyle: 'italic',
         fontSize: 14,
-        marginLeft: spacing.unit
+        marginLeft: spacing.unit,
+        marginTop: 4,
+
+        [breakpoints.up('xl')]: {
+            fontSize: 20,
+            marginLeft: spacing.unit * 2,
+            marginTop: 6,
+        }
     }
 });
 
@@ -22,7 +33,7 @@ const FieldLabel = props => {
             {props.label}
             {props.isRequired && (
                 <div className={classes.requiredTextContainer}>
-                    (required)
+                    required
                 </div>
             )}
         </div>

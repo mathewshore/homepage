@@ -8,11 +8,8 @@ import Container from '../../common/Container';
 const styles = ({ spacing, breakpoints }) => ({
     container: {
         [breakpoints.up('xs')]: {
-            padding: spacing.unit * 1.5
+            padding: `${spacing.unit * 1.5}px ${spacing.unit * 2}px`
         },
-        // [breakpoints.up('sm')]: {
-        //     padding: spacing.unit * 1.5
-        // },
         [breakpoints.up('md')]: {
             padding: `${spacing.unit * 1.5}px ${spacing.unit * 8}px`
         },

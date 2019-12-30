@@ -38,6 +38,9 @@ const styles = ({ breakpoints, spacing }) => ({
             '&.animated': {
                 fontSize: 24
             }
+        },
+        [breakpoints.up('xl')]: {
+            fontSize: 28
         }
     },
     dividerRoot: {

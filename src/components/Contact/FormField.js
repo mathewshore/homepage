@@ -11,11 +11,14 @@ import TextField from '@material-ui/core/TextField';
 import FieldLabel from './FieldLabel';
 
 
-const styles = ({ spacing, shadows }) => ({
+const styles = ({ spacing, shadows, breakpoints }) => ({
     inputLabelRoot: {
         fontSize: 20,
         marginBottom: spacing.unit * 0.75,
-        position: 'relative'
+        position: 'relative',
+        [breakpoints.up('xl')]: {
+            marginBottom: spacing.unit * 1.5
+        }
     },
     inputTextFieldRoot: {
         marginTop: '0 !important',
@@ -28,7 +31,11 @@ const styles = ({ spacing, shadows }) => ({
         boxShadow: shadows[1],
         padding: `${spacing.unit}px ${spacing.unit * 0.5}px`,
         backgroundColor: 'rgba(255, 255, 255, 0.7)',
-        textIndent: spacing.unit * 0.5
+        textIndent: spacing.unit * 0.5,
+        [breakpoints.up('xl')]: {
+            padding: `${spacing.unit * 2}px ${spacing.unit}px`,
+            fontSize: 22
+        }
     },
     inputTextFieldMultiline: {
         padding: 0
@@ -37,11 +44,14 @@ const styles = ({ spacing, shadows }) => ({
         opacity: 0,
         height: 0,
         minHeight: 0,
+        fontSize: 16,
         transition: 'all 0.5s ease',
-
         '&.shown': {
             opacity: 1,
             height: spacing.unit * 2
+        },
+        [breakpoints.up('xl')]: {
+            marginTop: spacing.unit * 1.5
         }
     }
 });

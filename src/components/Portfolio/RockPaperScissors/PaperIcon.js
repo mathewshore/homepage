@@ -6,28 +6,14 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import green from '@material-ui/core/colors/green';
 import MuiPaperIcon from '@material-ui/icons/Note';
 
+import iconBaseStyles from './iconBaseStyles';
 
-const styles = ({ breakpoints }) => ({
+
+const styles = ({
     icon: {
+        ...iconBaseStyles,
         transform: 'rotate(-90deg)',
-        color: green[400],
-        transition: 'all 0.4s ease',
-
-        '&.selected': {
-            fontSize: 32
-        },
-        '&.large': {
-            fontSize: 48
-        },
-        [breakpoints.down('sm')]: {
-            fontSize: 20,
-            '&.selected': {
-                fontSize: 21
-            },
-            '&.large': {
-                fontSize: 36
-            }
-        }
+        color: green[400]
     }
 });
 

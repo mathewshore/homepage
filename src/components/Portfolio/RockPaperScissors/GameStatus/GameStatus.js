@@ -36,6 +36,9 @@ const styles = ({ spacing, breakpoints }) => ({
             '&.result-position': {
                 marginTop: spacing.unit * 5
             }
+        },
+        [breakpoints.up('xl')]: {
+            marginTop: spacing.unit * 12
         }
     },
     statusText: {

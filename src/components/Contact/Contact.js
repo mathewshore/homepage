@@ -145,7 +145,7 @@ class Contact extends Component {
         id: key,
         name: key,
         disabled: this.state.isSending,
-        isRequired: isRequired(key),
+        isRequired: isRequired(requiredFields, key),
         label: startCase(key),
         value: get(this.state, key),
         onChange: this.onFieldChange(key),

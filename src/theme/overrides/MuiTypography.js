@@ -8,12 +8,12 @@ const MuiTypography = {
         fontSize: spacing.unit * 2,
         lineHeight: 1.6,
         [breakpoints.up('xl')]: {
-            fontSize: spacing.unit * 4
+            fontSize: spacing.unit * 3.5
         }
     },
     display1: {
         [breakpoints.down('xs')]: {
-            fontSize: 28
+            fontSize: 24
         },
         [breakpoints.up('xl')]: {
             fontSize: 48
@@ -25,8 +25,11 @@ const MuiTypography = {
         }
     },
     title: {
+        [breakpoints.down('xs')]: {
+            fontSize: 20
+        },
         [breakpoints.up('xl')]: {
-            fontSize: 32
+            fontSize: 36
         }
     }
 }

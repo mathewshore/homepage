@@ -6,16 +6,27 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
 
-const styles = ({ palette, spacing }) => ({
+const styles = ({ palette, spacing, breakpoints }) => ({
     submitButtonRoot: {
         margin: 'auto',
         color: palette.text.light,
         fontSize: 16,
-        padding: `${spacing.unit * 1.5}px ${spacing.unit * 3}px`
+        padding: `${spacing.unit * 1.5}px ${spacing.unit * 3}px`,
+        marginTop: spacing.unit,
+        minWidth: spacing.unit * 28,
+        [breakpoints.down('xs')]: {
+            width: '100%'
+        },
+        [breakpoints.up('xl')]: {
+            minWidth: spacing.unit * 40,
+            padding: `${spacing.unit * 2.5}px ${spacing.unit * 3}px`,
+        }
     },
     submitButtonLabel: {
         paddingTop: 2,
-        minWidth: spacing.unit * 25
+        [breakpoints.up('xl')]: {
+            fontSize: 24
+        }
     },
     circularProgress: {
         position: 'absolute',

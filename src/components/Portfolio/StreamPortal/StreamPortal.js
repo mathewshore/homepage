@@ -16,10 +16,14 @@ const styles = ({ spacing, breakpoints }) => ({
         width: '100%',
         height: '100%',
         [breakpoints.up('xs')]: {
-            maxWidth: '100%'
+            maxWidth: '100%',
+        },
+        [breakpoints.down('sm')]: {
+            marginTop: spacing.unit * 2
         },
         [breakpoints.up('md')]: {
-            maxWidth: '60%'
+            maxWidth: '60%',
+            marginTop: 0
         },
         [breakpoints.up('xl')]: {
             maxWidth: '62%'

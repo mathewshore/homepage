@@ -35,7 +35,10 @@ const styles = ({ spacing, breakpoints, shadows }) => ({
         },
         [breakpoints.up('md')]: {
             padding: spacing.unit * 5,
-            width: '100%',
+            width: '100%'
+        },
+        [breakpoints.up('xl')]: {
+            padding: `${spacing.unit * 10}px ${spacing.unit * 8}px`
         }
     }
 });

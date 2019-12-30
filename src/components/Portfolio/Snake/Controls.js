@@ -9,7 +9,7 @@ import KeyboardBlock from './KeyboardBlock';
 import ArrowIcon from './ArrowIcon';
 
 
-const styles = ({ spacing, palette }) => ({
+const styles = ({ spacing, palette, breakpoints }) => ({
     controlsTypography: {
         marginBottom: spacing.unit * 2,
         textAlign: 'center'
@@ -20,8 +20,13 @@ const styles = ({ spacing, palette }) => ({
         justifyContent: 'center'
     },
     separatorTypography: {
-        margin: `0px ${spacing.unit * 3}px`,
-        fontSize: 16
+        fontSize: 16,
+        [breakpoints.up('xs')]: {
+            margin: `0px ${spacing.unit * 2.5}px`
+        },
+        [breakpoints.up('sm')]: {
+            margin: `0px ${spacing.unit * 3}px`
+        }
     },
     noMobileSupportText: {
         textAlign: 'center',
@@ -40,7 +45,7 @@ const Controls = props => {
     return (
         <Fragment>
             <Typography
-                variant="title"
+                variant="display1"
                 className={classes.controlsTypography}
             >
                 Controls

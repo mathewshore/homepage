@@ -10,7 +10,7 @@ import { GRID_WIDTH, CELL_SIZE, CELL_SIZE_MIN } from './constants';
 
 
 const endScreenSize = (factor, unit) =>
-    `calc((${GRID_WIDTH * factor}${unit}) + ${GRID_WIDTH * 2}px)`;
+    `calc(${GRID_WIDTH * factor}${unit} + ${GRID_WIDTH * 2}px)`;
 
 const styles = ({ breakpoints }) => ({
     endScreenContainer: {

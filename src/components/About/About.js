@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 
 import Section from '../common/Section';
 import GridContainer from '../common/GridContainer';
-import TextLink from '../common/TextLink';
 import { SECTIONS } from '../constants';
 
 
@@ -28,40 +27,26 @@ const About = props => {
             <GridContainer>
                 <Grid item sm={12} md={6}>
                     <Typography align='justify'>
-                        I have been working as a Front End Web Developer
-                        at a multicultural Bio-IT company
-                        <TextLink
-                            href="https://www.medisapiens.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            MediSapiens
-                        </TextLink>
-                        since April 2016. At work, I develop software using
-                        the trendiest technologies and finalize it with
-                        responsive pixel prefect design.
-
-                        Alongside work, I am about to aquire my BBA from
-                        Haaga-Helia University of Applied Sciences, department
-                        of Business IT. I have specialized in the Software
-                        Development, wherein my main focus has revolved around
-                        Front End Development fortified with Back End programming
-                        studies.
+                        I'm a passionate frontend oriented software developer
+                        with eye for user interface design and focus on intuitive
+                        interaction. I'm a BBA graduate specialized in software
+                        development tempered with over three years of relevant work
+                        experience in the IT industry in multicultural environment.
+                        I've worked with clients sizing from small to giant as a
+                        UI developer producing customized analytical tools for
+                        various purposes.
                     </Typography>
                 </Grid>
                 <Grid item sm={12} md={6}>
-                    <Typography align="justify">
-                        I am an open-minded teamworker with strong logical and
-                        analytical skills harnessed with a competitive spirit.
-                        Whenever I start working on user interfaces, I ponder
-                        thoroughly the workflow while constantly reminding myself
-                        of the aspect of user experience.
-
-                        My burning passion for programming has lead me to a point
-                        where when there are no work nor school tasks, I tend
-                        challenge myself by developing new and cool features.
-                        My longterm goal is to learn all the tricks of the craft
-                        and hone it to perfectness bit by bit.
+                    <Typography align='justify'>
+                        Project wise, I'm used to the development cycles of SCRUM
+                        and task management with Kanban board. I've developed
+                        different kind of web applications participating all the way from
+                        the design stages to full release of solutions. I'm used
+                        to coding SPA and hybrid architectures plugged in with
+                        REST APIs written with tools like React and Redux or Unstated.
+                        I like my code when it's tested, easy to read, easility
+                        reusable and the result is visually pleasing.
                     </Typography>
                 </Grid>
             </GridContainer>

@@ -14,7 +14,7 @@ import { collides } from './Snake';
 import { CELL_SIZE, CELL_SIZE_MIN } from './constants';
 
 
-const styles = ({ breakpoints, spacing }) => ({
+const styles = ({ breakpoints }) => ({
     row: {
         display: 'flex'
     },

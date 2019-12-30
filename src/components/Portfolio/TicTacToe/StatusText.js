@@ -19,7 +19,7 @@ const StatusText = props => {
     
     return (
         <Typography
-            variant="title"
+            variant="headline"
             classes={{ root: classes.typographyRoot }}
         >
             {props.children}

@@ -38,7 +38,7 @@ const styles = ({ spacing, palette, shadows, breakpoints }) => ({
         transition: 'height 0.5s ease',
 
         [breakpoints.up('xs')]: {
-            padding: `0 ${spacing.unit * 4}px`
+            padding: `0 ${spacing.unit * 3}px`
         },
         [breakpoints.up('sm')]: {
             padding: `0 ${spacing.unit * 6}px`
@@ -52,6 +52,7 @@ const styles = ({ spacing, palette, shadows, breakpoints }) => ({
             height: spacing.unit * 12
         },
         [breakpoints.up('xl')]: {
+            padding: `0 ${spacing.unit * 12} px`,
             height: spacing.unit * 16
         },
 

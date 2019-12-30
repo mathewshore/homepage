@@ -7,21 +7,33 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 
 
-const styles = ({ spacing, palette }) => ({
+const styles = ({ spacing, palette, breakpoints }) => ({
     headerContainer: {
         padding: spacing.unit * 3,
         backgroundColor: palette.primary.light,
-        display: 'flex'
+        display: 'flex',
+        [breakpoints.up('xl')]: {
+            padding: spacing.unit * 5
+        }
     },
     listContainer: {
+        background: '#fff',
         padding: `${spacing.unit * 2}px ${spacing.unit * 3}px`,
-        background: '#fff'
+        [breakpoints.up('xl')]: {
+            padding: `${spacing.unit * 3}px ${spacing.unit * 5}px`
+        }
     },
     listItem: {
-        padding: `${spacing.unit * 1.5}px 0`
+        padding: `${spacing.unit * 1.5}px 0`,
+        [breakpoints.up('xl')]: {
+            padding: `${spacing.unit * 2.5}px 0`
+        }
     },
     listTitleIcon: {
-        marginLeft: 'auto'
+        marginLeft: 'auto',
+        [breakpoints.up('xl')]: {
+            fontSize: 44
+        }
     }
 });
 

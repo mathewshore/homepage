@@ -25,6 +25,10 @@ const styles = ({ spacing, palette, breakpoints }) => ({
             margin: spacing.unit * 1.5,
             display: 'flex',
             justifyContent: 'center'
+        },
+        [breakpoints.up('xl')]: {
+            width: spacing.unit * 12,
+            height: spacing.unit * 12
         }
     }
 });

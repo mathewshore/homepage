@@ -20,8 +20,8 @@ const styles = ({ spacing, palette, shadows }) => ({
         transition: 'all 0.3s ease',
         '&.visible': {
             top: (spacing.unit * 8.5) - 2,
-            right: (spacing.unit * -3) - 3,
-            padding: spacing.unit * 1.5,
+            right: -spacing.unit * 2,
+            padding: `${spacing.unit * 1.5}px ${spacing.unit}px`,
             height: 'auto',
             width: 'auto',
         },
@@ -42,7 +42,7 @@ const styles = ({ spacing, palette, shadows }) => ({
         transition: 'all 0.3s ease',
         '&.visible': {
             top: -9,
-            right: 30,
+            right: 18,
             borderLeft: '14px solid transparent',
             borderRight: '14px solid transparent',
             borderBottom: `16px solid ${palette.background.navBar}`,

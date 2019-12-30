@@ -3,19 +3,16 @@ import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
+
 import DescriptionContainer from '../../common/DescriptionContainer';
 import Table from '../../common/Table';
 
 import { RESULT_TYPES } from './constants';
 
 
-const styles = ({ spacing, breakpoints }) => ({
+const styles = ({ spacing }) => ({
     container: {
-        // todo: adjust for mediascreens
-        width: '30%',
-        [breakpoints.down('lg')]: {
-            width: '100%'
-        }
+        width: '100%'
     },
     bodyTypography: {
         marginBottom: spacing.unit * 3

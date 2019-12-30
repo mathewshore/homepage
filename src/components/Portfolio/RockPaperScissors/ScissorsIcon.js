@@ -6,27 +6,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import orange from '@material-ui/core/colors/orange';
 
+import iconBaseStyles from './iconBaseStyles';
 
-const styles = ({ breakpoints }) => ({
+
+const styles = ({
     scissorsIcon: {
-        color: orange[400],
-        transition: 'all 0.4s ease',
-
-        '&.selected': {
-            fontSize: 32,
-        },
-        '&.large': {
-            fontSize: 48
-        },
-        [breakpoints.down('sm')]: {
-            fontSize: 20,
-            '&.selected': {
-                fontSize: 21
-            },
-            '&.large': {
-                fontSize: 36
-            }
-        }
+        ...iconBaseStyles,
+        color: orange[400]
     }
 });
 

@@ -34,13 +34,13 @@ const styles = ({ breakpoints }) => ({
         },
         [breakpoints.up('xl')]: {
             '&.display3': {
-                fontSize: 48
+                fontSize: 56
             },
             '&.display2': {
-                fontSize: 48
+                fontSize: 52
             },
             '&.display1': {
-                fontSize: 36
+                fontSize: 40
             },
             '&.subheading': {
                 fontSize: 24

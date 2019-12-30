@@ -21,7 +21,7 @@ const styles = ({ spacing, palette, breakpoints }) => ({
         background: palette.background.paper,
 
         [breakpoints.up('xs')]: {
-            padding: `${spacing.unit * 6}px ${spacing.unit * 4}px`,
+            padding: `${spacing.unit * 5}px ${spacing.unit * 3}px`,
         },
         [breakpoints.up('sm')]: {
             padding: spacing.unit * 6,
@@ -31,6 +31,9 @@ const styles = ({ spacing, palette, breakpoints }) => ({
         },
         [breakpoints.up('lg')]: {
             padding: spacing.unit * 10,
+        },
+        [breakpoints.up('xl')]: {
+            padding: spacing.unit * 12,
         },
     }
 });
