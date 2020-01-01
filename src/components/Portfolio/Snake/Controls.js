@@ -7,31 +7,27 @@ import Typography from '@material-ui/core/Typography';
 
 import KeyboardBlock from './KeyboardBlock';
 import ArrowIcon from './ArrowIcon';
+import MenuHeader from './MenuHeader';
 
 
-const styles = ({ spacing, palette, breakpoints }) => ({
-    controlsTypography: {
-        marginBottom: spacing.unit * 2,
-        textAlign: 'center'
-    },
+const styles = ({ spacing, breakpoints }) => ({
     keysContainer: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin: `${spacing.unit * 3}px 0px`
     },
     separatorTypography: {
         fontSize: 16,
         [breakpoints.up('xs')]: {
-            margin: `0px ${spacing.unit * 2.5}px`
+            margin: `0px ${spacing.unit * 2}px`
         },
         [breakpoints.up('sm')]: {
             margin: `0px ${spacing.unit * 3}px`
+        },
+        [breakpoints.up('xl')]: {
+            margin: `0px ${spacing.unit * 4.5}px`
         }
-    },
-    noMobileSupportText: {
-        textAlign: 'center',
-        marginTop: spacing.unit * 2,
-        color: palette.info.main
     }
 });
 
@@ -44,12 +40,7 @@ const Controls = props => {
     const { classes } = props;
     return (
         <Fragment>
-            <Typography
-                variant="display1"
-                className={classes.controlsTypography}
-            >
-                Controls
-            </Typography>
+            <MenuHeader>Controls</MenuHeader>
             <div className={classes.keysContainer}>
                 <KeyboardBlock keys={['W', 'A', 'S', 'D']} />
                 <Typography
@@ -60,9 +51,6 @@ const Controls = props => {
                 </Typography>
                 <KeyboardBlock keys={getArrowKeys()} />
             </div>
-            <Typography className={classes.noMobileSupportText}>
-                Note: I haven't written support for mobile devices.
-            </Typography>
         </Fragment>
     );
 };

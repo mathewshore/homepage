@@ -2,16 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
+import Typography from '@material-ui/core/Typography';
 
 
 const styles = ({ spacing }) => ({
-    container: {
-        background: 'black',
-        color: 'white',
-        padding: `${spacing.unit}px 0px`,
-        marginBottom: spacing.unit * 1.5,
-        borderRadius: 2
-    },
+    typographyRoot: {
+        marginBottom: spacing.unit * 1.5
+    }
 });
 
 const formatScoreText = score => {
@@ -28,9 +25,9 @@ const formatScoreText = score => {
 const Score = props => {
     const { classes } = props;
     return (
-        <div className={classes.container}>
-            SCORE: {formatScoreText(props.score)}
-        </div>
+        <Typography classes={{ root: classes.typographyRoot }}>
+            Score: {formatScoreText(props.score)}
+        </Typography>
     );
 };
 

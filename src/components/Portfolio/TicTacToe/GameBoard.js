@@ -18,10 +18,13 @@ const styles = ({ spacing, shadows }) => ({
         margin: 'auto'
     },
     boardTable: {
-        display: 'table',
+        display: 'inline-grid',
         margin: 'auto',
         padding: spacing.unit,
         boxShadow: shadows[1]
+    },
+    boardRow: {
+        display: 'inline-flex'
     }
 });
 
@@ -32,7 +35,7 @@ const GameBoard = props => {
         <div className={classes.gridWrapper}>
             <div className={classes.boardTable}>
                 {times(props.rowCount, (i) => (
-                    <div key={i}>
+                    <div key={i} className={classes.boardRow}>
                         {times(props.rowCellCount, (j) => {
                             const cellKey = `${i}_${j}`;
                             const playerKey = get(grid, cellKey);

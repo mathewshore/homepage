@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import SpacingContainer from './SpacingContainer';
 
 
-const styles = ({ palette, spacing }) => ({
+const styles = ({ palette, spacing, breakpoints }) => ({
     container: {
         position: 'sticky',
         top: 0,
@@ -25,7 +25,10 @@ const styles = ({ palette, spacing }) => ({
         marginLeft: 'auto'
     },
     closeIcon: {
-        fontSize: spacing.unit * 5
+        fontSize: spacing.unit * 5,
+        [breakpoints.up('xl')]: {
+            fontSize: spacing.unit * 6.5
+        }
     },
     modalCaption: {
         marginTop: spacing.unit

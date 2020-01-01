@@ -8,16 +8,30 @@ import Button from '@material-ui/core/Button';
 import { GitHubIcon } from '../SocialMediaLinks'
 
 
-const styles = ({ spacing }) => ({
+const styles = ({ spacing, breakpoints }) => ({
     container: {
         display: 'flex',
         justifyContent: 'center',
         marginTop: spacing.unit * 0.5,
-        marginBottom: spacing.unit * 0.75
+        marginBottom: spacing.unit * 0.75,
+    },
+    buttonRoot: {
+        padding: `${spacing.unit * 1.5}px ${spacing.unit * 2}px`,
+        [breakpoints.down('xs')]: {
+            fontSize: 12,
+            width: '100%'
+        },
+        [breakpoints.up('md')]: {
+            padding: `${spacing.unit * 1.75}px ${spacing.unit * 3}px`,
+        }
     },
     gitHubIcon: {
         marginLeft: spacing.unit,
         marginTop: -spacing.unit * 0.25
+    },
+    itemTitle: {
+        fontWeight: 'bold',
+        margin: `0px ${spacing.unit * 0.5}px`
     }
 });
 
@@ -25,8 +39,17 @@ const PortfolioFooterContent = props => {
     const { classes } = props;
     return (
         <div className={classes.container}>
-            <Button {...omit(props, ['classes', 'itemTitle'])}>
-                {`Source code for ${props.itemTitle}`}
+            <Button
+                {...omit(props, ['classes', 'itemTitle'])}
+                classes={{ root: classes.buttonRoot }}
+            >
+                <span className={classes.itemTitle}>
+                    {props.itemTitle}
+                </span>
+                in
+                <span className={classes.itemTitle}>
+                    GitHub
+                </span>
                 <GitHubIcon className={classes.gitHubIcon} />
             </Button>
         </div>
@@ -36,6 +59,7 @@ const PortfolioFooterContent = props => {
 PortfolioFooterContent.defaultProps = {
     component: 'a',
     target: '_blank',
+    variant: 'outlined',
     disableTouchRipple: true,
     disableFocusRipple: true
 };

@@ -9,12 +9,13 @@ import ArrowRightIcon from '@material-ui/icons/ArrowForward';
 import ArrowLeftIcon from '@material-ui/icons/ArrowBack';
 
 
-const styles = ({ palette, spacing }) => ({
+const styles = ({ palette, breakpoints }) => ({
     arrowIcon: {
         fill: palette.text.main,
-        height: spacing.unit * 2,
-        width: spacing.unit * 2,
-        fontSize: 16
+        fontSize: 16,
+        [breakpoints.up('xl')]: {
+            fontSize: 20
+        }
     }
 });
 

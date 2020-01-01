@@ -8,8 +8,6 @@ import grey from '@material-ui/core/colors/grey';
 
 const styles = ({ spacing, palette, breakpoints }) => ({
     container: {
-        padding: spacing.unit,
-        margin: spacing.unit * 0.5,
         border: `1px solid ${grey[600]}`,
         borderRadius: 4,
         width: spacing.unit * 3,
@@ -22,11 +20,23 @@ const styles = ({ spacing, palette, breakpoints }) => ({
         '&.hidden': {
             opacity: 0
         },
-        [breakpoints.down('md')]: {
-            padding: spacing.unit * 0.5,
+        [breakpoints.up('xs')]: {
+            padding: spacing.unit * 0.25,
             width: spacing.unit * 2.5,
             height: spacing.unit * 2.5,
-            fontSize: spacing.unit * 1.5
+            fontSize: spacing.unit * 1.5,
+            margin: spacing.unit * 0.5,
+        },
+        [breakpoints.up('md')]: {
+            padding: spacing.unit * 0.5,
+            fontSize: spacing.unit * 1.75
+        },
+        [breakpoints.up('lg')]: {
+            fontSize: spacing.unit * 2
+        },
+        [breakpoints.up('xl')]: {
+            padding: spacing.unit,
+            margin: spacing.unit * 0.75,
         }
     }
 });

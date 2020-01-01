@@ -13,12 +13,14 @@ const styles = ({ spacing, breakpoints }) => ({
             padding: `${spacing.unit * 1.5}px 0px ${spacing.unit * 3}px`
         },
         [breakpoints.up('md')]: {
-            minHeight: `calc(100vh - ${spacing.unit * 17}px - ${spacing.unit * 4}px)`,
-            padding: `${spacing.unit * 2}px 0px`
+            minHeight: `calc(100vh - ${spacing.unit * 17}px - ${spacing.unit * 6.5}px)`,
+            padding: `${spacing.unit * 2}px 0px ${spacing.unit * 3}px`
         },
         [breakpoints.up('lg')]: {
-            minHeight: `calc(100vh - ${(spacing.unit * 17.5)}px - ${spacing.unit * 4}px)`,
-            padding: `${spacing.unit * 2}px 0px`
+            minHeight: `calc(100vh - ${(spacing.unit * 17.5)}px - ${spacing.unit * 9}px)`
+        },
+        [breakpoints.up('xl')]: {
+            minHeight: `calc(100vh - ${(spacing.unit * 17.5)}px - ${spacing.unit * 18}px)`
         }
     }
 });

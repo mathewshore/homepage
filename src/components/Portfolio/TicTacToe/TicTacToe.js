@@ -19,14 +19,18 @@ import StatusText from './StatusText';
 
 const styles = ({ breakpoints, spacing }) => ({
     container: {
-        // display: 'flex'
         [breakpoints.up('md')]: {
             display: 'flex',
             justifyContent: 'center'
         }
     },
     gameContainer: {
-        marginLeft: 'auto'
+        marginLeft: 'auto',
+        width: '100%',
+        display: 'grid',
+        [breakpoints.down('sm')]: {
+            marginTop: spacing.unit * 2
+        }
     },
     statTableContainer: {
         width: spacing.unit * 50,

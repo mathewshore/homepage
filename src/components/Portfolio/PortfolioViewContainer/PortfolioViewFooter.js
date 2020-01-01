@@ -14,21 +14,16 @@ const PortfolioViewFooter = props => {
     const { classes } = props;
     return (
         <div className={classes.container}>
-            <SpacingContainer verticalSpacing={props.verticalSpacing}>
+            <SpacingContainer>
                 {props.children}
             </SpacingContainer>
         </div>
     );
 };
 
-PortfolioViewFooter.defaultProps = {
-    verticalSpacing: 'normal'
-};
-
 PortfolioViewFooter.propTypes = {
     classes: PropTypes.object.isRequired,
-    children: PropTypes.any,
-    verticalSpacing: PropTypes.oneOf(['normal', 'dense'])
+    children: PropTypes.any
 };
 
 export default withStyles(styles)(PortfolioViewFooter);

@@ -8,15 +8,17 @@ import toString from 'lodash/toString';
 import random from 'lodash/random';
 
 import withStyles from '@material-ui/core/styles/withStyles';
+import Typography from '@material-ui/core/Typography';
 
 import Description from './Description';
 import GameGrid from './GameGrid';
-import EndScreen from './EndScreen';
+import HomeView from './HomeView';
 
 import { GRID_HEIGHT, GRID_WIDTH, INITIAL_GAME_TEMPO } from './constants';
+import ControlsView from './ControlsView';
 
 
-const styles = ({ spacing, breakpoints }) => ({
+const styles = ({ spacing, palette, breakpoints }) => ({
     container: {
         [breakpoints.up('md')]: {
             display: 'flex'
@@ -32,6 +34,20 @@ const styles = ({ spacing, breakpoints }) => ({
         [breakpoints.up('md')]: {
             marginTop: spacing.unit
         },
+    },
+    noMobileSupportText: {
+        textAlign: 'center',
+        color: palette.info.main,
+        [breakpoints.up('xs')]: {
+            display: 'block',
+            marginTop: spacing.unit * 2,
+        },
+        [breakpoints.down('md')]: {
+            marginTop: 0
+        },
+        [breakpoints.up('lg')]: {
+            display: 'none'
+        }
     }
 });
 
@@ -99,7 +115,8 @@ class Snake extends React.Component {
         snakeTrail: [], // 1st index = head of snake, last index = tail
         gameOver: false,
         foodLocation: undefined,
-        tempoMultiplier: INITIAL_GAME_TEMPO
+        tempoMultiplier: INITIAL_GAME_TEMPO,
+        menuView: undefined
     };
 
     snakeMoveInterval = undefined;
@@ -267,26 +284,52 @@ class Snake extends React.Component {
         });
     }
 
+    handleMenuViewChange = menuView => () => {
+        this.setState({ menuView });
+    };
+
+    getScreen = () => {
+        if (this.state.gameIsRunning) {
+            return;
+        }
+
+        if (this.state.menuView === 'controls') {
+            return (
+                <ControlsView
+                    onControlsViewClick={this.handleMenuViewChange('controls')}
+                    onBackClick={this.handleMenuViewChange()}
+                />
+            );
+        }
+
+        return (
+            <HomeView
+                onControlsViewClick={this.handleMenuViewChange('controls')}
+                onStartClick={this.startGame}
+                gameOver={this.state.gameOver}
+                score={this.state.score}
+            />
+        );
+    };
+
     render() {
         const { classes } = this.props;
-        const { gameOver, gameIsRunning } = this.state;
 
         return (
             <div className={classes.container}>
                 <Description />
-                <div className={classes.snakeContainer}>
-                    {!gameIsRunning && (
-                        <EndScreen
-                            onStartClick={this.startGame}
-                            gameOver={gameOver}
-                            score={this.state.score}
+                <div>
+                    <Typography className={classes.noMobileSupportText}>
+                        Note: I haven't written support for mobile devices.
+                    </Typography>
+                    <div className={classes.snakeContainer}>
+                        {this.getScreen()}
+                        <GameGrid
+                            snakeTrail={this.state.snakeTrail}
+                            domain={[GRID_HEIGHT, GRID_WIDTH]}
+                            foodLocation={this.state.foodLocation}
                         />
-                    )}
-                    <GameGrid
-                        snakeTrail={this.state.snakeTrail}
-                        domain={[GRID_HEIGHT, GRID_WIDTH]}
-                        foodLocation={this.state.foodLocation}
-                    />
+                    </div>
                 </div>
             </div>
         );
