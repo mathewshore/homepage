@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import pick from 'lodash/pick';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
+import SendButtonContent from './SendButtonContent';
 
 
 const styles = ({ palette, spacing, breakpoints }) => ({
@@ -55,7 +57,7 @@ const SendButton = props => {
                         className={classes.circularProgress}
                     />
                 )}
-                {props.children}
+                <SendButtonContent {...pick(props, ['loading', 'wasSent'])} />
             </Button>
         </div>
     );

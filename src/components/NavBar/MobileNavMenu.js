@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -22,39 +22,30 @@ const styles = ({
     }
 });
 
-class MobileNavMenu extends Component {
-    state = {
-        isOpen: false
-    };
+const MobileNavMenu = props => {
+    const { classes } = props;
+    const [isOpen, setOpenMenu] = useState(false);
 
-    onMenuToggleClick = () => {
-        this.setState({ isOpen: !this.state.isOpen });
-    };
+    const onMenuToggleClick = () => setOpenMenu(!isOpen);
 
-    render() {
-        // ToDo: Update to react version with state hooks and use it here.
-        const { classes } = this.props;
-        const { isOpen } = this.state;
-
-        return (
-            <div className={classes.menuContainer}>
-                <div className={classes.menuDropDown}>
-                    <MenuIcon
-                        isOpen={isOpen}
-                        onClick={this.onMenuToggleClick}
-                    />
-                    <MobileNavMenuList
-                        isOpen={isOpen}
-                        dense={this.props.dense}
-                    >
-                        {this.props.children}
-                    </MobileNavMenuList>
-                </div>
-                {isOpen && <Backdrop onClick={this.onMenuToggleClick} />}
+    return (
+        <div className={classes.menuContainer}>
+            <div className={classes.menuDropDown}>
+                <MenuIcon
+                    isOpen={isOpen}
+                    onClick={onMenuToggleClick}
+                />
+                <MobileNavMenuList
+                    isOpen={isOpen}
+                    dense={props.dense}
+                >
+                    {props.children}
+                </MobileNavMenuList>
             </div>
-        );
-    }
-}
+            {isOpen && <Backdrop onClick={onMenuToggleClick} />}
+        </div>
+    );
+};
 
 MobileNavMenu.propTypes = {
     classes: PropTypes.object.isRequired,

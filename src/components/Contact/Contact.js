@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
 
@@ -12,7 +12,6 @@ import startCase from 'lodash/startCase';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
-import CheckIcon from '@material-ui/icons/CheckCircle';
 
 import Section from '../common/Section';
 import GridContainer from '../common/GridContainer';
@@ -35,72 +34,68 @@ const styles = ({ palette, spacing }) => ({
         background: palette.background.contact
     },
     submitButtonWrapper: {
-        paddingTop: 20,
-        textAlign: 'center',
-    },
-    checkIcon: {
-        marginLeft: spacing.unit,
-        marginTop: -spacing.unit * 0.25
+        paddingTop: spacing.unit * 2.5,
+        textAlign: 'center'
     }
 });
 
 const requiredFields = ['name', 'email', 'message'];
 
-class Contact extends Component {
-    state = {
+const validateEmail = email => {
+    if (isRequired(requiredFields, 'email') && !email) {
+        return getFieldError('email', email);
+    } else if (isValidEmail(email)) {
+        return { email: "Invalid email address, expected format: 'example@email.com'." };
+    }
+    return { email: undefined };
+};
+
+const Contact = props => {
+    const initialFormValues = {
         name: '',
         email: '',
-        message: '',
-        errors: {},
-        isSending: false,
-        wasSent: false,
-        messageBanner: null,
-        messageBannerType: null
+        message: ''
+    };
+    const initialMessageBanner = {
+        content: null,
+        type: null
+    };
+    const [formValues, setFormValues] = useState(initialFormValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSending, setIsSending] = useState(false);
+    const [wasSent, setWasSent] = useState(false);
+    const [messageBanner, setMessageBanner] = useState(initialMessageBanner);
+
+    const onFieldChange = (key, value) => {
+        setFormValues(currentValues => ({
+            ...currentValues,
+            [key]: value
+        }));
     };
 
-    onFieldChange = key => e => {
-        this.setState({ [key]: e.target.value });
-    }
-
-    onFieldBlur = key => () => {
-        this.validateValue(key);
-    };
-
-    validateValue = key => {
-        const value = get(this.state, key);
+    const onFieldBlur = key => e => {
+        const { value } = e.target;
         const error = (key === 'email')
-            ? this.validateEmail()
+            ? validateEmail(value)
             : getFieldError(key, value);
 
-        this.setState({
-            errors: {
-                ...this.state.errors,
-                ...error
-            }
-        });
+        setFormErrors(currentErrors => ({
+            ...currentErrors,
+            ...error
+        }));
     };
 
-    validateEmail = () => {
-        const { email } = this.state;
-        if (isRequired(requiredFields, 'email') && !email) {
-            return getFieldError('email', email);
-        } else if (isValidEmail(email)) {
-            return { email: "Invalid email address, expected format: 'example@email.com'." };
-        }
-        return { email: undefined };
-    };
-
-    getFormErrors = () => {
-        const errors = validateRequiredFields(requiredFields, this.state);
-        const emailError = this.validateEmail();
+    const getFormErrors = () => {
+        const errors = validateRequiredFields(requiredFields, formValues);
+        const emailError = validateEmail(get(formValues, 'email'));
         return { ...errors, ...emailError };
     };
 
-    sendMessage = () => {
-        this.setState({ isSending: true });
+    const sendMessage = () => {
+        setIsSending(true);
 
         const data = {
-            ...pick(this.state, [
+            ...pick(formValues, [
                 'name',
                 'email',
                 'message'
@@ -113,124 +108,101 @@ class Contact extends Component {
             data,
             cache: false,
             success: () => {
-                this.setState({
-                    isSending: false,
-                    wasSent: true,
-                    name: '',
-                    email: '',
-                    message: ''
-                });
+                setIsSending(false);
+                setWasSent(true);
+                setFormValues(initialFormValues);
+                setMessageBanner(initialMessageBanner);
             },
             error: () => {
-                this.setState({
-                    isSending: false,
-                    messageBannerType: 'danger',
-                    messageBanner: 'Message could not be sent, please try again later.'
+                setIsSending(false);
+                setMessageBanner({
+                    type: 'danger',
+                    content: 'Message could not be sent, please try again later.'
                 });
             },
-        })
-    };
-
-    handleSubmit = e => {
-        e.preventDefault();
-        const errors = this.getFormErrors();
-        this.setState({ errors });
-        const everyFieldPasses = every(keys(errors), key => isEmpty(get(errors, key)));
-        if (everyFieldPasses) {
-            this.sendMessage();
-        }
-    };
-
-    getFormFieldProps = key => ({
-        id: key,
-        name: key,
-        disabled: this.state.isSending,
-        isRequired: isRequired(requiredFields, key),
-        label: startCase(key),
-        value: get(this.state, key),
-        onChange: this.onFieldChange(key),
-        onBlur: this.onFieldBlur(key),
-        helperText: get(this.state.errors, key),
-        error: !isNil(get(this.state.errors, key))
-    });
-
-    renderSendButtonText = () => {
-        if (this.state.isSending) {
-            return 'Sending Message';
-        }
-        if (this.state.wasSent) {
-            const { classes } = this.props;
-            return (
-                <Fragment>
-                    Message was sent
-                    <CheckIcon className={classes.checkIcon} />
-                </Fragment>
-            );
-        }
-        return 'Send Message';
-    };
-
-    closeMessageBanner = () => {
-        this.setState({
-            messageBanner: null,
-            messageBannerType: null
         });
     };
 
-    render() {
-        const { classes } = this.props;
+    const handleSubmit = e => {
+        e.preventDefault();
+        const errors = getFormErrors();
+        setFormErrors(errors);
+        const everyFieldPasses = every(keys(errors), key => isEmpty(get(errors, key)));
+        if (everyFieldPasses) {
+            sendMessage();
+        }
+    };
 
-        return (
-            <Section
-                id={SECTIONS.CONTACT}
-                containerClassName={classes.contactSectionContainer}
-            >
-                <form onSubmit={this.handleSubmit}>
-                    <GridContainer>
-                        {this.state.messageBanner && (
-                            <Grid item xs={12}>
-                                <MessageBanner
-                                    type={this.state.messageBannerType}
-                                    onClose={this.closeMessageBanner}
-                                >
-                                    {this.state.messageBanner}
-                                </MessageBanner>
-                            </Grid>
-                        )}
-                        <Grid item xs={12} sm={6}>
-                            <FormField
-                                {...this.getFormFieldProps('name')}
-                                placeholder="Your name..."
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <FormField
-                                {...this.getFormFieldProps('email')}
-                                placeholder="Your email..."
-                            />
-                        </Grid>
+    const getFormFieldProps = key => ({
+        id: key,
+        name: key,
+        disabled: isSending,
+        isRequired: isRequired(requiredFields, key),
+        label: startCase(key),
+        value: get(formValues, key),
+        onChange: e => onFieldChange(key, e.target.value),
+        onBlur: onFieldBlur(key),
+        helperText: get(formErrors, key),
+        error: !isNil(get(formErrors, key))
+    });
+
+    const closeMessageBanner = () => {
+        setMessageBanner(initialMessageBanner);
+    };
+
+    const { classes } = props;
+
+    return (
+        <Section
+            id={SECTIONS.CONTACT}
+            containerClassName={classes.contactSectionContainer}
+        >
+            <form onSubmit={handleSubmit}>
+                <GridContainer>
+                    {messageBanner.content && (
                         <Grid item xs={12}>
-                            <FormField
-                                {...this.getFormFieldProps('message')}
-                                multiline
-                                rows={6}
-                                placeholder="Type your message here..."
-                            />
+                            <MessageBanner
+                                type={messageBanner.type}
+                                onClose={closeMessageBanner}
+                            >
+                                {messageBanner.content}
+                            </MessageBanner>
                         </Grid>
-                    </GridContainer>
-                    <div className={classes.submitButtonWrapper}>
-                        <SendButton loading={this.state.isSending}>
-                            {this.renderSendButtonText()}
-                        </SendButton>
-                    </div>
-                </form>
-            </Section>
-        );
-    }
-}
+                    )}
+                    <Grid item xs={12} sm={6}>
+                        <FormField
+                            {...getFormFieldProps('name')}
+                            placeholder="Your name..."
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <FormField
+                            {...getFormFieldProps('email')}
+                            placeholder="Your email..."
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormField
+                            {...getFormFieldProps('message')}
+                            multiline
+                            rows={6}
+                            placeholder="Type your message here..."
+                        />
+                    </Grid>
+                </GridContainer>
+                <div className={classes.submitButtonWrapper}>
+                    <SendButton
+                        loading={isSending}
+                        wasSent={wasSent}
+                    />
+                </div>
+            </form>
+        </Section>
+    );
+};
 
 Contact.propTypes = {
-    classes: PropTypes.object
+    classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Contact);

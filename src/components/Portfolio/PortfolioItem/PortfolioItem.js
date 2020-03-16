@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import DetailCard from './DetailCard';
 import ImageCard from './ImageCard';
-
-import { Link } from 'react-router-dom';
 
 
 const styles = ({
@@ -15,43 +14,34 @@ const styles = ({
     }
 });
 
-class PortfolioItem extends Component {
-    state = {
-        visibleDetails: false
-    };
+const PortfolioItem = props => {
+    const { classes } = props;
+    const [visibleDetails, setVisibleDetails] = useState(false);
 
-    onCardMouseEnter = () => {
-        this.setState({ visibleDetails: true });
-    };
+    const onCardMouseEnter = () => setVisibleDetails(true);
 
-    onCardMouseLeave = () => {
-        this.setState({ visibleDetails: false });
-    };
-
-    render() {
-        const { classes } = this.props;
+    const onCardMouseLeave = () => setVisibleDetails(false);
     
-        return (
-            <Link to={`/portfolio/${this.props.id}`}>
-                <div
-                    className={classes.container}
-                    onMouseEnter={this.onCardMouseEnter}
-                    onMouseLeave={this.onCardMouseLeave}
-                >
-                    <ImageCard
-                        title={this.props.title}
-                        imageSrc={this.props.imageSrc}
-                    />
-                    <DetailCard
-                        visible={this.state.visibleDetails}
-                        title={this.props.title}
-                        description={this.props.description}
-                    />
-                </div>
-            </Link>
-        );
-    }
-}
+    return (
+        <Link to={`/portfolio/${props.id}`}>
+            <div
+                className={classes.container}
+                onMouseEnter={onCardMouseEnter}
+                onMouseLeave={onCardMouseLeave}
+            >
+                <ImageCard
+                    title={props.title}
+                    imageSrc={props.imageSrc}
+                />
+                <DetailCard
+                    visible={visibleDetails}
+                    title={props.title}
+                    description={props.description}
+                />
+            </div>
+        </Link>
+    );
+};
 
 PortfolioItem.propTypes = {
     classes: PropTypes.object.isRequired,

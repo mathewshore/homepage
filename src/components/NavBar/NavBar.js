@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import join from 'lodash/join';
 import map from 'lodash/map';
@@ -92,71 +93,67 @@ const getActiveSection = () => {
     return isLastSection ? last(sectionIds) : sectionIds[nextSectionIndex - 1];
 };
 
-class NavBar extends Component {
-    state = {
-        activeSection: null
-    };
+const scrollIntoElement = elementId => {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.scrollIntoView({ block: 'center' });
+    }
+};
 
-    componentDidMount() {
+const NavBar = props => {
+    const { classes } = props;
+    const [activeSection, setActiveSection] = useState('');
+
+    const handleScroll = () => setActiveSection(getActiveSection());
+
+    useEffect(() => {
         const elementId = window.location.hash.split('#')[1];
         if (elementId) {
-            // Wait for dom to render the portfolio element before scrolling into it.
-            setTimeout(() => {
-                const element = document.getElementById(elementId);
-                if (element) {
-                    element.scrollIntoView({ block: 'center' });
-                }
-            }, 0)
-        }
-        this.setState({ activeSection: getActiveSection() });
-        window.addEventListener('scroll', this.handleScroll);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
-
-    handleScroll = () => {
-        this.setState({ activeSection: getActiveSection() });
-    };
-
-    render() {
-        const { classes } = this.props;
-        const { activeSection } = this.state;
-
-        const isMobile = includes(['xs', 'sm'], this.props.width);
-        const NavLinksContainer = isMobile ? MobileNavMenu : NavLinks;
-        const isDense = !isNil(activeSection);
-
-        const navContentClassNames = [classes.navContent];
-        if (isDense) {
-            navContentClassNames.push('dense');
+            scrollIntoElement(elementId);
+            setActiveSection(getActiveSection());
         }
 
-        return (
-            <div className={classes.navBarContainer}>
-                <Container>
-                    <div className={join(navContentClassNames, ' ')}>
-                        <NavLogo dense={isDense} />
-                        <NavLinksContainer dense={isDense}>
-                            {/* Intro section link is not rendered in nav. */}
-                            {map(pull(sectionIds, SECTIONS.INTRO), (id, i) => (
-                                <NavLink
-                                    key={id}
-                                    isMobile={isMobile}
-                                    first={i === 0}
-                                    linkTo={id}
-                                    text={id}
-                                    isActive={id === activeSection}
-                                    dense={isDense}
-                                />
-                            ))}
-                        </NavLinksContainer>
-                    </div>
-                </Container>
-            </div>
-        );
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const isMobile = includes(['xs', 'sm'], props.width);
+    const NavLinksContainer = isMobile ? MobileNavMenu : NavLinks;
+    const isDense = !isNil(activeSection);
+
+    const navContentClassNames = [classes.navContent];
+    if (isDense) {
+        navContentClassNames.push('dense');
     }
-}
+
+    return (
+        <div className={classes.navBarContainer}>
+            <Container>
+                <div className={join(navContentClassNames, ' ')}>
+                    <NavLogo dense={isDense} />
+                    <NavLinksContainer dense={isDense}>
+                        {/* Remove Intro section link from nav. */}
+                        {map(pull(sectionIds, SECTIONS.INTRO), (id, i) => (
+                            <NavLink
+                                key={id}
+                                isMobile={isMobile}
+                                first={i === 0}
+                                linkTo={id}
+                                text={id}
+                                isActive={id === activeSection}
+                                dense={isDense}
+                            />
+                        ))}
+                    </NavLinksContainer>
+                </div>
+            </Container>
+        </div>
+    );
+};
+
+NavBar.propTypes = {
+    classes: PropTypes.object,
+    width: PropTypes.string
+};
 
 export default withWidth()(withStyles(styles)(NavBar));

@@ -1,50 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ToolButton from './ToolButton';
 import tools from './tools';
 
 
-const TOOLS_PER_SECOND = 6;
+const RPSAnimation = props => {
+    const [toolIndex, setToolIndex] = useState(0);
 
-export default class RPSAnimation extends React.Component {
-    state = {
-        toolIndex: 0,
-        count: 0
-    };
+    useEffect(() => {
+        const onIntervalLoop = () => {
+            const handleSetToolIndex = currentIndex => {
+                const incrementedIndex = currentIndex + 1;
+                return (incrementedIndex === tools.length)
+                    ? 0 
+                    : incrementedIndex;
+            };
+            setToolIndex(handleSetToolIndex);
+        };
+        const intervalTime = (1000 / props.toolsPerSecond);
+        const toolInterval = setInterval(onIntervalLoop, intervalTime);
+        return () => clearInterval(toolInterval);
+    }, []);
 
-    toolInterval = setInterval(() => this.setToolIndex(), (1000 / TOOLS_PER_SECOND));
+    return (
+        <ToolButton
+            disabled
+            withLargeIcon={props.withLargeIcon}
+            className={props.className}
+            tool={tools[toolIndex]}
+        />
+    )
+};
 
-    componentWillUnmount() {
-        clearInterval(this.toolInterval);
-    }
-
-    setToolIndex() {
-        const count = this.state.count + 1;
-        if (count >= ((TOOLS_PER_SECOND * tools.length) - 1)) {
-            clearInterval(this.toolInterval);
-        }
-
-        const incrementedIndex = this.state.toolIndex + 1;
-        const toolIndex = incrementedIndex === tools.length ? 0 : incrementedIndex;
-
-        this.setState({ toolIndex, count });
-    }
-
-    render() {
-        const tool = tools[this.state.toolIndex];
-
-        return (
-            <ToolButton
-                disabled
-                withLargeIcon={this.props.withLargeIcon}
-                className={this.props.className}
-                tool={tool}
-            />
-        )
-    }
-}
+RPSAnimation.defaultProps = {
+    toolsPerSecond: 10
+};
 
 RPSAnimation.propTypes = {
     className: PropTypes.string,
-    withLargeIcon: PropTypes.bool
+    withLargeIcon: PropTypes.bool,
+    toolsPerSecond: PropTypes.number
 };
+
+export default RPSAnimation;

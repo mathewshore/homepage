@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import DescriptionContainer from '../../common/DescriptionContainer';
 
 
-const Description = props => {
+const Description = () => {
     return (
         <DescriptionContainer>
             <Typography>
@@ -19,10 +19,6 @@ const Description = props => {
             </Typography>
         </DescriptionContainer>
     )
-};
-
-Description.propTypes = {
-
 };
 
 export default Description;
